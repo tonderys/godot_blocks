@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://fonts/GUI_60.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scripts/Game.gd" type="Script" id=2]
+[ext_resource path="res://scripts/Timer.gd" type="Script" id=4]
+[ext_resource path="res://scenes/Board.tscn" type="PackedScene" id=5]
+
+[node name="Game" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Background" type="ColorRect" parent="."]
+margin_right = 580.0
+margin_bottom = 1024.0
+color = Color( 0.803922, 1, 0.780392, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_top = 986.0
+margin_right = 580.0
+margin_bottom = 1026.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "Score:0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UI" type="Node" parent="."]
+
+[node name="Timer" type="ColorRect" parent="."]
+margin_top = 25.0
+margin_right = 580.0
+margin_bottom = 50.0
+color = Color( 0, 0.015625, 1, 1 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="remaining" type="Timer" parent="Timer"]
+wait_time = 5.0
+autostart = true
+
+[node name="BoardNode" parent="." instance=ExtResource( 5 )]
+position = Vector2( 0, 50 )
+
+[connection signal="timeout" from="Timer/remaining" to="." method="onTimeout"]
