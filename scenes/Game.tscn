@@ -48,4 +48,4 @@ autostart = true
 [node name="BoardNode" parent="." instance=ExtResource( 5 )]
 position = Vector2( 0, 50 )
 
-[connection signal="timeout" from="Timer/remaining" to="." method="onTimeout"]
+[connection signal="timeout" from="Timer/remaining" to="BoardNode" method="onTimeout"]

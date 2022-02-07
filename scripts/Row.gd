@@ -12,10 +12,14 @@ func randomIndices() -> Array:
 	return indices
 
 func _init(height: int):
+	self.position = Vector2(0, height * 58)
 	rng.randomize()
 	var indices = randomIndices()
 	for i in indices:
 		var square = Square.instance()
 		square.get_node("body").rect_size = Vector2(58,58)
-		square.get_node("body").rect_position = Vector2(i * 58, height * 58)
+		square.get_node("body").rect_position = Vector2(i * 58, 0)
 		add_child(square)
+
+func lower():
+	self.position.y += 58
