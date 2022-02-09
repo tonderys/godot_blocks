@@ -28,11 +28,24 @@ func _process(delta: float):
 	elapsedTime += delta
 	while elapsedTime > tick:
 		elapsedTime -= tick
-		for row in looseRows:
-			row.elevate(rows)
-			
+		for looseRow in looseRows:
+			var rowAbove = getIndexOfRowWithHeight(looseRow.height - 1)
+			if rowAbove != -1 and looseRow.isBlockedBy(rows[rowAbove]):
+				var sameLevelRow = getIndexOfRowWithHeight(looseRow.height)
+				if sameLevelRow == -1:
+					rows.append(looseRow)
+				else:
+					rows[sameLevelRow].mergeWith(looseRow)
+				looseRows.erase(looseRow)
+				break
+			looseRow.elevate()
 
-
+func getIndexOfRowWithHeight(height) -> int:
+	for id in range(rows.size()):
+		if rows[id].height == height:
+			return id
+	return -1
+	
 func onTimeout():
 	for row in rows:
 		row.lower()

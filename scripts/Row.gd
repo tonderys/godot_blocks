@@ -44,5 +44,8 @@ func mergeWith(other: Row) -> void:
 func lower() -> void:
 	self.height += 1
 
-func elevate(rows: Array) -> void:
+func elevate() -> void:
 	self.height -= 1
+	
+func isBlockedBy(other: Row) -> bool:
+	return other.height == height-1 and not canMergeWith(other)
