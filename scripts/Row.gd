@@ -39,6 +39,7 @@ func mergeWith(other: Row) -> void:
 	for square in other.squares:
 		squares.append(square)
 	for child in other.get_children():
+		other.remove_child(child)
 		add_child(child)
 
 func lower() -> void:
