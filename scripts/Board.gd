@@ -29,16 +29,22 @@ func _process(delta: float):
 	while elapsedTime > tick:
 		elapsedTime -= tick
 		for looseRow in looseRows:
-			var rowAbove = getIndexOfRowWithHeight(looseRow.height - 1)
-			if rowAbove != -1 and looseRow.isBlockedBy(rows[rowAbove]):
-				var sameLevelRow = getIndexOfRowWithHeight(looseRow.height)
-				if sameLevelRow == -1:
-					rows.append(looseRow)
-				else:
-					rows[sameLevelRow].mergeWith(looseRow)
-				looseRows.erase(looseRow)
+			if isBlockedByRowAbove(looseRow):
+				anchor(looseRow)
 				break
 			looseRow.elevate()
+
+func isBlockedByRowAbove(looseRow: Row):
+	var rowAbove = getIndexOfRowWithHeight(looseRow.height - 1)
+	return rowAbove != -1 and looseRow.isBlockedBy(rows[rowAbove])
+
+func anchor(looseRow: Row):
+	var sameLevelRow = getIndexOfRowWithHeight(looseRow.height)
+	if sameLevelRow == -1:
+		rows.append(looseRow)
+	else:
+		rows[sameLevelRow].mergeWith(looseRow)
+	looseRows.erase(looseRow)
 
 func getIndexOfRowWithHeight(height) -> int:
 	for id in range(rows.size()):
