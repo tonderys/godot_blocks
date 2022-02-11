@@ -4,20 +4,14 @@ class_name Row
 const Square = preload("res://scenes/Square.tscn")
 const square_side : int = 58
 const square_dimensions = Vector2(square_side, square_side)
-var rng = RandomNumberGenerator.new()
+
 
 var squares = Array()
 var height : int
 
-func randomIndices() -> Array:
-	var indices = [0,1,2,3,4,5,6,7,8,9]
-	indices.shuffle()
-	indices.resize(rng.randi_range(2, 9))
-	return indices
-
-func _init(height: int, indices: Array = randomIndices()):
+func _init(height: int, indices: Array):
 	self.height = height
-	rng.randomize()
+
 	for i in indices:
 		squares.append(i)
 		var square = Square.instance()
@@ -41,6 +35,9 @@ func mergeWith(other: Row) -> void:
 	for child in other.get_children():
 		other.remove_child(child)
 		add_child(child)
+
+func isFull() -> bool:
+	return squares.size() == 10
 
 func lower() -> void:
 	self.height += 1
