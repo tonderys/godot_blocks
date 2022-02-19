@@ -37,12 +37,20 @@ func _process(delta: float):
 			looseRow.elevate()
 	removeFullRows()
 
-func removeFullRows() -> void:
+func removeFullRows(combo: int = 1) -> void:
 	for row in rows:
 		if row.isFull():
+			var above = getRowWithHeight(row.height - 1)
+			var below = getRowWithHeight(row.height + 1)
 			elevateRowsBelow(row)
-			get_parent().addPoints(10)
+			get_parent().addPoints(combo)
 			removeRow(row)
+			if above != null and below != null:
+				if above.canMergeWith(below):
+					above.mergeWith(below)
+					elevateRowsBelow(below)
+					removeRow(below)
+					removeFullRows(combo + 1)
 
 func elevateRowsBelow(removedRow: Row):
 	for row in rows:
@@ -54,23 +62,23 @@ func isBlocked(looseRow: Row):
 	return isOnTopRow or isBlockedByRowAbove(looseRow)
 
 func isBlockedByRowAbove(looseRow: Row):
-	var rowAbove = getIndexOfRowWithHeight(looseRow.height - 1)
-	return rowAbove != -1 and looseRow.isBlockedBy(rows[rowAbove])
+	var rowAbove = getRowWithHeight(looseRow.height - 1)
+	return rowAbove != null and looseRow.isBlockedBy(rowAbove)
 
 func anchor(looseRow: Row):
-	var sameLevelRow = getIndexOfRowWithHeight(looseRow.height)
-	if sameLevelRow == -1:
+	var sameLevelRow = getRowWithHeight(looseRow.height)
+	if sameLevelRow == null:
 		rows.append(looseRow)
 	else:
-		rows[sameLevelRow].mergeWith(looseRow)
+		sameLevelRow.mergeWith(looseRow)
 		remove_child(looseRow)
 	looseRows.erase(looseRow)
 
-func getIndexOfRowWithHeight(height) -> int:
-	for id in range(rows.size()):
-		if rows[id].height == height:
-			return id
-	return -1
+func getRowWithHeight(height) -> Object:
+	for row in rows:
+		if row.height == height:
+			return row
+	return null
 
 func addRow(height: int) -> void:
 	var row = Row.new(height, randomIndices())

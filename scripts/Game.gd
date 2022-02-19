@@ -1,6 +1,7 @@
 extends Node2D
 
 var score = 0
+var level = 1
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -13,5 +14,5 @@ func _input(event):
 func _process(_delta: float) -> void:
 	get_node("Label").text = "Score:%s" % score
 
-func addPoints(points: int):
-	score += points
+func addPoints(multiplier: int):
+	score += 10 * level * multiplier
