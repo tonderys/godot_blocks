@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "Board",
+"language": "GDScript",
+"path": "res://scripts/Board.gd"
+}, {
 "base": "Node2D",
 "class": "Row",
 "language": "GDScript",
 "path": "res://scripts/Row.gd"
 } ]
 _global_script_class_icons={
+"Board": "",
 "Row": ""
 }
 

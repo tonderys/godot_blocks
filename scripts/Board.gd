@@ -1,4 +1,5 @@
 extends Node
+class_name Board
 
 const Row = preload("res://scripts/Row.gd")
 const tick : float = 1.0/60
@@ -10,18 +11,24 @@ var rows = Array()
 var looseRows = Array()
 var elapsedTime = 0.0
 
-func _init():
+func _enter_tree():
 	rng.randomize()
 
+func _ready():
+	reset()
+
+func reset() -> void:
+	rows = Array()
+	looseRows = Array()
+	elapsedTime = 0.0
+	for height in range(0, bottomRowHeight/2):
+		addRow(height)
+	
 func randomIndices() -> Array:
 	var indices = [0,1,2,3,4,5,6,7,8,9]
 	indices.shuffle()
 	indices.resize(rng.randi_range(2, 9))
 	return indices
-
-func _ready():
-	for height in range(0, 7):
-		addRow(height)
 
 func input(column: int):
 	addLooseRow(column)
@@ -36,6 +43,11 @@ func _process(delta: float):
 				break
 			looseRow.elevate()
 	removeFullRows()
+
+func isEmpty() -> bool:
+	print(rows.size())
+	print(rows.empty())
+	return rows.empty()
 
 func removeFullRows(combo: int = 1) -> void:
 	for row in rows:
