@@ -13,6 +13,7 @@ func _process(_delta: float) -> void:
 	get_node("Score").text = "Score:%s" % Global.score
 	if boardNode.isEmpty():
 		level += 1
+		get_node("Timer/remaining").wait_time *= 0.9
 		boardNode.reset()
 	elif boardNode.isFull():
 		get_tree().change_scene("res://scenes/Summary.tscn")

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/MenuButtons.gd" type="Script" id=1]
-[ext_resource path="res://scenes/Summary.gd" type="Script" id=2]
+[ext_resource path="res://scripts/Summary.gd" type="Script" id=2]
 [ext_resource path="res://fonts/Press_Start_2P/PressStart2P-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://fonts/GUI_60.tres" type="DynamicFont" id=4]
 
@@ -86,3 +86,4 @@ __meta__ = {
 }
 
 [connection signal="pressed" from="UI/MenuButtons/Restart" to="UI/MenuButtons" method="StartPressed"]
+[connection signal="pressed" from="UI/MenuButtons/Quit" to="." method="quitPressed"]

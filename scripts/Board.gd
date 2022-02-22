@@ -95,7 +95,7 @@ func getRowWithHeight(height) -> Object:
 
 func addRow(height: int) -> void:
 	var row = Row.new(height, randomIndices())
-	rows.append(row)
+	rows.insert(height, row)
 	add_child(row)
 	
 func removeRow(row: Row) -> void:
@@ -110,6 +110,4 @@ func addLooseRow(column: int) -> void:
 func onTimeout():
 	for row in rows:
 		row.lower()
-	var row = Row.new(0, randomIndices())
-	rows.insert(0, row)
-	add_child(row)
+	addRow(0)
