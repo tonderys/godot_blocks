@@ -11,6 +11,8 @@ func _process(_delta: float) -> void:
 	if boardNode.isEmpty():
 		level += 1
 		boardNode.reset()
+	elif boardNode.isFull():
+		get_tree().change_scene("res://scenes/Menu.tscn")
 		
 func _input(event):
 	if event is InputEventMouseButton:

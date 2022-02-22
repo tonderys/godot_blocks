@@ -45,9 +45,10 @@ func _process(delta: float):
 	removeFullRows()
 
 func isEmpty() -> bool:
-	print(rows.size())
-	print(rows.empty())
 	return rows.empty()
+
+func isFull() -> bool:
+	return rows.size() > bottomRowHeight
 
 func removeFullRows(combo: int = 1) -> void:
 	for row in rows:
