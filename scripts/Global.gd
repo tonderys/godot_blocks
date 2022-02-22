@@ -1,3 +1,3 @@
 extends Node2D
 
-var test_var = "Hello"
+var score : int = 0

@@ -48,6 +48,7 @@ window/stretch/aspect="keep_width"
 
 "pixel snap"=false
 resolution=false
+autoload=false
 
 [input]
 

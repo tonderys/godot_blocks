@@ -2,17 +2,20 @@ extends Node2D
 
 var board = preload("res://scenes/Board.tscn")
 
-var score = 0
+
 var level = 1
 onready var boardNode = get_node("BoardNode")
 
+func _init():
+	Global.score = 0
+
 func _process(_delta: float) -> void:
-	get_node("Label").text = "Score:%s" % score
+	get_node("Score").text = "Score:%s" % Global.score
 	if boardNode.isEmpty():
 		level += 1
 		boardNode.reset()
 	elif boardNode.isFull():
-		get_tree().change_scene("res://scenes/Menu.tscn")
+		get_tree().change_scene("res://scenes/Summary.tscn")
 		
 func _input(event):
 	if event is InputEventMouseButton:
@@ -23,4 +26,4 @@ func _input(event):
 			boardNode.input(column)
 
 func addPoints(multiplier: int):
-	score += 10 * level * multiplier
+	Global.score += 10 * level * multiplier

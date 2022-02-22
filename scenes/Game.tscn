@@ -16,7 +16,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="."]
+[node name="Score" type="Label" parent="."]
 margin_top = 986.0
 margin_right = 580.0
 margin_bottom = 1026.0
