@@ -30,13 +30,14 @@ func canMergeWith(other: Row) -> bool:
 
 func mergeWith(other: Row) -> void:
 	for square in other.squares:
+		assert(not squares.has(square) , "trying to add existing square to a row")
 		squares.append(square)
 	for child in other.get_children():
 		other.remove_child(child)
 		add_child(child)
 
 func isFull() -> bool:
-	return squares.size() == 10
+	return squares.size() >= 10
 
 func lower() -> void:
 	self.height += 1

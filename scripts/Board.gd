@@ -8,7 +8,6 @@ onready var tileMap := get_node("TileMap")
 
 var rows = Array()
 var looseRows = Array()
-var topRowsDemand: int = 0
 var elapsedTime = 0.0
 
 func _ready():
@@ -28,15 +27,7 @@ func _process(delta: float):
 	elapsedTime += delta
 	while elapsedTime > tick:
 		elapsedTime -= tick
-		for looseRow in looseRows:
-			if isBlocked(looseRow):
-				anchor(looseRow)
-				break
-			looseRow.elevate()
-	for i in range(topRowsDemand):
-		addTopRow()
-	topRowsDemand = 0
-	removeFullRows()
+		elevateLooseRows()
 
 func isEmpty() -> bool:
 	return rows.empty()
@@ -45,6 +36,8 @@ func isFull() -> bool:
 	return rows.size() > bottomRowHeight
 
 func removeFullRows(combo: int = 1) -> void:
+	if combo > 1:
+		yield(get_tree().create_timer(1.0), "timeout")
 	for row in rows:
 		if row.isFull():
 			var above = getRowWithHeight(row.height - 1)
@@ -78,6 +71,8 @@ func anchor(looseRow: Row):
 		rows.append(looseRow)
 	else:
 		sameLevelRow.mergeWith(looseRow)
+		if sameLevelRow.isFull():
+			removeFullRows(1)
 		remove_child(looseRow)
 	looseRows.erase(looseRow)
 
@@ -92,11 +87,6 @@ func addRow(height: int) -> void:
 	rows.insert(height, row)
 	add_child(row)
 	
-func addTopRow():
-	for row in rows:
-		row.lower()
-	addRow(0)
-
 func removeRow(row: Row) -> void:
 	remove_child(row)
 	rows.erase(row)
@@ -107,4 +97,22 @@ func addLooseRow(column: int) -> void:
 	add_child(row)
 	
 func onTimeout():
-	topRowsDemand += 1
+	addTopRow()
+
+func addTopRow():
+	for row in rows:
+		row.lower()
+	addRow(0)
+	anchorBlockedLooseRows()
+	
+func anchorBlockedLooseRows():
+	for looseRow in looseRows:
+		if isBlocked(looseRow):
+			anchor(looseRow)
+
+func elevateLooseRows():
+	for looseRow in looseRows:
+		if isBlocked(looseRow):
+			anchor(looseRow)
+			break
+		looseRow.elevate()
