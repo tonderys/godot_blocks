@@ -5,14 +5,11 @@ const Row = preload("res://scripts/Row.gd")
 const tick : float = 1.0/60
 const bottomRowHeight : int = 14
 onready var tileMap := get_node("TileMap")
-var rng = RandomNumberGenerator.new()
 
 var rows = Array()
 var looseRows = Array()
+var topRowsDemand: int = 0
 var elapsedTime = 0.0
-
-func _enter_tree():
-	rng.randomize()
 
 func _ready():
 	reset()
@@ -23,12 +20,6 @@ func reset() -> void:
 	elapsedTime = 0.0
 	for height in range(0, bottomRowHeight/2):
 		addRow(height)
-	
-func randomIndices() -> Array:
-	var indices = [0,1,2,3,4,5,6,7,8,9]
-	indices.shuffle()
-	indices.resize(rng.randi_range(2, 9))
-	return indices
 
 func input(column: int):
 	addLooseRow(column)
@@ -42,6 +33,9 @@ func _process(delta: float):
 				anchor(looseRow)
 				break
 			looseRow.elevate()
+	for i in range(topRowsDemand):
+		addTopRow()
+	topRowsDemand = 0
 	removeFullRows()
 
 func isEmpty() -> bool:
@@ -94,10 +88,15 @@ func getRowWithHeight(height) -> Object:
 	return null
 
 func addRow(height: int) -> void:
-	var row = Row.new(height, randomIndices())
+	var row = Row.new(height, Global.randomIndices())
 	rows.insert(height, row)
 	add_child(row)
 	
+func addTopRow():
+	for row in rows:
+		row.lower()
+	addRow(0)
+
 func removeRow(row: Row) -> void:
 	remove_child(row)
 	rows.erase(row)
@@ -108,6 +107,4 @@ func addLooseRow(column: int) -> void:
 	add_child(row)
 	
 func onTimeout():
-	for row in rows:
-		row.lower()
-	addRow(0)
+	topRowsDemand += 1

@@ -5,7 +5,6 @@ const Square = preload("res://scenes/Square.tscn")
 const square_side : int = 58
 const square_dimensions = Vector2(square_side, square_side)
 
-
 var squares = Array()
 var height : int
 
