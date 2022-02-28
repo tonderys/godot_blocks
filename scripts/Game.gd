@@ -22,7 +22,7 @@ func _input(event):
 	if event is InputEventMouseButton:
 		var column = int(event.position.x / 58)
 		if event.is_pressed():
-			print("pressed at ", column)
+			pass
 		else:
 			boardNode.input(column)
 

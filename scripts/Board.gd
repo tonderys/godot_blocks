@@ -37,7 +37,8 @@ func isFull() -> bool:
 
 func removeFullRows(combo: int = 1) -> void:
 	if combo > 1:
-		yield(get_tree().create_timer(1.0), "timeout")
+		yield(pauseTheGameFor(0.5), "completed")
+		
 	for row in rows:
 		if row.isFull():
 			var above = getRowWithHeight(row.height - 1)
@@ -110,6 +111,13 @@ func anchorBlockedLooseRows():
 		if isBlocked(looseRow):
 			anchor(looseRow)
 
+func pauseTheGameFor(period: float):
+	var dropdownTimer : Timer = get_parent().get_node("Timer/remaining")
+	dropdownTimer.set_paused(true)
+	print("pausing for %f" % period)
+	yield(get_tree().create_timer(period), "timeout")
+	dropdownTimer.set_paused(false)
+	
 func elevateLooseRows():
 	for looseRow in looseRows:
 		if isBlocked(looseRow):
