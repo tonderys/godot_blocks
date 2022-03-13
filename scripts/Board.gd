@@ -101,10 +101,11 @@ func onTimeout():
 	addTopRow()
 
 func addTopRow():
+	anchorBlockedLooseRows()
 	for row in rows:
 		row.lower()
 	addRow(0)
-	anchorBlockedLooseRows()
+
 	
 func anchorBlockedLooseRows():
 	for looseRow in looseRows:
@@ -114,7 +115,6 @@ func anchorBlockedLooseRows():
 func pauseTheGameFor(period: float):
 	var dropdownTimer : Timer = get_parent().get_node("Timer/remaining")
 	dropdownTimer.set_paused(true)
-	print("pausing for %f" % period)
 	yield(get_tree().create_timer(period), "timeout")
 	dropdownTimer.set_paused(false)
 	
@@ -122,5 +122,5 @@ func elevateLooseRows():
 	for looseRow in looseRows:
 		if isBlocked(looseRow):
 			anchor(looseRow)
-			break
-		looseRow.elevate()
+		else:
+			looseRow.elevate()
