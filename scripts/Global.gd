@@ -7,7 +7,7 @@ func _init():
 	rng.randomize()
 
 func shortenTimer(timer: Node, modifier: float) -> void:
-		timer.wait_time *= 0.9
+		timer.wait_time *= modifier
 		timer.stop()
 		timer.start()
 
