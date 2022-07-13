@@ -2,13 +2,12 @@ extends Node
 class_name Board
 
 const Row = preload("res://scripts/Row.gd")
-const tick : float = 1.0/60
+#const tick : float = 1.0/60
 const bottomRowHeight : int = 14
 onready var tileMap := get_node("TileMap")
 
 var rows = Array()
 var looseRows = Array()
-var elapsedTime = 0.0
 
 func _ready():
 	reset()
@@ -16,18 +15,12 @@ func _ready():
 func reset() -> void:
 	rows = Array()
 	looseRows = Array()
-	elapsedTime = 0.0
+
 	for height in range(0, bottomRowHeight/2):
 		addRow(height)
 
 func input(column: int):
 	addLooseRow(column)
-
-func _process(delta: float):
-	elapsedTime += delta
-	while elapsedTime > tick:
-		elapsedTime -= tick
-		elevateLooseRows()
 
 func isEmpty() -> bool:
 	return rows.empty()
