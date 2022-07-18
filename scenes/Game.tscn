@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://fonts/GUI_60.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scripts/Game.gd" type="Script" id=2]
+[ext_resource path="res://scenes/TillNextLevel.gd" type="Script" id=3]
 [ext_resource path="res://scripts/Timer.gd" type="Script" id=4]
 [ext_resource path="res://scenes/Board.tscn" type="PackedScene" id=5]
 
@@ -58,6 +59,16 @@ __meta__ = {
 [node name="remaining" type="Timer" parent="Timer"]
 wait_time = 5.0
 autostart = true
+
+[node name="TillNextLevel" type="ColorRect" parent="."]
+margin_top = 15.0
+margin_right = 580.0
+margin_bottom = 20.0
+color = Color( 1, 0, 0, 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="BoardNode" parent="." instance=ExtResource( 5 )]
 position = Vector2( 0, 50 )
