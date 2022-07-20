@@ -98,7 +98,6 @@ func addTopRow():
 	for row in rows:
 		row.lower()
 	addRow(0)
-
 	
 func anchorBlockedLooseRows():
 	for looseRow in looseRows:

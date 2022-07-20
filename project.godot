@@ -15,12 +15,18 @@ _global_script_classes=[ {
 "path": "res://scripts/Board.gd"
 }, {
 "base": "Node2D",
+"class": "Highlight",
+"language": "GDScript",
+"path": "res://scripts/Highlight.gd"
+}, {
+"base": "Node2D",
 "class": "Row",
 "language": "GDScript",
 "path": "res://scripts/Row.gd"
 } ]
 _global_script_class_icons={
 "Board": "",
+"Highlight": "",
 "Row": ""
 }
 

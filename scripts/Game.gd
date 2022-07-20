@@ -1,6 +1,6 @@
 extends Node2D
 
-var board = preload("res://scenes/Board.tscn")
+const Highlight = preload("res://scenes/Highlight.tscn")
 onready var boardNode = get_node("BoardNode")
 
 var elapsedTime = 0.0
@@ -8,10 +8,11 @@ const tick : float = 1.0/60
 var level = 1
 const rowsToNextLevel = 30
 var tillNextLevel = rowsToNextLevel
+var highlight = Highlight.instance()
 
 func _init():
 	Global.score = 0
-
+	
 func _process(_delta: float) -> void:
 	if boardNode.isEmpty():
 		levelUp()
@@ -27,12 +28,15 @@ func _process(_delta: float) -> void:
 		boardNode.elevateLooseRows()
 
 func _input(event):
+	if event is InputEventMouseMotion:
+		highlight.set_position(event.position)
 	if event is InputEventMouseButton:
-		var column = int(event.position.x / 58)
-		if event.is_pressed():
-			pass
+		if event.pressed: 
+				add_child(highlight)
 		else:
+			var column = int(event.position.x / 58)
 			boardNode.input(column)
+			remove_child(highlight)
 
 func onTimeout():
 	tillNextLevel -= 1
