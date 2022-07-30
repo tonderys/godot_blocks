@@ -12,11 +12,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TileMap" type="TileMap" parent="."]
-cell_size = Vector2( 58, 58 )
-cell_custom_transform = Transform2D( 64, 0, 0, 0, 0, 0 )
-format = 1
-
 [node name="HSeparator" type="HSeparator" parent="."]
 margin_top = 812.0
 margin_right = 580.0

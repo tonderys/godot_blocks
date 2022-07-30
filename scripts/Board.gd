@@ -1,13 +1,15 @@
 extends Node
 class_name Board
 
+const Highlight = preload("res://scenes/Highlight.tscn")
 const Row = preload("res://scripts/Row.gd")
-#const tick : float = 1.0/60
 const bottomRowHeight : int = 14
-onready var tileMap := get_node("TileMap")
+const square_size = 58
 
 var rows = Array()
 var looseRows = Array()
+var highlight = Highlight.instance()
+var highlighted_column = null
 
 func _ready():
 	reset()
@@ -19,8 +21,40 @@ func reset() -> void:
 	for height in range(0, bottomRowHeight/2):
 		addRow(height)
 
-func input(column: int):
-	addLooseRow(column)
+func highlight(posX):
+	add_child(highlight)
+	
+func unhighlight():
+	remove_child(highlight)
+
+func get_column_id(posX: int) -> int:
+	return int(posX / 58)
+
+func get_lowest_empty_square_in(column: int) -> int:
+	var height = 0
+	var square_found_in = -1
+	for row in rows:
+		if row.has_square_in(column):
+			square_found_in = height
+		height += 1
+	return square_found_in + 1
+
+func _input(event):
+	if event is InputEventMouseMotion:
+		highlighted_column = get_column_id(event.position.x)
+		
+func _process(_delta):
+	if highlighted_column != null:
+		var column_pos_x = highlighted_column * square_size
+		var column_pos_y = get_lowest_empty_square_in(highlighted_column) * square_size
+		var max_height = (bottomRowHeight + 1) * square_size
+		
+		highlight.set_position(Vector2(column_pos_x, column_pos_y))
+		highlight.set_size(Vector2(square_size, max_height - column_pos_y))
+
+func input(posX: int):
+	unhighlight()
+	addLooseRow(get_column_id(posX))
 
 func isEmpty() -> bool:
 	return rows.empty()

@@ -28,6 +28,9 @@ func canMergeWith(other: Row) -> bool:
 				return false
 	return true
 
+func has_square_in(column: int) -> bool:
+	return squares.has(column)
+
 func mergeWith(other: Row) -> void:
 	for square in other.squares:
 		assert(not squares.has(square) , "trying to add existing square to a row")
