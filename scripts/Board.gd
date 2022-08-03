@@ -26,6 +26,7 @@ func highlight(posX):
 	
 func unhighlight():
 	remove_child(highlight)
+	highlight.turn_red(0.0)
 
 func get_column_id(posX: int) -> int:
 	return int(posX / 58)
@@ -44,6 +45,9 @@ func _input(event):
 		highlighted_column = get_column_id(event.position.x)
 		
 func _process(_delta):
+	for row in rows:
+		if row.isEmpty(): #ToDo: overkill?
+			removeRow(row)
 	if highlighted_column != null:
 		var column_pos_x = highlighted_column * square_size
 		var column_pos_y = get_lowest_empty_square_in(highlighted_column) * square_size
@@ -52,9 +56,12 @@ func _process(_delta):
 		highlight.set_position(Vector2(column_pos_x, column_pos_y))
 		highlight.set_size(Vector2(square_size, max_height - column_pos_y))
 
-func input(posX: int):
+func handle_click(posX: int, remove: bool):
 	unhighlight()
-	addLooseRow(get_column_id(posX))
+	if remove:
+		remove_block_from_column(get_column_id(posX))
+	else:
+		addLooseRow(get_column_id(posX))
 
 func isEmpty() -> bool:
 	return rows.empty()
@@ -65,7 +72,6 @@ func isFull() -> bool:
 func removeFullRows(combo: int = 1) -> void:
 	if combo > 1:
 		yield(pauseTheGameFor(0.5), "completed")
-		
 	for row in rows:
 		if row.isFull():
 			var above = getRowWithHeight(row.height - 1)
@@ -119,6 +125,12 @@ func removeRow(row: Row) -> void:
 	remove_child(row)
 	rows.erase(row)
 	
+func remove_block_from_column(column: int):
+	for i in range(rows.size()-1,-1,-1):
+		if rows[i].has_square_in(column):
+			rows[i].remove_square(column)
+			return
+
 func addLooseRow(column: int) -> void:
 	var row = Row.new(bottomRowHeight, [column])
 	looseRows.append(row)

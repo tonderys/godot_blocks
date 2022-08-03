@@ -8,6 +8,7 @@ const tick : float = 1.0/60
 var level = 1
 const rowsToNextLevel = 30
 var tillNextLevel = rowsToNextLevel
+var clickStartPosY = null
 
 func _init():
 	Global.score = 0
@@ -27,11 +28,16 @@ func _process(_delta: float) -> void:
 		boardNode.elevateLooseRows()
 
 func _input(event):
+	if event is InputEventMouseMotion:
+		if clickStartPosY != null:
+			boardNode.highlight.turn_red((event.position.y - clickStartPosY)/58)
 	if event is InputEventMouseButton:
 		if event.pressed: 
-				boardNode.highlight(event.position.x)
+			clickStartPosY = event.position.y
+			boardNode.highlight(event.position.x)
 		else:
-			boardNode.input(event.position.x)
+			boardNode.handle_click(event.position.x, event.position.y > clickStartPosY + 58)
+			clickStartPosY = null
 
 func onTimeout():
 	tillNextLevel -= 1
