@@ -1,7 +1,7 @@
 extends Node2D
 
-func StartPressed():
+func start_pressed():
 	get_tree().change_scene("res://scenes/Game.tscn")
 	
-func quitPressed():
+func quit_pressed():
 	get_tree().quit()

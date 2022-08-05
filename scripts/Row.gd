@@ -2,25 +2,25 @@ extends Node2D
 class_name Row
 
 const Square = preload("res://scenes/Square.tscn")
-const square_side : int = 58
-const square_dimensions = Vector2(square_side, square_side) #ToDo: this might belong to the board
+const square_dimensions = Vector2(Global.square_side, Global.square_side) 
 
-var squares = Dictionary()
-var height : int
+var squares: Dictionary
+var height: int
 
 func _init(height: int, indices: Array):
+	squares = Dictionary()
 	self.height = height
 
 	for i in indices:
 		squares[i] = Square.instance()
 		squares[i].get_node("body").rect_size = square_dimensions
-		squares[i].get_node("body").rect_position = Vector2(i * square_side, 0)
+		squares[i].get_node("body").rect_position = Vector2(i * Global.square_side, 0)
 		add_child(squares[i])
 
 func _process(_delta: float):
-	self.position = Vector2(0, self.height * square_side)
+	self.position = Vector2(0, height * Global.square_side)
 
-func canMergeWith(other: Row) -> bool:
+func can_merge_with(other: Row) -> bool:
 	for otherSquare in other.squares.keys():
 		for ownSquare in squares.keys():
 			if ownSquare == otherSquare:
@@ -34,7 +34,7 @@ func remove_square(column: int):
 	remove_child(squares[column])
 	squares.erase(column)
 
-func mergeWith(other: Row) -> void:
+func merge_with(other: Row) -> void:
 	for id in other.squares.keys():
 		assert(not squares.has(id) , "trying to add existing square to a row")
 		squares[id] = other.squares[id]
@@ -42,11 +42,11 @@ func mergeWith(other: Row) -> void:
 		add_child(squares[id])
 		
 
-func isEmpty() -> bool:
+func is_empty() -> bool:
 	return squares.keys().size() == 0
 
-func isFull() -> bool:
-	return squares.keys().size() >= 10
+func is_full() -> bool:
+	return squares.keys().size() >= Global.columns
 
 func lower() -> void:
 	self.height += 1
@@ -54,5 +54,5 @@ func lower() -> void:
 func elevate() -> void:
 	self.height -= 1
 	
-func isBlockedBy(other: Row) -> bool:
-	return other.height == height-1 and not canMergeWith(other)
+func is_blocked_by(other: Row) -> bool:
+	return other.height == self.height-1 and not can_merge_with(other)

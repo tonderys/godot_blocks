@@ -1,15 +1,11 @@
 extends Node2D
-
-var rng = RandomNumberGenerator.new()
+class_name Square
 
 func rand() -> float:
-	return rng.randf_range(0.0, 0.7)
+	return Global.rng.randf_range(0.0, 0.7)
 
-func getRandomColor() -> Color:
+func _get_random_color() -> Color:
 	return Color(rand(), rand(), rand())
 
-func _init():
-	rng.randomize()
-
 func _ready():
-	get_node("body").color = getRandomColor()
+	get_node("body").color = _get_random_color()

@@ -2,17 +2,22 @@ extends Node2D
 
 var score : int = 0
 var rng = RandomNumberGenerator.new()
+const square_side: int = 58
+const columns: int = 10
+const rows: int = 14
 
 func _init():
 	rng.randomize()
 
-func shortenTimer(timer: Node, modifier: float) -> void:
+func shorten_timer(timer: Node, modifier: float) -> void:
 		timer.wait_time *= modifier
 		timer.stop()
 		timer.start()
 
-func randomIndices() -> Array:
-	var indices = [0,1,2,3,4,5,6,7,8,9]
+func random_indices() -> Array:
+	var indices = []
+	for i in range(columns):
+		indices.push_back(i)
 	indices.shuffle()
-	indices.resize(rng.randi_range(2, 9))
+	indices.resize(rng.randi_range(2, columns - 1))
 	return indices

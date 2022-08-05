@@ -86,5 +86,5 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="UI/MenuButtons/Start" to="UI/MenuButtons" method="StartPressed"]
-[connection signal="pressed" from="UI/MenuButtons/Quit" to="UI/MenuButtons" method="quitPressed"]
+[connection signal="pressed" from="UI/MenuButtons/Start" to="UI/MenuButtons" method="start_pressed"]
+[connection signal="pressed" from="UI/MenuButtons/Quit" to="UI/MenuButtons" method="quit_pressed"]

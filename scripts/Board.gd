@@ -3,13 +3,13 @@ class_name Board
 
 const Highlight = preload("res://scenes/Highlight.tscn")
 const Row = preload("res://scripts/Row.gd")
-const bottomRowHeight : int = 14
-const square_size = 58
 
 var rows = Array()
 var looseRows = Array()
 var highlight = Highlight.instance()
 var highlighted_column = null
+
+signal squares_removed(amount, combo)
 
 func _ready():
 	reset()
@@ -18,7 +18,7 @@ func reset() -> void:
 	rows = Array()
 	looseRows = Array()
 
-	for height in range(0, bottomRowHeight/2):
+	for height in range(0, Global.rows/2):
 		addRow(height)
 
 func highlight(posX):
@@ -31,30 +31,38 @@ func unhighlight():
 func get_column_id(posX: int) -> int:
 	return int(posX / 58)
 
+func _rows_from_bottom() -> Array:
+	var result = Array()
+	for i in range(rows.size()-1,-1,-1):
+		result.push_back(rows[i])
+	return result
+
 func get_lowest_empty_square_in(column: int) -> int:
-	var height = 0
-	var square_found_in = -1
-	for row in rows:
+	for row in _rows_from_bottom():
 		if row.has_square_in(column):
-			square_found_in = height
-		height += 1
-	return square_found_in + 1
+			return row.height + 1
+	return 0
+
+func remove_block_from_column(column: int):
+	for row in _rows_from_bottom():
+		if row.has_square_in(column):
+			row.remove_square(column)
+			if row.is_empty(): removeRow(row)
+			emit_signal("squares_removed", 1, 1)
+			return
 
 func _input(event):
 	if event is InputEventMouseMotion:
 		highlighted_column = get_column_id(event.position.x)
-		
+			
 func _process(_delta):
-	for row in rows:
-		if row.isEmpty(): #ToDo: overkill?
-			removeRow(row)
 	if highlighted_column != null:
-		var column_pos_x = highlighted_column * square_size
-		var column_pos_y = get_lowest_empty_square_in(highlighted_column) * square_size
-		var max_height = (bottomRowHeight + 1) * square_size
+		var column_pos_x = highlighted_column * Global.square_side
+		var column_pos_y = get_lowest_empty_square_in(highlighted_column) * Global.square_side
+		var max_height = (Global.rows + 1) * Global.square_side
 		
 		highlight.set_position(Vector2(column_pos_x, column_pos_y))
-		highlight.set_size(Vector2(square_size, max_height - column_pos_y))
+		highlight.set_size(Vector2(Global.square_side, max_height - column_pos_y))
 
 func handle_click(posX: int, remove: bool):
 	unhighlight()
@@ -63,25 +71,25 @@ func handle_click(posX: int, remove: bool):
 	else:
 		addLooseRow(get_column_id(posX))
 
-func isEmpty() -> bool:
+func is_empty() -> bool:
 	return rows.empty()
 
-func isFull() -> bool:
-	return rows.size() > bottomRowHeight
+func is_full() -> bool:
+	return rows.size() > Global.rows
 
 func removeFullRows(combo: int = 1) -> void:
 	if combo > 1:
 		yield(pauseTheGameFor(0.5), "completed")
 	for row in rows:
-		if row.isFull():
+		if row.is_full():
 			var above = getRowWithHeight(row.height - 1)
 			var below = getRowWithHeight(row.height + 1)
 			elevateRowsBelow(row)
-			get_parent().addPoints(combo)
+			emit_signal("squares_removed", Global.columns, combo)
 			removeRow(row)
 			if above != null and below != null:
-				if above.canMergeWith(below):
-					above.mergeWith(below)
+				if above.can_merge_with(below):
+					above.merge_with(below)
 					elevateRowsBelow(below)
 					removeRow(below)
 					removeFullRows(combo + 1)
@@ -97,15 +105,15 @@ func isBlocked(looseRow: Row):
 
 func isBlockedByRowAbove(looseRow: Row):
 	var rowAbove = getRowWithHeight(looseRow.height - 1)
-	return rowAbove != null and looseRow.isBlockedBy(rowAbove)
+	return rowAbove != null and looseRow.is_blocked_by(rowAbove)
 
 func anchor(looseRow: Row):
 	var sameLevelRow = getRowWithHeight(looseRow.height)
 	if sameLevelRow == null:
 		rows.append(looseRow)
 	else:
-		sameLevelRow.mergeWith(looseRow)
-		if sameLevelRow.isFull():
+		sameLevelRow.merge_with(looseRow)
+		if sameLevelRow.is_full():
 			removeFullRows(1)
 		remove_child(looseRow)
 	looseRows.erase(looseRow)
@@ -117,7 +125,7 @@ func getRowWithHeight(height) -> Object:
 	return null
 
 func addRow(height: int) -> void:
-	var row = Row.new(height, Global.randomIndices())
+	var row = Row.new(height, Global.random_indices())
 	rows.insert(height, row)
 	add_child(row)
 	
@@ -125,14 +133,8 @@ func removeRow(row: Row) -> void:
 	remove_child(row)
 	rows.erase(row)
 	
-func remove_block_from_column(column: int):
-	for i in range(rows.size()-1,-1,-1):
-		if rows[i].has_square_in(column):
-			rows[i].remove_square(column)
-			return
-
 func addLooseRow(column: int) -> void:
-	var row = Row.new(bottomRowHeight, [column])
+	var row = Row.new(Global.rows, [column])
 	looseRows.append(row)
 	add_child(row)
 	

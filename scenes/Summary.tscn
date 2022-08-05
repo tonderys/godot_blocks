@@ -85,5 +85,5 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="UI/MenuButtons/Restart" to="UI/MenuButtons" method="StartPressed"]
-[connection signal="pressed" from="UI/MenuButtons/Back" to="." method="backPressed"]
+[connection signal="pressed" from="UI/MenuButtons/Restart" to="UI/MenuButtons" method="start_pressed"]
+[connection signal="pressed" from="UI/MenuButtons/Back" to="." method="back_pressed"]

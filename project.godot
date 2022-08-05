@@ -23,11 +23,17 @@ _global_script_classes=[ {
 "class": "Row",
 "language": "GDScript",
 "path": "res://scripts/Row.gd"
+}, {
+"base": "Node2D",
+"class": "Square",
+"language": "GDScript",
+"path": "res://scripts/Square.gd"
 } ]
 _global_script_class_icons={
 "Board": "",
 "Highlight": "",
-"Row": ""
+"Row": "",
+"Square": ""
 }
 
 [application]
