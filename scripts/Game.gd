@@ -1,6 +1,5 @@
 extends Node2D
 
-const Highlight = preload("res://scenes/Highlight.tscn")
 onready var boardNode = get_node("BoardNode")
 
 var elapsedTime = 0.0
@@ -9,12 +8,14 @@ var level = 1
 const rowsToNextLevel = 30
 var tillNextLevel = rowsToNextLevel
 var clickStartPosY = null
+var input_handler = null
 
 func _init():
 	Global.score = 0
 	
 func _ready():
 	boardNode.connect("squares_removed", self, "add_points")
+	input_handler = Mouse_press_release.new(boardNode)
 	
 func _process(_delta: float) -> void:
 	if boardNode.is_empty():
@@ -32,15 +33,12 @@ func _process(_delta: float) -> void:
 
 func _input(event):
 	if event is InputEventMouseMotion:
-		if clickStartPosY != null:
-			boardNode.highlight.turn_red((event.position.y - clickStartPosY)/58)
+		input_handler.move(event)
 	if event is InputEventMouseButton:
-		if event.pressed: 
-			clickStartPosY = event.position.y
-			boardNode.highlight(event.position.x) #ToDo: click_on(pos)
+		if event.pressed:
+			input_handler.interaction_on(event)
 		else:
-			boardNode.handle_click(event.position.x, event.position.y > clickStartPosY + 58) #ToDo:click_off(pos)
-			clickStartPosY = null
+			input_handler.interaction_off(event)
 
 func on_timeout():
 	tillNextLevel -= 1
