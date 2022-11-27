@@ -6,7 +6,7 @@ const Row = preload("res://scripts/Row.gd")
 
 var rows = Array()
 var looseRows = Array()
-var highlight = Highlight.instance()
+var highlight
 var highlighted_column = null
 
 signal squares_removed(amount, combo)
@@ -21,15 +21,16 @@ func reset() -> void:
 	for height in range(0, Global.rows/2):
 		addRow(height)
 
-func highlight(posX):
+func highlight(pos_x):
+	highlight = Highlight.instance()
+	highlight.init(get_column_id(pos_x), self)
 	add_child(highlight)
 	
 func unhighlight():
-	remove_child(highlight)
-	highlight.turn_red(0.0)
+	highlight.queue_free()
 
-func get_column_id(posX: int) -> int:
-	return int(posX / 58)
+func get_column_id(pos_x: int) -> int:
+	return int(pos_x / Global.square_side)
 
 func _rows_from_bottom() -> Array:
 	var result = Array()
@@ -43,33 +44,14 @@ func get_lowest_empty_square_in(column: int) -> int:
 			return row.height + 1
 	return 0
 
-func remove_block_from_column(column: int):
+func remove_block_from_column(pos_x: int):
+	var column = get_column_id(pos_x)
 	for row in _rows_from_bottom():
 		if row.has_square_in(column):
 			row.remove_square(column)
 			if row.is_empty(): removeRow(row)
 			emit_signal("squares_removed", 1, 1)
 			return
-
-func _input(event):
-	if event is InputEventMouseMotion:
-		highlighted_column = get_column_id(event.position.x)
-			
-func _process(_delta):
-	if highlighted_column != null:
-		var column_pos_x = highlighted_column * Global.square_side
-		var column_pos_y = get_lowest_empty_square_in(highlighted_column) * Global.square_side
-		var max_height = (Global.rows + 1) * Global.square_side
-		
-		highlight.set_position(Vector2(column_pos_x, column_pos_y))
-		highlight.set_size(Vector2(Global.square_side, max_height - column_pos_y))
-
-func handle_click(posX: int, remove: bool):
-	unhighlight()
-	if remove:
-		remove_block_from_column(get_column_id(posX))
-	else:
-		addLooseRow(get_column_id(posX))
 
 func is_empty() -> bool:
 	return rows.empty()
@@ -133,7 +115,8 @@ func removeRow(row: Row) -> void:
 	remove_child(row)
 	rows.erase(row)
 	
-func addLooseRow(column: int) -> void:
+func addLooseRow(pos_x: int) -> void:
+	var column = get_column_id(pos_x)
 	var row = Row.new(Global.rows, [column])
 	looseRows.append(row)
 	add_child(row)
