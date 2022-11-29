@@ -29,7 +29,7 @@ func _process(_delta: float) -> void:
 	elapsedTime += _delta
 	while elapsedTime > tick:
 		elapsedTime -= tick
-		boardNode.elevateLooseRows()
+		boardNode.elevate_loose_rows()
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -42,7 +42,7 @@ func _input(event):
 
 func on_timeout():
 	tillNextLevel -= 1
-	boardNode.addTopRow()
+	boardNode.add_top_row()
 
 func add_points(squares: int, multiplier : int = 1):
 	print("%s [squares_removed] with multiplier:%s on lvl:%s" % [squares, multiplier, level])

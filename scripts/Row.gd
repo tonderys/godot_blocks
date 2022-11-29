@@ -2,6 +2,7 @@ extends Node2D
 class_name Row
 
 const Square = preload("res://scenes/Square.tscn")
+const Piece = preload("res://scenes/Piece.tscn")
 const square_dimensions = Vector2(Global.square_side, Global.square_side) 
 
 var squares: Dictionary
@@ -30,9 +31,17 @@ func can_merge_with(other: Row) -> bool:
 func has_square_in(column: int) -> bool:
 	return squares.has(column)
 	
-func remove_square(column: int):
+func remove_square(column: int) -> Node2D:
+	var square_body = squares[column].get_node("body")
+	
 	remove_child(squares[column])
 	squares.erase(column)
+
+	var piece = Piece.instance()
+	piece.init(square_body.color, 
+			   Vector2(square_body.rect_position.x + square_body.rect_size.x / 2, 
+					   self.position.y + square_body.rect_size.y / 2))
+	return piece
 
 func merge_with(other: Row) -> void:
 	for id in other.squares.keys():

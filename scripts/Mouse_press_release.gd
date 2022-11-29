@@ -24,7 +24,7 @@ func interaction_on(position):
 func interaction_off(position):
 	if self.starting_pos != null:
 		if (position.y - self.starting_pos.y < -Global.square_side):
-			board_node.addLooseRow(starting_pos.x)
+			board_node.add_loose_row(starting_pos.x)
 		if (position.y - self.starting_pos.y > Global.square_side):
 			board_node.remove_block_from_column(starting_pos.x)
 		board_node.unhighlight()
