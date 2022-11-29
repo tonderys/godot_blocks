@@ -30,8 +30,19 @@ func can_merge_with(other: Row) -> bool:
 
 func has_square_in(column: int) -> bool:
 	return squares.has(column)
-	
-func remove_square(column: int) -> Node2D:
+
+func destroy_squares() -> Array:
+	var result = Array()
+	for square in squares.values():
+		var square_body = square.get_node("body")
+		var piece = Piece.instance()
+		piece.init(square_body.color, 
+				   Vector2(square_body.rect_position.x + square_body.rect_size.x / 2, 
+						   self.position.y + square_body.rect_size.y / 2))
+		result.append(piece)
+	return result
+
+func destroy_square(column: int) -> Node2D:
 	var square_body = squares[column].get_node("body")
 	
 	remove_child(squares[column])

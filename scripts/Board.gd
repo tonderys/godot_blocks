@@ -59,7 +59,7 @@ func remove_block_from_column(pos_x: int):
 	var column = get_column_id(pos_x)
 	for row in _rows_from_bottom():
 		if row.has_square_in(column):
-			pieces.append(row.remove_square(column))
+			pieces.append(row.destroy_square(column))
 			self.add_child(pieces.back())
 			if row.is_empty(): remove_row(row)
 			emit_signal("squares_removed", 1, 1)
@@ -124,6 +124,9 @@ func add_row(height: int) -> void:
 	add_child(row)
 	
 func remove_row(row: Row) -> void:
+	for node in row.destroy_squares():
+		pieces.append(node)
+		self.add_child(pieces.back())
 	elevate_rows_below(row)
 	remove_child(row)
 	rows.erase(row)
