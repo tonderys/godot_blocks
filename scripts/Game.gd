@@ -9,12 +9,14 @@ const rowsToNextLevel = 30
 var tillNextLevel = rowsToNextLevel
 var clickStartPosY = null
 var input_handler = null
+var removes = 0
 
 func _init():
 	Global.score = 0
 	
 func _ready():
 	boardNode.connect("squares_removed", self, "add_points")
+	boardNode.connect("combo", self, "add_removes")
 	input_handler = Mouse_press_release.new(boardNode)
 	
 func _process(_delta: float) -> void:
@@ -48,6 +50,10 @@ func add_points(squares: int, multiplier : int = 1):
 	print("%s [squares_removed] with multiplier:%s on lvl:%s" % [squares, multiplier, level])
 	Global.score += squares * level * multiplier
 	get_node("Score").text = "Score:%s" % Global.score
+
+func add_removes():
+	removes = min(removes + 1, 5)
+	get_node("removes").get_node("score").text = "%s" % removes
 
 func level_up():
 	add_points(Global.columns, tillNextLevel)

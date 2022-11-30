@@ -11,6 +11,7 @@ var highlight
 var highlighted_column = null
 
 signal squares_removed(amount, combo)
+signal combo()
 
 func _ready():
 	reset()
@@ -76,6 +77,7 @@ func is_full() -> bool:
 func remove_full_rows(combo: int = 1) -> void:
 	if combo > 1:
 		yield(pause_the_game_for(0.5), "completed")
+		emit_signal("combo")
 	for row in rows:
 		if row.is_full():
 			var above = get_row_with_height(row.height - 1)

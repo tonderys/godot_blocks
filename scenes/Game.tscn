@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://fonts/GUI_60.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scripts/Game.gd" type="Script" id=2]
 [ext_resource path="res://scripts/TillNextLevel.gd" type="Script" id=3]
 [ext_resource path="res://scripts/Timer.gd" type="Script" id=4]
 [ext_resource path="res://scenes/Board.tscn" type="PackedScene" id=5]
+[ext_resource path="res://fonts/bomb.png" type="Texture" id=6]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 2 )
@@ -18,10 +19,11 @@ __meta__ = {
 }
 
 [node name="Multipier" type="Label" parent="."]
-margin_left = 290.0
+margin_left = 247.0
 margin_top = 926.0
 margin_right = 580.0
 margin_bottom = 966.0
+rect_pivot_offset = Vector2( 176, -35 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 1 )
 text = "1x"
@@ -32,6 +34,7 @@ __meta__ = {
 }
 
 [node name="Score" type="Label" parent="."]
+margin_left = 2.0
 margin_top = 986.0
 margin_right = 580.0
 margin_bottom = 1026.0
@@ -64,6 +67,28 @@ margin_right = 580.0
 margin_bottom = 20.0
 color = Color( 1, 0, 0, 1 )
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="removes" type="Node" parent="."]
+
+[node name="bomb" type="Sprite" parent="removes"]
+modulate = Color( 0.803922, 1, 0.780392, 1 )
+position = Vector2( 18.5, 937.5 )
+scale = Vector2( 2.3125, 2.1875 )
+texture = ExtResource( 6 )
+
+[node name="score" type="Label" parent="removes"]
+margin_left = 34.0
+margin_top = 920.0
+margin_right = 80.0
+margin_bottom = 960.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "0"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
