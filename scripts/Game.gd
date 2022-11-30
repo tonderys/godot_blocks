@@ -15,9 +15,9 @@ func _init():
 	Global.score = 0
 	
 func _ready():
-	boardNode.connect("squares_removed", self, "add_points")
-	boardNode.connect("combo", self, "add_removes")
-	input_handler = Mouse_press_release.new(boardNode)
+	boardNode.connect("squares_removed", self, "squares_removed")
+	boardNode.connect("row_removed", self, "row_removed")
+	input_handler = Mouse_press_release.new(boardNode, self)
 	
 func _process(_delta: float) -> void:
 	if boardNode.is_empty():
@@ -46,15 +46,23 @@ func on_timeout():
 	tillNextLevel -= 1
 	boardNode.add_top_row()
 
+func squares_removed(radius, squares):
+	add_points(squares)
+	modify_available_removes(-radius)
+
+func row_removed(combo):
+	add_points(Global.columns, combo)
+	modify_available_removes(combo - 1)
+
 func add_points(squares: int, multiplier : int = 1):
 	print("%s [squares_removed] with multiplier:%s on lvl:%s" % [squares, multiplier, level])
 	Global.score += squares * level * multiplier
 	get_node("Score").text = "Score:%s" % Global.score
 
-func add_removes():
-	removes = min(removes + 1, 5)
-	get_node("removes").get_node("score").text = "%s" % removes
-
+func modify_available_removes(amount):
+	removes = clamp(removes + amount, 0, 5)
+	get_node("removes").get_node("amount").text = "%s" % removes
+	
 func level_up():
 	add_points(Global.columns, tillNextLevel)
 	tillNextLevel = rowsToNextLevel

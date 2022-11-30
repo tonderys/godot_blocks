@@ -8,11 +8,12 @@ const width = Global.square_side
 const max_height = (Global.rows + 1) * Global.square_side
 
 var highlighted_column
-var parent
+var board_node
+var game_node
 
 func init(column, board):
 	highlighted_column = column
-	parent = board
+	board_node = board
 	update()
 
 func _process(_delta):
@@ -23,22 +24,22 @@ func update():
 	set_size(Vector2(width, max_height - pos_y()))
 	
 func pos_y():
-	return parent.get_lowest_empty_square_in(highlighted_column) * Global.square_side
+	return board_node.get_lowest_empty_square_in(highlighted_column) * Global.square_side
 
 func _ready():
-	get_node("body").color = Color(0, 0, blue, transparency)
+	get_node("column").color = Color(0, 0, blue, transparency)
 	
 func indicate_remove():
-	get_node("body").color = Color(1.0, 0.0, blue, transparency)
+	get_node("column").color = Color(1.0, 0.0, blue, transparency)
 	
 func indicate_add():
-	get_node("body").color = Color(0.0 ,1.0 , blue, transparency)
+	get_node("column").color = Color(0.0 ,1.0 , blue, transparency)
 
 func indicate_no_action():
-	get_node("body").color = Color(0.0 ,0.0 , blue, transparency)
+	get_node("column").color = Color(0.0 ,0.0 , blue, transparency)
 
 func set_position(position: Vector2):
-	get_node("body").rect_position = position
+	get_node("column").rect_position = position
 
 func set_size(size: Vector2):
-	get_node("body").rect_size = size
+	get_node("column").rect_size = size

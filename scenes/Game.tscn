@@ -79,7 +79,7 @@ position = Vector2( 18.5, 937.5 )
 scale = Vector2( 2.3125, 2.1875 )
 texture = ExtResource( 6 )
 
-[node name="score" type="Label" parent="removes"]
+[node name="amount" type="Label" parent="removes"]
 margin_left = 34.0
 margin_top = 920.0
 margin_right = 80.0

@@ -8,10 +8,9 @@ var rows = Array()
 var looseRows = Array()
 var pieces = Array()
 var highlight
-var highlighted_column = null
 
 signal squares_removed(amount, combo)
-signal combo()
+signal row_removed(combo)
 
 func _ready():
 	reset()
@@ -56,7 +55,7 @@ func get_lowest_empty_square_in(column: int) -> int:
 			return row.height + 1
 	return 0
 
-func remove_block_from_column(pos_x: int):
+func remove_block_from_column(pos_x: int, radius: int = 1):
 	var column = get_column_id(pos_x)
 	for row in _rows_from_bottom():
 		if row.has_square_in(column):
@@ -83,7 +82,7 @@ func remove_full_rows(combo: int = 1) -> void:
 			var above = get_row_with_height(row.height - 1)
 			var below = get_row_with_height(row.height + 1)
 			elevate_rows_below(row)
-			emit_signal("squares_removed", Global.columns, combo)
+			emit_signal("row_removed", combo)
 			remove_row(row)
 			if above != null and below != null:
 				if above.can_merge_with(below):
@@ -140,9 +139,6 @@ func add_loose_row(pos_x: int) -> void:
 	looseRows.append(row)
 	add_child(row)
 	
-func on_timeout():
-	add_top_row()
-
 func add_top_row():
 	anchor_blocked_loose_rows()
 	for row in rows:
