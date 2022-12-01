@@ -17,7 +17,7 @@ func _init():
 func _ready():
 	boardNode.connect("squares_removed", self, "squares_removed")
 	boardNode.connect("row_removed", self, "row_removed")
-	input_handler = Mouse_press_release.new(boardNode, self)
+	input_handler = PressRelease.new(boardNode, self)
 	
 func _process(_delta: float) -> void:
 	if boardNode.is_empty():

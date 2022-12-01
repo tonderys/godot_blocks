@@ -1,5 +1,5 @@
 extends Node
-class_name Mouse_press_release
+class_name PressRelease
 
 var starting_pos
 var board_node
