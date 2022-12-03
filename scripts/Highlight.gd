@@ -24,7 +24,7 @@ func update():
 	set_size(Vector2(width, max_height - pos_y()))
 	
 func pos_y():
-	return board_node.get_lowest_empty_square_in(highlighted_column) * Global.square_side
+	return (board_node.get_lowest_square_in(highlighted_column) + 1) * Global.square_side
 
 func _ready():
 	get_node("column").color = Color(0, 0, blue, transparency)

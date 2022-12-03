@@ -43,29 +43,17 @@ func unhighlight():
 func get_column_id(pos_x: int) -> int:
 	return int(pos_x / Global.square_side)
 
-func _rows_from_bottom() -> Array:
+func rows_from_bottom() -> Array:
 	var result = Array()
 	for i in range(rows.size()-1,-1,-1):
 		result.push_back(rows[i])
 	return result
 
-func get_lowest_empty_square_in(column: int) -> int:
-	for row in _rows_from_bottom():
+func get_lowest_square_in(column: int) -> int:
+	for row in rows_from_bottom():
 		if row.has_square_in(column):
-			return row.height + 1
-	return 0
-
-func remove_block_from_column(pos_x: int, radius: int = 1):
-	var column = get_column_id(pos_x)
-	for row in _rows_from_bottom():
-		if row.has_square_in(column):
-			pieces.append(row.destroy_square(column))
-			self.add_child(pieces.back())
-			if row.is_empty(): 
-				remove_row(row)
-				elevate_rows_below(row)
-			emit_signal("squares_removed", 1, 1)
-			return
+			return row.height
+	return -1
 
 func is_empty() -> bool:
 	return rows.empty()
@@ -73,21 +61,29 @@ func is_empty() -> bool:
 func is_full() -> bool:
 	return rows.size() > Global.rows
 
+func remove_block_from_column(pos_x: int, radius: int = 1):
+	var column = get_column_id(pos_x)
+	for row in rows_from_bottom():
+		if row.has_square_in(column):
+			pieces.append(row.destroy_square(column))
+			self.add_child(pieces.back())
+			if row.is_empty(): 
+				remove_row(row)
+			emit_signal("squares_removed", 1, 1)
+			return
+
 func remove_full_rows(combo: int = 1) -> void:
 	if combo > 1:
 		yield(pause_the_game_for(0.5), "completed")
-		emit_signal("combo")
 	for row in rows:
 		if row.is_full():
 			var above = get_row_with_height(row.height - 1)
 			var below = get_row_with_height(row.height + 1)
-			elevate_rows_below(row)
 			emit_signal("row_removed", combo)
 			remove_row(row)
 			if above != null and below != null:
 				if above.can_merge_with(below):
 					above.merge_with(below)
-					elevate_rows_below(below)
 					remove_row(below)
 					remove_full_rows(combo + 1)
 
@@ -132,6 +128,7 @@ func remove_row(row: Row) -> void:
 		self.add_child(pieces.back())
 	remove_child(row)
 	rows.erase(row)
+	elevate_rows_below(row)
 	
 func add_loose_row(pos_x: int) -> void:
 	var column = get_column_id(pos_x)
