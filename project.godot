@@ -10,6 +10,16 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node",
+"class": "Action",
+"language": "GDScript",
+"path": "res://scripts/Action.gd"
+}, {
+"base": "Reference",
+"class": "ActionFactory",
+"language": "GDScript",
+"path": "res://scripts/ActionFactory.gd"
+}, {
+"base": "Node",
 "class": "Board",
 "language": "GDScript",
 "path": "res://scripts/Board.gd"
@@ -19,10 +29,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Highlight.gd"
 }, {
-"base": "Node",
-"class": "PressRelease",
+"base": "Action",
+"class": "Press",
 "language": "GDScript",
-"path": "res://scripts/PressRelease.gd"
+"path": "res://scripts/ActionPress.gd"
+}, {
+"base": "Action",
+"class": "Release",
+"language": "GDScript",
+"path": "res://scripts/ActionRelease.gd"
 }, {
 "base": "Node2D",
 "class": "Row",
@@ -35,9 +50,12 @@ _global_script_classes=[ {
 "path": "res://scripts/Square.gd"
 } ]
 _global_script_class_icons={
+"Action": "",
+"ActionFactory": "",
 "Board": "",
 "Highlight": "",
-"PressRelease": "",
+"Press": "",
+"Release": "",
 "Row": "",
 "Square": ""
 }
