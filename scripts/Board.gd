@@ -36,7 +36,11 @@ func highlight(pos_x):
 	highlight = Highlight.instance()
 	highlight.init(get_column_id(pos_x), self)
 	add_child(highlight)
-	
+
+func update_highlight():
+	if is_instance_valid(highlight):
+		highlight.update()
+
 func unhighlight():
 	highlight.queue_free()
 
@@ -121,7 +125,7 @@ func add_row(height: int) -> void:
 	var row = Row.new(height, Global.random_indices())
 	rows.insert(height, row)
 	add_child(row)
-	
+
 func remove_row(row: Row) -> void:
 	for node in row.destroy_squares():
 		pieces.append(node)
@@ -129,7 +133,8 @@ func remove_row(row: Row) -> void:
 	remove_child(row)
 	rows.erase(row)
 	elevate_rows_below(row)
-	
+	update_highlight()
+
 func add_loose_row(pos_x: int) -> void:
 	var column = get_column_id(pos_x)
 	var row = Row.new(Global.rows, [column])
@@ -141,6 +146,7 @@ func add_top_row():
 	for row in rows:
 		row.lower()
 	add_row(0)
+	update_highlight()
 	
 func anchor_blocked_loose_rows():
 	for looseRow in looseRows:

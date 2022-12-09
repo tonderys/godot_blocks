@@ -12,12 +12,17 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "Action",
 "language": "GDScript",
-"path": "res://scripts/Action.gd"
+"path": "res://scripts/Actions/Action.gd"
 }, {
 "base": "Reference",
 "class": "ActionFactory",
 "language": "GDScript",
-"path": "res://scripts/ActionFactory.gd"
+"path": "res://scripts/Actions/ActionFactory.gd"
+}, {
+"base": "Action",
+"class": "Add",
+"language": "GDScript",
+"path": "res://scripts/Actions/Add.gd"
 }, {
 "base": "Node",
 "class": "Board",
@@ -32,12 +37,17 @@ _global_script_classes=[ {
 "base": "Action",
 "class": "Press",
 "language": "GDScript",
-"path": "res://scripts/ActionPress.gd"
+"path": "res://scripts/Actions/Press.gd"
 }, {
 "base": "Action",
 "class": "Release",
 "language": "GDScript",
-"path": "res://scripts/ActionRelease.gd"
+"path": "res://scripts/Actions/Release.gd"
+}, {
+"base": "Action",
+"class": "Remove",
+"language": "GDScript",
+"path": "res://scripts/Actions/Remove.gd"
 }, {
 "base": "Node2D",
 "class": "Row",
@@ -52,10 +62,12 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Action": "",
 "ActionFactory": "",
+"Add": "",
 "Board": "",
 "Highlight": "",
 "Press": "",
 "Release": "",
+"Remove": "",
 "Row": "",
 "Square": ""
 }

@@ -5,7 +5,9 @@ var actions
 func _init():
 	actions = {
 		"press": Press,
-		"release": Release
+		"release": Release,
+		"add":Add,
+		"remove":Remove
 	}
 	
 func get_action(name):
