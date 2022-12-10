@@ -65,16 +65,23 @@ func is_empty() -> bool:
 func is_full() -> bool:
 	return rows.size() > Global.rows
 
-func remove_block_from_column(pos_x: int, radius: int = 1):
-	var column = get_column_id(pos_x)
-	for row in rows_from_bottom():
-		if row.has_square_in(column):
+func remove_blocks_from_column(pos_x: int, radius: int):
+	var x = get_column_id(pos_x)
+	var y = get_lowest_square_in(x)
+
+	var squares_to_be_removed = Dictionary()
+	for row in rows:
+		squares_to_be_removed[row] = row.get_squares_within_range(x,y,radius)
+		
+	var removed_squares_amount = 0
+	for row in squares_to_be_removed:
+		for column in squares_to_be_removed[row]:
+			removed_squares_amount+=1
 			pieces.append(row.destroy_square(column))
 			self.add_child(pieces.back())
 			if row.is_empty(): 
 				remove_row(row)
-			emit_signal("squares_removed", 1, 1)
-			return
+	emit_signal("squares_removed", radius, removed_squares_amount)
 
 func remove_full_rows(combo: int = 1) -> void:
 	if combo > 1:

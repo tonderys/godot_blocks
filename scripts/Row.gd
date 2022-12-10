@@ -60,7 +60,13 @@ func merge_with(other: Row) -> void:
 		squares[id] = other.squares[id]
 		other.remove_child(squares[id])
 		add_child(squares[id])
-		
+
+func get_squares_within_range(x,y,r):
+	var result = []
+	for width in squares.keys():
+		if (abs(width - x) + abs(height - y)) <= r:
+			result.append(width)
+	return result
 
 func is_empty() -> bool:
 	return squares.keys().size() == 0

@@ -50,7 +50,7 @@ func on_timeout():
 
 func squares_removed(radius, squares):
 	add_points(squares)
-	modify_available_removes(-radius)
+	modify_available_removes(- radius - 1)
 
 func row_removed(combo):
 	add_points(Global.columns, combo)
