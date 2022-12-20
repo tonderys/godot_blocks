@@ -29,6 +29,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Board.gd"
 }, {
+"base": "Reference",
+"class": "GutHookScript",
+"language": "GDScript",
+"path": "res://addons/gut/hook_script.gd"
+}, {
+"base": "Node",
+"class": "GutTest",
+"language": "GDScript",
+"path": "res://addons/gut/test.gd"
+}, {
 "base": "Node2D",
 "class": "Highlight",
 "language": "GDScript",
@@ -64,6 +74,8 @@ _global_script_class_icons={
 "ActionFactory": "",
 "Add": "",
 "Board": "",
+"GutHookScript": "",
+"GutTest": "",
 "Highlight": "",
 "Press": "",
 "Release": "",
@@ -91,6 +103,10 @@ window/size/test_height=512
 window/handheld/orientation="portrait"
 window/stretch/mode="2d"
 window/stretch/aspect="keep_width"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/gut/plugin.cfg" )
 
 [global]
 

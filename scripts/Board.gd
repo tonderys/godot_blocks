@@ -134,7 +134,7 @@ func add_row(height: int) -> void:
 	add_child(row)
 
 func remove_row(row: Row) -> void:
-	for node in row.destroy_squares():
+	for node in row.destroy_all_squares():
 		pieces.append(node)
 		self.add_child(pieces.back())
 	remove_child(row)

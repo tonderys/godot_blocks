@@ -1,1 +1,7 @@
-.import/
+.import/*
+addons/*
+.gut_*
+gut_*
+
+asset_lib_icon.png*
+BigFont*

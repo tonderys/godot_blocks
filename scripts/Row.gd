@@ -8,15 +8,16 @@ const square_dimensions = Vector2(Global.square_side, Global.square_side)
 var squares: Dictionary
 var height: int
 
-func _init(height: int, indices: Array):
+func _init(h: int, indices: Array):
 	squares = Dictionary()
-	self.height = height
+	height = h
 
 	for i in indices:
 		squares[i] = Square.instance()
 		squares[i].get_node("body").rect_size = square_dimensions
 		squares[i].get_node("body").rect_position = Vector2(i * Global.square_side, 0)
 		add_child(squares[i])
+	print("squares", len(squares))
 
 func _process(_delta: float):
 	self.position = Vector2(0, height * Global.square_side)
@@ -31,22 +32,28 @@ func can_merge_with(other: Row) -> bool:
 func has_square_in(column: int) -> bool:
 	return squares.has(column)
 
-func destroy_squares() -> Array:
+func destroy_all_squares() -> Array:
 	var result = Array()
-	for square in squares.values():
-		var square_body = square.get_node("body")
+	var to_be_removed = []
+	for column in squares:
 		var piece = Piece.instance()
+		var square_body = squares[column].get_node("body")
 		piece.init(square_body.color, 
 				   Vector2(square_body.rect_position.x + square_body.rect_size.x / 2, 
 						   self.position.y + square_body.rect_size.y / 2))
 		result.append(piece)
+		remove_child(squares[column])
+		to_be_removed.append(column)
+	
+	for column in to_be_removed:
+		squares.erase(column)
 	return result
 
 func destroy_square(column: int) -> Node2D:
 	var square_body = squares[column].get_node("body")
-	
 	remove_child(squares[column])
-	squares.erase(column)
+	if not squares.erase(column):
+		pass
 
 	var piece = Piece.instance()
 	piece.init(square_body.color, 
@@ -58,7 +65,7 @@ func merge_with(other: Row) -> void:
 	for id in other.squares.keys():
 		assert(not squares.has(id) , "trying to add existing square to a row")
 		squares[id] = other.squares[id]
-		other.remove_child(squares[id])
+		other.destroy_square(id)
 		add_child(squares[id])
 
 func get_squares_within_range(x,y,r):
