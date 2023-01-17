@@ -35,6 +35,7 @@ func remove_unnecessary_pieces() -> void:
 func highlight(pos_x):
 	highlight = Highlight.instance()
 	highlight.init(get_column_id(pos_x), self)
+	highlight.z_index += 1
 	add_child(highlight)
 
 func update_highlight():

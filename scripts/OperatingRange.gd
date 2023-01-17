@@ -7,6 +7,9 @@ var color = Color.blue
 const step = Global.square_side
 const thickness = 5.0
 
+func is_in_range(point):
+	return point.x >= 0 and point.y >= 0
+
 func get_line(start, steps):
 	var result = [start, ]
 	for i in range((radius * 2) + 1):
@@ -33,5 +36,10 @@ func _draw():
 	var dr = get_line(ur[-1], [Vector2(-step, 0), Vector2(0, step)])
 	
 	var points = bl + ul + ur + dr
+	var prev = points[0]
 	for i in range (1, len(points)):
-		draw_line(points[i-1], points[i], color, thickness)
+		var next = points[i]
+		if is_in_range(prev) and is_in_range(next):
+			draw_line(prev, next, color, thickness)
+			prev = next
+			
