@@ -10,13 +10,14 @@ var pieces = Array()
 var highlight
 
 signal squares_removed(amount, combo)
-signal row_removed(combo)
 
 func _ready():
 	reset()
 
 func reset() -> void:
 	rows = Array()
+	for row in looseRows:
+		remove_child(row)
 	looseRows = Array()
 	remove_unnecessary_pieces()
 	
@@ -66,43 +67,16 @@ func is_empty() -> bool:
 func is_full() -> bool:
 	return rows.size() > Global.rows
 
-func remove_blocks_from_column(pos_x: int, radius: int):
-	var x = get_column_id(pos_x)
-	var y = get_lowest_square_in(x)
-
-	var squares_to_be_removed = Dictionary()
-	for row in rows:
-		squares_to_be_removed[row] = row.get_squares_within_range(x,y,radius)
-		
-	var removed_squares_amount = 0
-	for row in squares_to_be_removed:
-		for column in squares_to_be_removed[row]:
-			removed_squares_amount+=1
-			pieces.append(row.destroy_square(column))
-			self.add_child(pieces.back())
-			if row.is_empty(): 
-				remove_row(row)
-	emit_signal("squares_removed", radius, removed_squares_amount)
-
-func remove_full_rows(combo: int = 1) -> void:
-	if combo > 1:
-		yield(pause_the_game_for(0.5), "completed")
+func remove_full_rows() -> void:
 	for row in rows:
 		if row.is_full():
-			var above = get_row_with_height(row.height - 1)
-			var below = get_row_with_height(row.height + 1)
-			emit_signal("row_removed", combo)
+			emit_signal("row_removed")
 			remove_row(row)
-			if above != null and below != null:
-				if above.can_merge_with(below):
-					above.merge_with(below)
-					remove_row(below)
-					remove_full_rows(combo + 1)
 
-func elevate_rows_below(removedRow: Row):
+func handle_rows_below(removedRow: Row):
 	for row in rows:
 		if row.height > removedRow.height:
-			row.elevate()
+			remove_row(row)
 	
 func is_blocked(looseRow: Row):
 	var isOnTopRow : bool = looseRow.height == 0
@@ -119,7 +93,7 @@ func anchor(looseRow: Row):
 	else:
 		sameLevelRow.merge_with(looseRow)
 		if sameLevelRow.is_full():
-			remove_full_rows(1)
+			remove_full_rows()
 		remove_child(looseRow)
 	looseRows.erase(looseRow)
 
@@ -135,12 +109,14 @@ func add_row(height: int) -> void:
 	add_child(row)
 
 func remove_row(row: Row) -> void:
-	for node in row.destroy_all_squares():
+	var removed_squares = row.destroy_all_squares()
+	emit_signal("squares_removed", len(removed_squares))
+	for node in removed_squares:
 		pieces.append(node)
 		self.add_child(pieces.back())
 	remove_child(row)
 	rows.erase(row)
-	elevate_rows_below(row)
+	handle_rows_below(row)
 	update_highlight()
 
 func add_loose_row(pos_x: int) -> void:
@@ -161,12 +137,6 @@ func anchor_blocked_loose_rows():
 		if is_blocked(looseRow):
 			anchor(looseRow)
 
-func pause_the_game_for(period: float):
-	var dropdownTimer : Timer = get_parent().get_node("Timer/remaining")
-	dropdownTimer.set_paused(true)
-	yield(get_tree().create_timer(period), "timeout")
-	dropdownTimer.set_paused(false)
-	
 func elevate_loose_rows():
 	for looseRow in looseRows:
 		if is_blocked(looseRow):

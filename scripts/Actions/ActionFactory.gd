@@ -7,7 +7,9 @@ func _init():
 		"press": Press,
 		"release": Release,
 		"add":Add,
-		"remove":Remove
+		"remove":Remove,
+		"tap":Tap,
+		"untap":Untap
 	}
 	
 func get_action(name):

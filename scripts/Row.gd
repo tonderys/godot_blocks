@@ -54,7 +54,6 @@ func destroy_square(column: int) -> Node2D:
 	remove_child(squares[column])
 	if not squares.erase(column):
 		pass
-
 	var piece = Piece.instance()
 	piece.init(square_body.color, 
 			   Vector2(square_body.rect_position.x + square_body.rect_size.x / 2, 
@@ -63,10 +62,10 @@ func destroy_square(column: int) -> Node2D:
 
 func merge_with(other: Row) -> void:
 	for id in other.squares.keys():
-		assert(not squares.has(id) , "trying to add existing square to a row")
-		squares[id] = other.squares[id]
+		if not squares.has(id):
+			squares[id] = other.squares[id].duplicate(1)
+			add_child(squares[id])
 		other.destroy_square(id)
-		add_child(squares[id])
 
 func get_squares_within_range(x,y,r):
 	var result = []

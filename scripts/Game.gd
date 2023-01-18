@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var boardNode = get_node("BoardNode")
+onready var board_node = get_node("BoardNode")
 
 const tick : float = 1.0/60
 const rowsToNextLevel = 30
@@ -16,27 +16,26 @@ func _init():
 	action_factory = ActionFactory.new()
 	
 func _ready():
-	boardNode.connect("squares_removed", self, "squares_removed")
-	boardNode.connect("row_removed", self, "row_removed")
-	change_action_to("press", boardNode, self, Vector2(0,0))
+	board_node.connect("squares_removed", self, "squares_removed")
+	change_action_to("tap", board_node, self, Vector2(0,0))
 
 func change_action_to(name, board, game, pos):
 	input_handler = self.action_factory.get_action(name)
 	input_handler.init(board, game, pos)
 
 func _process(_delta: float) -> void:
-	if boardNode.is_empty():
+	if board_node.is_empty():
 		level_up()
-		boardNode.reset()
+		board_node.reset()
 	elif tillNextLevel <= 0:
 		level_up()
-	elif boardNode.is_full():
+	elif board_node.is_full():
 		get_tree().change_scene("res://scenes/Summary.tscn")
 
 	elapsedTime += _delta
 	while elapsedTime > tick:
 		elapsedTime -= tick
-		boardNode.elevate_loose_rows()
+		board_node.elevate_loose_rows()
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -46,15 +45,13 @@ func _input(event):
 
 func on_timeout():
 	tillNextLevel -= 1
-	boardNode.add_top_row()
+	board_node.add_top_row()
 
-func squares_removed(radius, squares):
+func squares_removed(squares):
 	add_points(squares)
-	modify_available_removes(- radius - 1)
 
-func row_removed(combo):
-	add_points(Global.columns, combo)
-	modify_available_removes(combo - 1)
+func row_removed():
+	add_points(Global.columns)
 
 func add_points(squares: int, multiplier : int = 1):
 	print("%s [squares_removed] with multiplier:%s on lvl:%s" % [squares, multiplier, level])
