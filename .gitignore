@@ -5,3 +5,7 @@ gut_*
 
 asset_lib_icon.png*
 BigFont*
+export_presets.cfg
+*.wav
+*.import
+*.sfs

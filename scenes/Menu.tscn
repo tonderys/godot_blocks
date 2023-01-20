@@ -87,4 +87,5 @@ __meta__ = {
 }
 
 [connection signal="pressed" from="UI/MenuButtons/Start" to="UI/MenuButtons" method="start_pressed"]
+[connection signal="pressed" from="UI/MenuButtons/Settings" to="UI/MenuButtons" method="settings_pressed"]
 [connection signal="pressed" from="UI/MenuButtons/Quit" to="UI/MenuButtons" method="quit_pressed"]

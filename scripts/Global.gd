@@ -1,10 +1,12 @@
 extends Node2D
 
+const width = 580
+const height = 870
 var score : int = 0
 var rng = RandomNumberGenerator.new()
-const square_side: int = 58
-const columns: int = 10
-const rows: int = 14
+const columns: int = 8
+const square_side: int = width / columns
+const rows: int = (height - square_side) / square_side
 
 func _init():
 	rng.randomize()

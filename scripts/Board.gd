@@ -13,7 +13,8 @@ signal squares_removed(amount, combo)
 
 func _ready():
 	reset()
-
+	get_node("HSeparator").margin_top = Global.square_side * Global.rows
+	get_node("HSeparator").margin_bottom = Global.square_side * Global.rows + 4
 func reset() -> void:
 	rows = Array()
 	for row in looseRows:
@@ -70,7 +71,6 @@ func is_full() -> bool:
 func remove_full_rows() -> void:
 	for row in rows:
 		if row.is_full():
-			emit_signal("row_removed")
 			remove_row(row)
 
 func handle_rows_below(removedRow: Row):
@@ -121,9 +121,10 @@ func remove_row(row: Row) -> void:
 
 func add_loose_row(pos_x: int) -> void:
 	var column = get_column_id(pos_x)
-	var row = Row.new(Global.rows, [column])
-	looseRows.append(row)
-	add_child(row)
+	if column < Global.columns:
+		var row = Row.new(Global.rows, [column])
+		looseRows.append(row)
+		add_child(row)
 	
 func add_top_row():
 	anchor_blocked_loose_rows()

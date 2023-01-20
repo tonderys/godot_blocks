@@ -44,14 +44,13 @@ func _input(event):
 		input_handler.interact(event.position)
 
 func on_timeout():
+	get_node("Sounds").get_node("addRow").play()
 	tillNextLevel -= 1
 	board_node.add_top_row()
 
 func squares_removed(squares):
+	get_node("Sounds").get_node("removeRow").play()
 	add_points(squares)
-
-func row_removed():
-	add_points(Global.columns)
 
 func add_points(squares: int, multiplier : int = 1):
 	print("%s [squares_removed] with multiplier:%s on lvl:%s" % [squares, multiplier, level])
@@ -63,6 +62,7 @@ func modify_available_removes(amount):
 	get_node("removes").get_node("amount").text = "%s" % removes
 	
 func level_up():
+	get_node("Sounds").get_node("lvlUp").play()
 	add_points(Global.columns, tillNextLevel)
 	tillNextLevel = rowsToNextLevel
 	level += 1

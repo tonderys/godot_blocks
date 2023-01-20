@@ -5,3 +5,9 @@ func start_pressed():
 	
 func quit_pressed():
 	get_tree().quit()
+
+func settings_pressed():
+	get_tree().change_scene("res://scenes/Settings.tscn")
+
+func back_pressed():
+	get_tree().change_scene("res://scenes/Menu.tscn")
