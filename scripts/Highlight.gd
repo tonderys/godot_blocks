@@ -19,7 +19,6 @@ var highlighted_column
 var board_node
 var game_node
 var operating_range
-var radius = 50
 
 func init(column, board):
 	highlighted_column = column

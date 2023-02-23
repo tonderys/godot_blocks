@@ -19,11 +19,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Actions/ActionFactory.gd"
 }, {
-"base": "Action",
-"class": "Add",
-"language": "GDScript",
-"path": "res://scripts/Actions/Add.gd"
-}, {
 "base": "Node",
 "class": "Board",
 "language": "GDScript",
@@ -44,20 +39,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Highlight.gd"
 }, {
-"base": "Action",
-"class": "Press",
+"base": "Node2D",
+"class": "Piece",
 "language": "GDScript",
-"path": "res://scripts/Actions/Press.gd"
-}, {
-"base": "Action",
-"class": "Release",
-"language": "GDScript",
-"path": "res://scripts/Actions/Release.gd"
-}, {
-"base": "Action",
-"class": "Remove",
-"language": "GDScript",
-"path": "res://scripts/Actions/Remove.gd"
+"path": "res://scripts/Piece.gd"
 }, {
 "base": "Node2D",
 "class": "Row",
@@ -82,14 +67,11 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Action": "",
 "ActionFactory": "",
-"Add": "",
 "Board": "",
 "GutHookScript": "",
 "GutTest": "",
 "Highlight": "",
-"Press": "",
-"Release": "",
-"Remove": "",
+"Piece": "",
 "Row": "",
 "Square": "",
 "Tap": "",
@@ -128,6 +110,8 @@ resolution=false
 autoload=false
 restore=false
 "restore scenes"=true
+widtg=false
+width=false
 
 [input]
 

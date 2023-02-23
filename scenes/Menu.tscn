@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/MenuButtons.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Menu.gd" type="Script" id=2]
 [ext_resource path="res://fonts/Press_Start_2P/PressStart2P-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://fonts/GUI_60.tres" type="DynamicFont" id=4]
 
@@ -9,7 +10,8 @@ size = 80
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 3 )
 
-[node name="Game" type="Node2D"]
+[node name="Menu" type="Node2D"]
+script = ExtResource( 2 )
 
 [node name="Background" type="Node2D" parent="."]
 

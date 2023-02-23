@@ -15,6 +15,7 @@ func _ready():
 	reset()
 	get_node("HSeparator").margin_top = Global.square_side * Global.rows
 	get_node("HSeparator").margin_bottom = Global.square_side * Global.rows + 4
+	
 func reset() -> void:
 	rows = Array()
 	for row in looseRows:
@@ -125,6 +126,7 @@ func add_loose_row(pos_x: int) -> void:
 		var row = Row.new(Global.rows, [column])
 		looseRows.append(row)
 		add_child(row)
+		get_parent().get_node("Sounds").get_node("addSquare").play()
 	
 func add_top_row():
 	anchor_blocked_loose_rows()

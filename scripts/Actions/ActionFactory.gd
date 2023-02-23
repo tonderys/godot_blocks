@@ -4,10 +4,6 @@ var actions
 
 func _init():
 	actions = {
-		"press": Press,
-		"release": Release,
-		"add":Add,
-		"remove":Remove,
 		"tap":Tap,
 		"untap":Untap
 	}

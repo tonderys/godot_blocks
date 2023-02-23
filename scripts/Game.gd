@@ -2,7 +2,7 @@ extends Node2D
 
 onready var board_node = get_node("BoardNode")
 
-const tick : float = 1.0/60
+const tick : float = 0.2/Global.rows
 const rowsToNextLevel = 30
 var action_factory
 var level = 1
@@ -18,7 +18,7 @@ func _init():
 func _ready():
 	board_node.connect("squares_removed", self, "squares_removed")
 	change_action_to("tap", board_node, self, Vector2(0,0))
-
+	
 func change_action_to(name, board, game, pos):
 	input_handler = self.action_factory.get_action(name)
 	input_handler.init(board, game, pos)
@@ -38,10 +38,7 @@ func _process(_delta: float) -> void:
 		board_node.elevate_loose_rows()
 
 func _input(event):
-	if event is InputEventMouseMotion:
-		input_handler.move(event.position)
-	if event is InputEventMouseButton:
-		input_handler.interact(event.position)
+	input_handler.interact(event)
 
 func on_timeout():
 	get_node("Sounds").get_node("addRow").play()

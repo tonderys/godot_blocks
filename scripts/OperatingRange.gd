@@ -5,7 +5,7 @@ var radius
 var color = Color.blue
 
 const step = Global.square_side
-const thickness = 5.0
+const thickness = 0.1 * Global.square_side
 
 func is_in_range(point):
 	return point.x >= 0 and point.y >= 0

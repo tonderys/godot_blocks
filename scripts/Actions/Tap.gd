@@ -1,7 +1,9 @@
 extends Action
 class_name Tap
 
-func interact(position):
-	board_node.highlight(position.x)
-	self.position = position
-	state_transition("untap")
+func interact(event):
+	if ((event is InputEventMouseButton or event is InputEventScreenTouch)
+		and event.pressed):
+		board_node.highlight(event.position.x)
+		self.position = event.position
+		state_transition("untap")
