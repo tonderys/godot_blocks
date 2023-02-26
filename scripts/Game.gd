@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 
 onready var board_node = get_node("BoardNode")
 

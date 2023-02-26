@@ -18,3 +18,9 @@ func move(_position):
 
 func interact(_position):
 	pass
+
+func is_valid(event):
+	return event is InputEventMouseButton or event is InputEventScreenTouch
+	
+func is_on_board(event):
+	return board_node.get_node("Area").get_global_rect().has_point(event.position)

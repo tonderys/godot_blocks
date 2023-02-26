@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://fonts/GUI_60.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scripts/Game.gd" type="Script" id=2]
@@ -9,8 +9,9 @@
 [ext_resource path="res://sounds/lvlUp.wav" type="AudioStream" id=7]
 [ext_resource path="res://sounds/down.wav" type="AudioStream" id=8]
 [ext_resource path="res://sounds/boom.wav" type="AudioStream" id=9]
+[ext_resource path="res://scenes/Pause.gd" type="Script" id=10]
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node"]
 script = ExtResource( 2 )
 
 [node name="Background" type="ColorRect" parent="."]
@@ -24,7 +25,7 @@ __meta__ = {
 [node name="Multipier" type="Label" parent="."]
 margin_left = 2.0
 margin_top = 926.0
-margin_right = 580.0
+margin_right = 488.0
 margin_bottom = 966.0
 rect_pivot_offset = Vector2( 176, -35 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -39,7 +40,7 @@ __meta__ = {
 [node name="Score" type="Label" parent="."]
 margin_left = 2.0
 margin_top = 986.0
-margin_right = 580.0
+margin_right = 488.0
 margin_bottom = 1026.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 1 )
@@ -91,4 +92,43 @@ stream = ExtResource( 8 )
 [node name="removeRow" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 9 )
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="Pause" type="Control" parent="CanvasLayer"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="overlay" type="ColorRect" parent="CanvasLayer/Pause"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.317647 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="CanvasLayer/Pause"]
+margin_left = 488.0
+margin_top = 926.0
+margin_right = 580.0
+margin_bottom = 1024.0
+focus_mode = 0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 1 )
+enabled_focus_mode = 0
+text = "||"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="timeout" from="Timer/remaining" to="." method="on_timeout"]
+[connection signal="pressed" from="CanvasLayer/Pause/Button" to="CanvasLayer/Pause" method="toggle"]
