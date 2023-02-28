@@ -9,7 +9,7 @@
 [ext_resource path="res://sounds/lvlUp.wav" type="AudioStream" id=7]
 [ext_resource path="res://sounds/down.wav" type="AudioStream" id=8]
 [ext_resource path="res://sounds/boom.wav" type="AudioStream" id=9]
-[ext_resource path="res://scenes/Pause.gd" type="Script" id=10]
+[ext_resource path="res://scenes/Pause.tscn" type="PackedScene" id=11]
 
 [node name="Game" type="Node"]
 script = ExtResource( 2 )
@@ -18,35 +18,6 @@ script = ExtResource( 2 )
 margin_right = 580.0
 margin_bottom = 1024.0
 color = Color( 0.803922, 1, 0.780392, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Multipier" type="Label" parent="."]
-margin_left = 2.0
-margin_top = 926.0
-margin_right = 488.0
-margin_bottom = 966.0
-rect_pivot_offset = Vector2( 176, -35 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 1 )
-text = "1x"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Score" type="Label" parent="."]
-margin_left = 2.0
-margin_top = 986.0
-margin_right = 488.0
-margin_bottom = 1026.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 1 )
-text = "Score:0"
-align = 1
-valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -92,28 +63,29 @@ stream = ExtResource( 8 )
 [node name="removeRow" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 9 )
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="GUI" type="CanvasLayer" parent="."]
 layer = 10
 
-[node name="Pause" type="Control" parent="CanvasLayer"]
+[node name="Pause" type="Control" parent="GUI"]
 pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="overlay" type="ColorRect" parent="CanvasLayer/Pause"]
+[node name="overlay" type="ColorRect" parent="GUI/Pause"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 0.317647 )
+color = Color( 1, 1, 1, 0.501961 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="CanvasLayer/Pause"]
+[node name="PauseMenu" parent="GUI/Pause/overlay" instance=ExtResource( 11 )]
+
+[node name="Button" type="Button" parent="GUI/Pause"]
 margin_left = 488.0
 margin_top = 926.0
 margin_right = 580.0
@@ -130,5 +102,34 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Score" type="Label" parent="GUI"]
+margin_left = 2.0
+margin_top = 986.0
+margin_right = 488.0
+margin_bottom = 1026.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "Score:0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Multipier" type="Label" parent="GUI"]
+margin_left = 2.0
+margin_top = 926.0
+margin_right = 488.0
+margin_bottom = 966.0
+rect_pivot_offset = Vector2( 176, -35 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "1x"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="timeout" from="Timer/remaining" to="." method="on_timeout"]
-[connection signal="pressed" from="CanvasLayer/Pause/Button" to="CanvasLayer/Pause" method="toggle"]
+[connection signal="pressed" from="GUI/Pause/Button" to="." method="toggle_pause"]

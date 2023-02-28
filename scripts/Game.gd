@@ -1,4 +1,5 @@
 extends Node
+class_name Game 
 
 onready var board_node = get_node("BoardNode")
 
@@ -10,6 +11,7 @@ var elapsedTime = 0.0
 var tillNextLevel = rowsToNextLevel
 var input_handler = null
 var removes = 0
+var paused = false
 
 func _init():
 	Global.score = 0
@@ -52,7 +54,7 @@ func squares_removed(squares):
 func add_points(squares: int, multiplier : int = 1):
 	print("%s [squares_removed] with multiplier:%s on lvl:%s" % [squares, multiplier, level])
 	Global.score += squares * level * multiplier
-	get_node("Score").text = "Score:%s" % Global.score
+	get_node("GUI/Score").text = "Score:%s" % Global.score
 
 func modify_available_removes(amount):
 	removes = clamp(removes + amount, 0, 5)
@@ -63,5 +65,16 @@ func level_up():
 	add_points(Global.columns, tillNextLevel)
 	tillNextLevel = rowsToNextLevel
 	level += 1
-	get_node("Multipier").text = "x%s" % level
+	get_node("GUI/Multipier").text = "x%s" % level
 	Global.shorten_timer(get_node("Timer/remaining"), 0.9)
+
+func toggle_pause():
+	paused = not paused
+	get_tree().paused = paused
+	get_node("GUI/Pause/overlay").visible = paused
+
+func _notification(what):
+	if what == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST:
+		get_node("GUI/Pause/overlay/PauseMenu").back_pressed()
+	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
+		get_node("GUI/Pause/overlay/PauseMenu").back_pressed()

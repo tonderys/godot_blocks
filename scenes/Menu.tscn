@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/MenuButtons.gd" type="Script" id=1]
-[ext_resource path="res://scenes/Menu.gd" type="Script" id=2]
+[ext_resource path="res://scripts/Menu.gd" type="Script" id=2]
 [ext_resource path="res://fonts/Press_Start_2P/PressStart2P-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://fonts/GUI_60.tres" type="DynamicFont" id=4]
 

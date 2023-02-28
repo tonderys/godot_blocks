@@ -35,7 +35,7 @@ func remove_unnecessary_pieces() -> void:
 		piece.queue_free()
 		pieces.erase(piece)
 
-func highlight(pos_x):
+func highlight_column(pos_x):
 	highlight = Highlight.instance()
 	highlight.init(get_column_id(pos_x), self)
 	highlight.z_index += 1
