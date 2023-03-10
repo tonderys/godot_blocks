@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/MenuButtons.gd" type="Script" id=1]
+[ext_resource path="res://scripts/Scoreboard.gd" type="Script" id=2]
 [ext_resource path="res://fonts/Press_Start_2P/PressStart2P-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://fonts/GUI_60.tres" type="DynamicFont" id=4]
 
@@ -15,6 +16,7 @@ size = 30
 font_data = ExtResource( 3 )
 
 [node name="Scoreboard" type="Node2D"]
+script = ExtResource( 2 )
 
 [node name="Background" type="Node2D" parent="."]
 
@@ -181,18 +183,6 @@ margin_bottom = 737.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 2 )
 text = "9..."
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="10" type="Label" parent="Scores"]
-margin_top = 737.0
-margin_right = 576.0
-margin_bottom = 802.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 2 )
-text = "10..."
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false

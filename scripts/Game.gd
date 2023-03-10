@@ -32,7 +32,7 @@ func _process(_delta: float) -> void:
 	elif tillNextLevel <= 0:
 		level_up()
 	elif board_node.is_full():
-		get_tree().change_scene("res://scenes/Summary.tscn")
+		get_tree().change_scene("res://scenes/NamePrompt.tscn")
 
 	elapsedTime += _delta
 	while elapsedTime > tick:
