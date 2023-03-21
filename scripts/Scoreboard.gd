@@ -12,12 +12,12 @@ func _init():
 func _ready():
 	var i = 0
 	for place in get_node("Scores").get_children():
-		var score = score_data.get_score_at(i)
-		if len(score) == 0:
+		var record = score_data.get_record_at(i)
+		if len(record) == 0:
 			return
 		else:
-			var player_name = score[0]
-			var player_score = score[1]
+			var player_name = record[0]
+			var player_score = record[1]
 			place.text = "%s. %s %s"%[(i+1), player_name, player_score]
 			i += 1
 

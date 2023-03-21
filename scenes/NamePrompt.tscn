@@ -57,12 +57,17 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
 custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 4 )
+disabled = true
 enabled_focus_mode = 0
 text = "Submit!"
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="delay" type="Timer" parent="UI/Submit"]
+one_shot = true
+autostart = true
 
 [node name="Score" type="Label" parent="UI"]
 margin_top = 156.0
@@ -79,3 +84,4 @@ __meta__ = {
 
 [connection signal="focus_entered" from="UI/insert name/name" to="." method="name_focus_entered"]
 [connection signal="pressed" from="UI/Submit" to="." method="submit_pressed"]
+[connection signal="timeout" from="UI/Submit/delay" to="." method="enable_submit"]

@@ -7,6 +7,9 @@ func _ready():
 	get_node("UI/insert name/name").text = scoreboard.score_data.get_recent_name()
 	get_node("UI/Score").text = "Score:%s" % Global.score
 
+func enable_submit():
+	get_node("UI/Submit").disabled = false
+
 func name_focus_entered():
 	get_node("UI/insert name/name").text = ""
 

@@ -1,7 +1,7 @@
 extends Node
 class_name ScoreData
 
-const entries_amount = 100
+const entries_amount = 9
 
 var score_file = File.new()
 var file_path = "user://highscore.res"
@@ -40,13 +40,20 @@ func save(name, score):
 			break
 	if len(score_data.scoreboard) > entries_amount:
 		score_data.scoreboard.resize(entries_amount)
+	save_file()
 
-func get_score_at(place):
-	if len(score_data.scoreboard) >= place:
+func get_record_at(place):
+	if len(score_data.scoreboard) > place:
 		return score_data.scoreboard[place]
 	else:
 		return []
 
+func get_score_at(place):
+	return get_record_at(place)[1]
+
+func is_good_enough(score):
+	return score > get_score_at(entries_amount - 1)
+	
 func get_high_score():
 	return score_data.high_score
 	
