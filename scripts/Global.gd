@@ -1,20 +1,22 @@
 extends Node2D
 
-const columns: int = 8
+const columns: int = 7
 const width = 580 - (580 % columns)
 const square_side: int = width / columns
 const height = 870
-var score : int = 0
-var rng = RandomNumberGenerator.new()
 const rows: int = (height - square_side) / square_side
 
-func _init():
-	rng.randomize()
+var score : int = 0
 
 func shorten_timer(timer: Node, modifier: float) -> void:
 		timer.wait_time *= modifier
 		timer.stop()
 		timer.start()
+
+var rng = RandomNumberGenerator.new()
+	
+func _init():
+	rng.randomize()
 
 func random_indices() -> Array:
 	var indices = []

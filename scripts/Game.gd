@@ -62,9 +62,9 @@ func modify_available_removes(amount):
 	
 func level_up():
 	get_node("Sounds").get_node("lvlUp").play()
+	level += 1
 	add_points(Global.columns, tillNextLevel)
 	tillNextLevel = rowsToNextLevel
-	level += 1
 	get_node("GUI/Multipier").text = "x%s" % level
 	Global.shorten_timer(get_node("Timer/remaining"), 0.9)
 
