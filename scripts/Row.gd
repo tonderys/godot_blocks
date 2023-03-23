@@ -7,10 +7,12 @@ const square_dimensions = Vector2(Global.square_side, Global.square_side)
 
 var squares: Dictionary
 var height: int
+var columns
 
-func _init(h: int, indices: Array):
+func _init(h: int, indices: Array, amount_of_columns = Global.columns):
 	squares = Dictionary()
 	height = h
+	columns = amount_of_columns
 
 	for i in indices:
 		squares[i] = Square.instance()
@@ -78,7 +80,7 @@ func is_empty() -> bool:
 	return squares.keys().size() == 0
 
 func is_full() -> bool:
-	return squares.keys().size() >= Global.columns
+	return squares.keys().size() >= columns
 
 func lower() -> void:
 	self.height += 1
