@@ -9,7 +9,7 @@
 [ext_resource path="res://sounds/lvlUp.wav" type="AudioStream" id=7]
 [ext_resource path="res://sounds/down.wav" type="AudioStream" id=8]
 [ext_resource path="res://sounds/boom.wav" type="AudioStream" id=9]
-[ext_resource path="res://scenes/Pause.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/GUI/PauseButtons.tscn" type="PackedScene" id=11]
 
 [node name="Game" type="Node"]
 script = ExtResource( 2 )

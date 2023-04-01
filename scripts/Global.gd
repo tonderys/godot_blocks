@@ -5,6 +5,7 @@ const width = 580 - (580 % columns)
 const square_side: int = width / columns
 const height = 870
 const rows: int = (height - square_side) / square_side
+const highscore_file_path = "user://highscore.res"
 
 var score : int = 0
 

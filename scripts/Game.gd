@@ -2,7 +2,6 @@ extends Node
 class_name Game 
 
 onready var board_node = get_node("BoardNode")
-const ScoreData = preload("res://scripts/ScoreData.gd")
 
 const tick : float = 0.2/Global.rows
 const rowsToNextLevel = 30
@@ -40,7 +39,7 @@ func _process(_delta: float) -> void:
 		board_node.elevate_loose_rows()
 
 func game_over():
-	var score_data = ScoreData.new()
+	var score_data = load("res://scripts/ScoreData.gd").new(Global.highscore_file_path)
 	if score_data.is_good_enough(Global.score):
 		get_tree().change_scene("res://scenes/NamePrompt.tscn")
 	else:

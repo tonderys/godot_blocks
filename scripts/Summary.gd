@@ -1,8 +1,6 @@
 extends Node2D
 
-const Scoreboard = preload("res://scripts/Scoreboard.gd")
-
-var scoreboard = Scoreboard.new()
+var scoreboard = load("res://scripts/Scoreboard.gd").new()
 
 func _ready():
 	var hiScore = max(Global.score, scoreboard.score_data.get_high_score())

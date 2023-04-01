@@ -1,13 +1,11 @@
 extends Node
 class_name Scoreboard
 
-const ScoreData = preload("res://scripts/ScoreData.gd")
 const entries_amount = 9
-
 var score_data
 
 func _init():
-	score_data = ScoreData.new()
+	score_data = load("res://scripts/ScoreData.gd").new(Global.highscore_file_path)
 	
 func _ready():
 	var i = 0
