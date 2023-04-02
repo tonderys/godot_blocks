@@ -9,15 +9,19 @@ func _init():
 	
 func _ready():
 	var i = 0
-	for place in get_node("Scores").get_children():
+	for place in get_node("records").get_children():
 		var record = score_data.get_record_at(i)
 		if len(record) == 0:
 			return
 		else:
 			var player_name = record[0]
 			var player_score = record[1]
-			place.text = "%s. %s %s"%[(i+1), player_name, player_score]
+			print(get_node("records").get_children())
+
 			i += 1
+			place.get_node("place").text = "%s."%i
+			place.get_node("name").text = "%s"%player_name
+			place.get_node("score").text = "%s"%player_score
 
 func save(name, score):
 	score_data.save(name, score)

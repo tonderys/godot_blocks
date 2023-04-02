@@ -21,12 +21,12 @@ func reset() -> void:
 	for row in looseRows:
 		remove_child(row)
 	looseRows = Array()
-	remove_unnecessary_pieces()
+	_remove_unnecessary_pieces()
 	
 	for height in range(0, Global.rows/2):
-		add_row(height)
+		_add_row(height)
 		
-func remove_unnecessary_pieces() -> void:
+func _remove_unnecessary_pieces() -> void:
 	var pieces_to_be_removed = Array()
 	for piece in pieces:
 		if not piece.get_node("emitter").emitting:
@@ -37,28 +37,28 @@ func remove_unnecessary_pieces() -> void:
 
 func highlight_column(pos_x):
 	highlight = Highlight.instance()
-	highlight.init(get_column_id(pos_x), self)
+	highlight.init(_get_column_id(pos_x), self)
 	highlight.z_index += 1
 	add_child(highlight)
 
-func update_highlight():
+func _update_highlight():
 	if is_instance_valid(highlight):
 		highlight.update()
 
 func unhighlight():
 	highlight.queue_free()
 
-func get_column_id(pos_x: int) -> int:
+func _get_column_id(pos_x: int) -> int:
 	return int(pos_x / Global.square_side)
 
-func rows_from_bottom() -> Array:
+func _rows_from_bottom() -> Array:
 	var result = Array()
 	for i in range(rows.size()-1,-1,-1):
 		result.push_back(rows[i])
 	return result
 
 func get_lowest_square_in(column: int) -> int:
-	for row in rows_from_bottom():
+	for row in _rows_from_bottom():
 		if row.has_square_in(column):
 			return row.height
 	return -1
@@ -69,47 +69,47 @@ func is_empty() -> bool:
 func is_full() -> bool:
 	return rows.size() > Global.rows
 
-func remove_full_rows() -> void:
+func _remove_full_rows() -> void:
 	for row in rows:
 		if row.is_full():
-			remove_row(row)
+			_remove_row(row)
 
-func handle_rows_below(removedRow: Row):
+func _handle_rows_below(removedRow: Row):
 	for row in rows:
 		if row.height > removedRow.height:
-			remove_row(row)
+			_remove_row(row)
 	
-func is_blocked(looseRow: Row):
+func _is_blocked(looseRow: Row):
 	var isOnTopRow : bool = looseRow.height == 0
-	return isOnTopRow or is_blocked_by_row_above(looseRow)
+	return isOnTopRow or _is_blocked_by_row_above(looseRow)
 
-func is_blocked_by_row_above(looseRow: Row):
-	var rowAbove = get_row_with_height(looseRow.height - 1)
+func _is_blocked_by_row_above(looseRow: Row):
+	var rowAbove = _get_row_with_height(looseRow.height - 1)
 	return rowAbove != null and looseRow.is_blocked_by(rowAbove)
 
-func anchor(looseRow: Row):
-	var sameLevelRow = get_row_with_height(looseRow.height)
+func _anchor(looseRow: Row):
+	var sameLevelRow = _get_row_with_height(looseRow.height)
 	if sameLevelRow == null:
 		rows.append(looseRow)
 	else:
 		sameLevelRow.merge_with(looseRow)
 		if sameLevelRow.is_full():
-			remove_full_rows()
+			_remove_full_rows()
 		remove_child(looseRow)
 	looseRows.erase(looseRow)
 
-func get_row_with_height(height) -> Object:
+func _get_row_with_height(height) -> Object:
 	for row in rows:
 		if row.height == height:
 			return row
 	return null
 
-func add_row(height: int) -> void:
+func _add_row(height: int) -> void:
 	var row = Row.new(height, Global.random_indices())
 	rows.insert(height, row)
 	add_child(row)
 
-func remove_row(row: Row) -> void:
+func _remove_row(row: Row) -> void:
 	var removed_squares = row.destroy_all_squares()
 	emit_signal("squares_removed", len(removed_squares))
 	for node in removed_squares:
@@ -117,11 +117,11 @@ func remove_row(row: Row) -> void:
 		self.add_child(pieces.back())
 	remove_child(row)
 	rows.erase(row)
-	handle_rows_below(row)
-	update_highlight()
+	_handle_rows_below(row)
+	_update_highlight()
 
 func add_loose_row(pos_x: int) -> void:
-	var column = get_column_id(pos_x)
+	var column = _get_column_id(pos_x)
 	if column < Global.columns:
 		var row = Row.new(Global.rows, [column])
 		looseRows.append(row)
@@ -129,20 +129,20 @@ func add_loose_row(pos_x: int) -> void:
 		get_parent().get_node("Sounds").get_node("addSquare").play()
 	
 func add_top_row():
-	anchor_blocked_loose_rows()
+	_anchor_blocked_loose_rows()
 	for row in rows:
 		row.lower()
-	add_row(0)
-	update_highlight()
+	_add_row(0)
+	_update_highlight()
 	
-func anchor_blocked_loose_rows():
+func _anchor_blocked_loose_rows():
 	for looseRow in looseRows:
-		if is_blocked(looseRow):
-			anchor(looseRow)
+		if _is_blocked(looseRow):
+			_anchor(looseRow)
 
 func elevate_loose_rows():
 	for looseRow in looseRows:
-		if is_blocked(looseRow):
-			anchor(looseRow)
+		if _is_blocked(looseRow):
+			_anchor(looseRow)
 		else:
 			looseRow.elevate()
