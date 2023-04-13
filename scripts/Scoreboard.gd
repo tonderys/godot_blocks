@@ -16,7 +16,6 @@ func _ready():
 		else:
 			var player_name = record[0]
 			var player_score = record[1]
-			print(get_node("records").get_children())
 
 			i += 1
 			place.get_node("place").text = "%s."%i

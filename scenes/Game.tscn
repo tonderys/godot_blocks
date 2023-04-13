@@ -1,14 +1,11 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://fonts/GUI_60.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scripts/Game.gd" type="Script" id=2]
 [ext_resource path="res://scripts/TillNextLevel.gd" type="Script" id=3]
 [ext_resource path="res://scripts/Timer.gd" type="Script" id=4]
 [ext_resource path="res://scenes/Board.tscn" type="PackedScene" id=5]
-[ext_resource path="res://sounds/tap.wav" type="AudioStream" id=6]
-[ext_resource path="res://sounds/lvlUp.wav" type="AudioStream" id=7]
-[ext_resource path="res://sounds/down.wav" type="AudioStream" id=8]
-[ext_resource path="res://sounds/boom.wav" type="AudioStream" id=9]
+[ext_resource path="res://scenes/Sounds.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/GUI/PauseButtons.tscn" type="PackedScene" id=11]
 
 [node name="Game" type="Node"]
@@ -48,20 +45,6 @@ __meta__ = {
 
 [node name="BoardNode" parent="." instance=ExtResource( 5 )]
 position = Vector2( 0, 50 )
-
-[node name="Sounds" type="Node" parent="."]
-
-[node name="addSquare" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 6 )
-
-[node name="lvlUp" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 7 )
-
-[node name="addRow" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 8 )
-
-[node name="removeRow" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 9 )
 
 [node name="GUI" type="CanvasLayer" parent="."]
 layer = 10
@@ -130,6 +113,8 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Sounds" parent="." instance=ExtResource( 6 )]
 
 [connection signal="timeout" from="Timer/remaining" to="." method="on_timeout"]
 [connection signal="pressed" from="GUI/Pause/Button" to="." method="toggle_pause"]

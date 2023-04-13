@@ -8,14 +8,16 @@ var rows = Array()
 var looseRows = Array()
 var pieces = Array()
 var highlight
+var row_generator = RandomRow.new()
 
 signal squares_removed(amount, combo)
+signal add_square
 
 func _ready():
 	reset()
 	get_node("HSeparator").margin_top = Global.square_side * Global.rows
 	get_node("HSeparator").margin_bottom = Global.square_side * Global.rows + 4
-	
+
 func reset() -> void:
 	rows = Array()
 	for row in looseRows:
@@ -25,7 +27,7 @@ func reset() -> void:
 	
 	for height in range(0, Global.rows/2):
 		_add_row(height)
-		
+
 func _remove_unnecessary_pieces() -> void:
 	var pieces_to_be_removed = Array()
 	for piece in pieces:
@@ -105,7 +107,7 @@ func _get_row_with_height(height) -> Object:
 	return null
 
 func _add_row(height: int) -> void:
-	var row = Row.new(height, Global.random_indices())
+	var row = row_generator.generate_row(height)
 	rows.insert(height, row)
 	add_child(row)
 
@@ -126,7 +128,7 @@ func add_loose_row(pos_x: int) -> void:
 		var row = Row.new(Global.rows, [column])
 		looseRows.append(row)
 		add_child(row)
-		get_parent().get_node("Sounds").get_node("addSquare").play()
+		emit_signal("add_square")
 	
 func add_top_row():
 	_anchor_blocked_loose_rows()

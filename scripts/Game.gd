@@ -2,6 +2,7 @@ extends Node
 class_name Game 
 
 onready var board_node = get_node("BoardNode")
+var sounds = load("res://scenes/Sounds.tscn").instance()
 
 const tick : float = 0.2/Global.rows
 const rowsToNextLevel = 30
@@ -19,6 +20,7 @@ func _init():
 	
 func _ready():
 	board_node.connect("squares_removed", self, "squares_removed")
+	board_node.connect("add_square", get_node("Sounds"), "play_add_square")
 	change_action_to("tap", board_node, self, Vector2(0,0))
 	
 func change_action_to(name, board, game, pos):
@@ -49,12 +51,12 @@ func _input(event):
 	input_handler.interact(event)
 
 func on_timeout():
-	get_node("Sounds").get_node("addRow").play()
+	get_node("Sounds/addRow").play()
 	tillNextLevel -= 1
 	board_node.add_top_row()
 
 func squares_removed(squares):
-	get_node("Sounds").get_node("removeRow").play()
+	get_node("Sounds/removeRow").play()
 	add_points(squares)
 
 func add_points(squares: int, multiplier : int = 1):
@@ -67,7 +69,7 @@ func modify_available_removes(amount):
 	get_node("removes").get_node("amount").text = "%s" % removes
 	
 func level_up():
-	get_node("Sounds").get_node("lvlUp").play()
+	get_node("Sounds/lvlUp").play()
 	level += 1
 	add_points(Global.columns, tillNextLevel)
 	tillNextLevel = rowsToNextLevel

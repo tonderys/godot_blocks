@@ -19,7 +19,6 @@ func _init(h: int, indices: Array, amount_of_columns = Global.columns):
 		squares[i].get_node("body").rect_size = square_dimensions
 		squares[i].get_node("body").rect_position = Vector2(i * Global.square_side, 0)
 		add_child(squares[i])
-	print("squares", len(squares))
 
 func _process(_delta: float):
 	self.position = Vector2(0, height * Global.square_side)
