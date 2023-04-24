@@ -6,10 +6,12 @@
 [node name="Node" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="Restart" type="Button" parent="."]
-margin_top = 190.0
+[node name="menu" type="Node2D" parent="."]
+
+[node name="Restart" type="Button" parent="menu"]
+margin_top = 223.0
 margin_right = 576.0
-margin_bottom = 256.0
+margin_bottom = 289.0
 focus_mode = 0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
@@ -22,10 +24,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Continue" type="Button" parent="."]
-margin_top = 446.0
+[node name="Continue" type="Button" parent="menu"]
+margin_top = 456.0
 margin_right = 576.0
-margin_bottom = 512.0
+margin_bottom = 522.0
 focus_mode = 0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
@@ -38,10 +40,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Back" type="Button" parent="."]
-margin_top = 702.0
+[node name="Back" type="Button" parent="menu"]
+margin_top = 735.0
 margin_right = 576.0
-margin_bottom = 768.0
+margin_bottom = 801.0
 focus_mode = 0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
@@ -54,6 +56,70 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="Restart" to="." method="start_pressed"]
-[connection signal="pressed" from="Continue" to="." method="toggle_pause"]
-[connection signal="pressed" from="Back" to="." method="back_pressed"]
+[node name="ensure prompt" type="Node2D" parent="."]
+visible = false
+
+[node name="prompt" type="Label" parent="ensure prompt"]
+margin_top = 179.0
+margin_right = 576.0
+margin_bottom = 269.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "Are you sure you want to"
+align = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="option" type="Label" parent="ensure prompt"]
+margin_top = 269.0
+margin_right = 576.0
+margin_bottom = 320.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "quit / restart"
+align = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Yes" type="Button" parent="ensure prompt"]
+margin_top = 454.0
+margin_right = 288.0
+margin_bottom = 520.0
+focus_mode = 0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 1 )
+enabled_focus_mode = 0
+text = "Yes"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="No" type="Button" parent="ensure prompt"]
+margin_left = 288.0
+margin_top = 454.0
+margin_right = 576.0
+margin_bottom = 520.0
+focus_mode = 0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 1 )
+enabled_focus_mode = 0
+text = "No"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="menu/Restart" to="." method="ensure" binds= [ "restart", 2 ]]
+[connection signal="pressed" from="menu/Continue" to="." method="toggle_pause"]
+[connection signal="pressed" from="menu/Back" to="." method="ensure" binds= [ "quit", 1 ]]
+[connection signal="pressed" from="ensure prompt/Yes" to="." method="yes_pressed"]
+[connection signal="pressed" from="ensure prompt/No" to="." method="restore_pause_menu"]
