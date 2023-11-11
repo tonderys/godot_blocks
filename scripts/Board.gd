@@ -72,14 +72,19 @@ func is_full() -> bool:
 	return rows.size() > Global.rows
 
 func _remove_full_rows() -> void:
+	var removed_squares = Array()
 	for row in rows:
 		if row.is_full():
-			_remove_row(row)
+			removed_squares += _handle_rows_below(row)
+			removed_squares += _remove_row(row)
+			emit_signal("squares_removed", removed_squares)
 
-func _handle_rows_below(removedRow: Row):
-	for row in rows:
+func _handle_rows_below(removedRow: Row) -> Array:
+	var removed_squares = Array()
+	for row in _rows_from_bottom(): 
 		if row.height > removedRow.height:
-			_remove_row(row)
+			removed_squares += _remove_row(row)
+	return removed_squares
 	
 func _is_blocked(looseRow: Row):
 	var isOnTopRow : bool = looseRow.height == 0
@@ -111,16 +116,15 @@ func _add_row(height: int) -> void:
 	rows.insert(height, row)
 	add_child(row)
 
-func _remove_row(row: Row) -> void:
+func _remove_row(row: Row) -> Array:
 	var removed_squares = row.destroy_all_squares()
-	emit_signal("squares_removed", len(removed_squares))
 	for node in removed_squares:
 		pieces.append(node)
 		self.add_child(pieces.back())
 	remove_child(row)
 	rows.erase(row)
-	_handle_rows_below(row)
 	_update_highlight()
+	return removed_squares
 
 func add_loose_row(pos_x: int) -> void:
 	var column = _get_column_id(pos_x)

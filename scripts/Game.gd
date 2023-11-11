@@ -3,6 +3,7 @@ class_name Game
 
 onready var board_node = get_node("BoardNode")
 var sounds = load("res://scenes/Sounds.tscn").instance()
+const FloatingText = preload("res://scenes/FloatingText.tscn")
 
 const tick : float = 0.2/Global.rows
 const rowsToNextLevel = 30
@@ -47,6 +48,14 @@ func game_over():
 	else:
 		get_tree().change_scene("res://scenes/Summary.tscn")
 
+func display_at(text, position, remove_others = false):
+	var score = FloatingText.instance()
+	score.init(text, position)
+	if remove_others:
+		for child in get_node("GUI/popups").get_children():
+			child.free()
+	get_node("GUI/popups").add_child(score)
+	
 func _input(event):
 	input_handler.interact(event)
 
@@ -57,12 +66,15 @@ func on_timeout():
 
 func squares_removed(squares):
 	get_node("Sounds/removeRow").play()
-	add_points(squares)
-
+	var score = add_points(squares.size());
+	display_at("+%s" % score, Vector2(Global.width / 2, Global.height / 2))
+	
 func add_points(squares: int, multiplier : int = 1):
 	print("%s [squares_removed] with multiplier:%s on lvl:%s" % [squares, multiplier, level])
+	var score_delta = squares * level * multiplier
 	Global.score += squares * level * multiplier
 	get_node("GUI/Score").text = "Score:%s" % Global.score
+	return score_delta
 
 func modify_available_removes(amount):
 	removes = clamp(removes + amount, 0, 5)
@@ -70,8 +82,11 @@ func modify_available_removes(amount):
 	
 func level_up():
 	get_node("Sounds/lvlUp").play()
+	var score = add_points(Global.columns, tillNextLevel)
+	display_at("lvl UP! +%s" % score,
+				Vector2(Global.width / 2, Global.height/2),
+				true)
 	level += 1
-	add_points(Global.columns, tillNextLevel)
 	tillNextLevel = rowsToNextLevel
 	get_node("GUI/Multipier").text = "x%s" % level
 	Global.shorten_timer(get_node("Timer/remaining"), 0.9)

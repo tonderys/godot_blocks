@@ -49,6 +49,8 @@ position = Vector2( 0, 50 )
 [node name="GUI" type="CanvasLayer" parent="."]
 layer = 10
 
+[node name="popups" type="Node2D" parent="GUI"]
+
 [node name="Pause" type="Control" parent="GUI"]
 pause_mode = 2
 anchor_right = 1.0
