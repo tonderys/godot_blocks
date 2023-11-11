@@ -2,8 +2,11 @@ extends Node2D
 class_name Row
 
 const Square = preload("res://scenes/Square.tscn")
-const Piece = preload("res://scenes/Piece.tscn")
+const DestroySquare = preload("res://scenes/DestroySquare.tscn")
+const FallSquare = preload("res://scenes/FallSquare.tscn")
 const square_dimensions = Vector2(Global.square_side, Global.square_side) 
+
+enum RemoveBy {FALL, DESTROY}
 
 var squares: Dictionary
 var height: int
@@ -33,15 +36,19 @@ func can_merge_with(other: Row) -> bool:
 func has_square_in(column: int) -> bool:
 	return squares.has(column)
 
-func destroy_all_squares() -> Array:
+func remove_squares(behavior) -> Array:
 	var result = Array()
 	var to_be_removed = []
 	for column in squares:
-		var piece = Piece.instance()
 		var square_body = squares[column].get_node("body")
-		piece.init(square_body.color, 
-				   Vector2(square_body.rect_position.x + square_body.rect_size.x / 2, 
-						   self.position.y + square_body.rect_size.y / 2))
+		var square_position = Vector2(square_body.rect_position.x + square_body.rect_size.x / 2,
+									  self.position.y + square_body.rect_size.y / 2)
+		var piece
+		if (behavior == RemoveBy.DESTROY):
+			piece = DestroySquare.instance()
+		else:
+			piece = FallSquare.instance()
+		piece.init(square_body.color, square_position)
 		result.append(piece)
 		remove_child(squares[column])
 		to_be_removed.append(column)
@@ -50,23 +57,11 @@ func destroy_all_squares() -> Array:
 		squares.erase(column)
 	return result
 
-func destroy_square(column: int) -> Node2D:
-	var square_body = squares[column].get_node("body")
-	remove_child(squares[column])
-	if not squares.erase(column):
-		pass
-	var piece = Piece.instance()
-	piece.init(square_body.color, 
-			   Vector2(square_body.rect_position.x + square_body.rect_size.x / 2, 
-					   self.position.y + square_body.rect_size.y / 2))
-	return piece
-
 func merge_with(other: Row) -> void:
 	for id in other.squares.keys():
 		if not squares.has(id):
 			squares[id] = other.squares[id].duplicate(1)
 			add_child(squares[id])
-		other.destroy_square(id)
 
 func get_squares_within_range(x,y,r):
 	var result = []

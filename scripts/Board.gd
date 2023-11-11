@@ -31,7 +31,7 @@ func reset() -> void:
 func _remove_unnecessary_pieces() -> void:
 	var pieces_to_be_removed = Array()
 	for piece in pieces:
-		if not piece.get_node("emitter").emitting:
+		if not piece.emitter.emitting:
 			pieces_to_be_removed.append(piece)
 	for piece in pieces_to_be_removed:
 		piece.queue_free()
@@ -76,14 +76,14 @@ func _remove_full_rows() -> void:
 	for row in rows:
 		if row.is_full():
 			removed_squares += _handle_rows_below(row)
-			removed_squares += _remove_row(row)
+			removed_squares += _remove_row(row, Row.RemoveBy.DESTROY)
 			emit_signal("squares_removed", removed_squares)
 
 func _handle_rows_below(removedRow: Row) -> Array:
 	var removed_squares = Array()
 	for row in _rows_from_bottom(): 
 		if row.height > removedRow.height:
-			removed_squares += _remove_row(row)
+			removed_squares += _remove_row(row, Row.RemoveBy.FALL)
 	return removed_squares
 	
 func _is_blocked(looseRow: Row):
@@ -116,8 +116,8 @@ func _add_row(height: int) -> void:
 	rows.insert(height, row)
 	add_child(row)
 
-func _remove_row(row: Row) -> Array:
-	var removed_squares = row.destroy_all_squares()
+func _remove_row(row: Row, behavior) -> Array:
+	var removed_squares = row.remove_squares(behavior)
 	for node in removed_squares:
 		pieces.append(node)
 		self.add_child(pieces.back())
