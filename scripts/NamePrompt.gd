@@ -4,7 +4,10 @@ const Scoreboard = preload("res://scripts/Scoreboard.gd")
 var scoreboard = Scoreboard.new()
 
 func _ready():
-	get_node("UI/insert name/name").text = scoreboard.score_data.get_recent_name()
+	var nick = Settings.data.nickname
+	if nick == "":
+		nick = scoreboard.score_data.get_recent_name()
+	get_node("UI/insert name/name").text = nick
 	get_node("UI/Score").text = "Score:%s" % Global.score
 
 func enable_submit():

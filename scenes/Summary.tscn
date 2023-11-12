@@ -1,21 +1,14 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/GUI/GameOverButtons.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Summary.gd" type="Script" id=2]
+[ext_resource path="res://scenes/Background.tscn" type="PackedScene" id=3]
 [ext_resource path="res://fonts/GUI_60.tres" type="DynamicFont" id=4]
 
 [node name="Summary" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="Background" type="Node2D" parent="."]
-
-[node name="ColorRect" type="ColorRect" parent="Background"]
-margin_right = 580.0
-margin_bottom = 1024.0
-color = Color( 0.803922, 1, 0.780392, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Background" parent="." instance=ExtResource( 3 )]
 
 [node name="UI" type="Node2D" parent="."]
 

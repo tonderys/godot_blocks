@@ -9,7 +9,7 @@ const transparency : float = 0.5
 const max_height = (Global.rows + 1) * Global.square_side
 
 const no_action_color = Color(0.0 ,0.0 , blue, transparency)
-const add_color = Color(0.0 ,1.0 , blue, transparency)
+var add_color = Global.highlight_color()
 const rmv_color = Color(1.0, 0.0, blue, transparency)
 
 var width = Global.square_side
@@ -63,8 +63,8 @@ func indicate_remove(radius := 0):
 	
 func indicate_add():
 	lower_by(1)
-	add_operating_range(Color.green)
-	$column.color = add_color
+	add_operating_range(Global.highlight_color())
+	$column.color = Global.highlight_color() - Color(0,0,0,0.5)
 	update()
 
 func indicate_no_action():

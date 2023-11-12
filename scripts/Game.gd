@@ -2,7 +2,6 @@ extends Node
 class_name Game 
 
 onready var board_node = get_node("BoardNode")
-var sounds = load("res://scenes/Sounds.tscn").instance()
 const FloatingText = preload("res://scenes/FloatingText.tscn")
 
 const tick : float = 0.2/Global.rows
@@ -23,6 +22,8 @@ func _ready():
 	board_node.connect("squares_removed", self, "squares_removed")
 	board_node.connect("add_square", get_node("Sounds"), "play_add_square")
 	change_action_to("tap", board_node, self, Vector2(0,0))
+	get_node("Timer").color = Global.timer_color()
+	get_node("TillNextLevel").color = Global.till_next_level_color()
 	
 func change_action_to(name, board, game, pos):
 	input_handler = self.action_factory.get_action(name)

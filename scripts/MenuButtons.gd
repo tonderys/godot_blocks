@@ -38,7 +38,7 @@ func toggle_pause():
 	get_owner().toggle_pause()
 
 func settings_pressed():
-	get_tree().change_scene("res://scenes/Settings.tscn")
+	get_tree().change_scene_to(Settings)
 
 func highscores_pressed():
 	get_tree().change_scene("res://scenes/Scoreboard.tscn")

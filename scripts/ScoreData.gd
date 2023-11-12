@@ -6,7 +6,7 @@ const entries_amount = 9
 var file_path
 var score_file = File.new()
 
-var score_data = {"recent_name": "input name",
+var score_data = {"recent_name": "",
 				  "scoreboard": [],
 				  "high_score": 0}
 
@@ -53,7 +53,7 @@ func get_score_at(place):
 	return get_record_at(place)[1]
 
 func is_good_enough(score):
-	return score > get_score_at(entries_amount - 1)
+	return len(score_data.scoreboard) < entries_amount || score > get_score_at(entries_amount - 1)
 	
 func get_high_score():
 	return score_data.high_score

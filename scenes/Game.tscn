@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://fonts/GUI_60.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scripts/Game.gd" type="Script" id=2]
@@ -6,24 +6,19 @@
 [ext_resource path="res://scripts/Timer.gd" type="Script" id=4]
 [ext_resource path="res://scenes/Board.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/Sounds.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/Background.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/GUI/PauseButtons.tscn" type="PackedScene" id=11]
 
 [node name="Game" type="Node"]
 script = ExtResource( 2 )
 
-[node name="Background" type="ColorRect" parent="."]
-margin_right = 580.0
-margin_bottom = 1024.0
-color = Color( 0.803922, 1, 0.780392, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Background" parent="." instance=ExtResource( 7 )]
 
 [node name="Timer" type="ColorRect" parent="."]
 margin_top = 25.0
 margin_right = 580.0
 margin_bottom = 50.0
-color = Color( 0, 0.015625, 1, 1 )
+color = Color( 0, 0.0156863, 1, 1 )
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false

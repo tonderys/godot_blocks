@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/MenuButtons.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Scoreboard.gd" type="Script" id=2]
 [ext_resource path="res://fonts/Press_Start_2P/PressStart2P-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://fonts/GUI_60.tres" type="DynamicFont" id=4]
 [ext_resource path="res://scenes/GUI/Record.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/Background.tscn" type="PackedScene" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 resource_local_to_scene = true
@@ -15,15 +16,7 @@ font_data = ExtResource( 3 )
 [node name="Scoreboard" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="Background" type="Node2D" parent="."]
-
-[node name="ColorRect" type="ColorRect" parent="Background"]
-margin_right = 580.0
-margin_bottom = 1024.0
-color = Color( 0.803922, 1, 0.780392, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Background" parent="." instance=ExtResource( 6 )]
 
 [node name="UI" type="Node2D" parent="."]
 

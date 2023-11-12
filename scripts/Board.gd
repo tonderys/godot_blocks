@@ -83,7 +83,7 @@ func _handle_rows_below(removedRow: Row) -> Array:
 	var removed_squares = Array()
 	for row in _rows_from_bottom(): 
 		if row.height > removedRow.height:
-			removed_squares += _remove_row(row, Row.RemoveBy.FALL)
+			removed_squares += _remove_row(row, Row.RemoveBy.FALL if Settings.data.fall else Row.RemoveBy.DESTROY)
 	return removed_squares
 	
 func _is_blocked(looseRow: Row):
