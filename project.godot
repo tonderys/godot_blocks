@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Generators/EasyRow.gd"
 }, {
+"base": "Node2D",
+"class": "EnsureDeletion",
+"language": "GDScript",
+"path": "res://scripts/EnsureDeletion.gd"
+}, {
 "base": "Generator",
 "class": "FakeRow",
 "language": "GDScript",
@@ -116,6 +121,7 @@ _global_script_class_icons={
 "Board": "",
 "DestroySquare": "",
 "EasyRow": "",
+"EnsureDeletion": "",
 "FakeRow": "",
 "FallSquare": "",
 "Game": "",

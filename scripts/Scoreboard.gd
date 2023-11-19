@@ -24,3 +24,7 @@ func _ready():
 
 func save(name, score):
 	score_data.save(name, score)
+
+
+func _ensure_deletion():
+	get_tree().change_scene("res://scenes/EnsureDeletion.tscn")
