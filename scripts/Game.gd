@@ -77,10 +77,6 @@ func add_points(squares: int, multiplier : int = 1):
 	Global.score += squares * level * multiplier
 	get_node("GUI/Score").text = "Score:%s" % Global.score
 	return score_delta
-
-func modify_available_removes(amount):
-	removes = clamp(removes + amount, 0, 5)
-	get_node("removes").get_node("amount").text = "%s" % removes
 	
 func level_up():
 	Sounds.get_node("lvlUp").play()

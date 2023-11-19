@@ -54,13 +54,7 @@ func pos_y():
 
 func _ready():
 	$column.color = Color(0, 0, blue, transparency)
-	
-func indicate_remove(radius := 0):
-	lower_by(radius)
-	add_operating_range(Color.red, radius)
-	$column.color = rmv_color
-	update()
-	
+
 func indicate_add():
 	lower_by(1)
 	add_operating_range(Global.highlight_color())
