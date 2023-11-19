@@ -7,3 +7,8 @@ func _ready():
 	
 	get_node("UI/Score").text = "Score:%s" % Global.score
 	get_node("UI/HiScore").text = "Best:%s" % hiScore
+	
+	get_node("UI/Buttons/Back").disabled = true;
+	
+func _enable_back_button():
+	get_node("UI/Buttons/Back").disabled = false;
