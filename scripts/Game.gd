@@ -83,7 +83,7 @@ func modify_available_removes(amount):
 	
 func level_up():
 	get_node("Sounds/lvlUp").play()
-	var score = add_points(Global.columns, tillNextLevel)
+	var score = add_points(Global.columns, tillNextLevel * 2)
 	display_at("lvl UP! +%s" % score,
 				Vector2(Global.width / 2, Global.height/2),
 				true)
