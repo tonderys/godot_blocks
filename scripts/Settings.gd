@@ -3,8 +3,12 @@ extends Node2D
 const settings_file_path = "user://settings.res"
 var settings_file = File.new()
 
+var mute_on = preload("res://icons/mute_on.png")
+var mute_off = preload("res://icons/mute_off.png")
+
 var data = {"nickname": "",
 			"volume": 100,
+			"muted": false,
 			"color": true,
 			"fall": true}
 
@@ -28,11 +32,12 @@ func update_settings():
 	get_node("MenuButtons/SetNickname/Background").reload()
 	get_node("MenuButtons/Sound/Intensity").value = data.volume
 	
-	if data.volume > 0:
+	if data.volume > -80 and !data.muted:
 		AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), false)
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), data.volume / 10)
 	else:
 		AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), true)
+	get_node("MenuButtons/Sound/mute").icon = mute_on if data.muted else mute_off
 	_save_file()
 
 func _init():
@@ -55,9 +60,14 @@ func _change_remainings():
 	data.fall = !data.fall
 	update_settings()
 
+func _toggle_mute():
+	data.muted = !data.muted
+	update_settings()
+
 func _set_volume(value):
 	data.volume = value
 	update_settings();
+	Sounds.get_node("addSquare").play()
 
 func _change_nickname():
 	get_node("MenuButtons/SetNickname/Background").visible = false

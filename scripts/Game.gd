@@ -21,7 +21,7 @@ func _init():
 	
 func _ready():
 	board_node.connect("squares_removed", self, "squares_removed")
-	board_node.connect("add_square", get_node("Sounds"), "play_add_square")
+	board_node.connect("add_square", Sounds, "play_add_square")
 	change_action_to("tap", board_node, self, Vector2(0,0))
 	get_node("Timer").color = Global.timer_color()
 	get_node("TillNextLevel").color = Global.till_next_level_color()
@@ -62,12 +62,12 @@ func _input(event):
 	input_handler.interact(event)
 
 func on_timeout():
-	get_node("Sounds/addRow").play()
+	Sounds.get_node("addRow").play()
 	tillNextLevel -= 1
 	board_node.add_top_row()
 
 func squares_removed(squares):
-	get_node("Sounds/removeRow").play()
+	Sounds.get_node("removeRow").play()
 	var score = add_points(squares.size());
 	display_at("+%s" % score, Vector2(Global.width / 2, Global.height / 2))
 	
@@ -83,7 +83,7 @@ func modify_available_removes(amount):
 	get_node("removes").get_node("amount").text = "%s" % removes
 	
 func level_up():
-	get_node("Sounds/lvlUp").play()
+	Sounds.get_node("lvlUp").play()
 	var score = add_points(Global.columns, tillNextLevel * noStallMultiplier)
 	display_at("lvl UP! +%s" % score,
 				Vector2(Global.width / 2, Global.height/2),

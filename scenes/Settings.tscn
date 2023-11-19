@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scripts/MenuButtons.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Settings.gd" type="Script" id=2]
 [ext_resource path="res://fonts/Press_Start_2P/PressStart2P-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://fonts/GUI_60.tres" type="DynamicFont" id=4]
 [ext_resource path="res://scenes/Background.tscn" type="PackedScene" id=5]
+[ext_resource path="res://icons/mute_off.png" type="Texture" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 80
@@ -50,10 +51,23 @@ __meta__ = {
 }
 
 [node name="Intensity" type="HSlider" parent="MenuButtons/Sound"]
-margin_left = 35.0
+margin_left = 36.0
+margin_top = 65.0
+margin_right = 493.0
+margin_bottom = 92.0
+min_value = -80.0
+max_value = 0.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="mute" type="Button" parent="MenuButtons/Sound"]
+margin_left = 516.0
 margin_top = 56.0
-margin_right = 525.0
-margin_bottom = 83.0
+margin_right = 560.0
+margin_bottom = 99.0
+icon = ExtResource( 6 )
+flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -223,6 +237,7 @@ __meta__ = {
 }
 
 [connection signal="value_changed" from="MenuButtons/Sound/Intensity" to="." method="_set_volume"]
+[connection signal="pressed" from="MenuButtons/Sound/mute" to="." method="_toggle_mute"]
 [connection signal="pressed" from="MenuButtons/Blocks" to="." method="_change_color"]
 [connection signal="pressed" from="MenuButtons/BelowDestroyed" to="." method="_change_remainings"]
 [connection signal="pressed" from="MenuButtons/Back" to="MenuButtons" method="back_pressed"]

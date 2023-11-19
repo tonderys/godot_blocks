@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://fonts/GUI_60.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scripts/Game.gd" type="Script" id=2]
 [ext_resource path="res://scripts/TillNextLevel.gd" type="Script" id=3]
 [ext_resource path="res://scripts/Timer.gd" type="Script" id=4]
 [ext_resource path="res://scenes/Board.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/Sounds.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/Background.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/GUI/PauseButtons.tscn" type="PackedScene" id=11]
 
@@ -110,8 +109,6 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Sounds" parent="." instance=ExtResource( 6 )]
 
 [connection signal="timeout" from="Timer/remaining" to="." method="on_timeout"]
 [connection signal="pressed" from="GUI/Pause/Button" to="." method="toggle_pause"]
