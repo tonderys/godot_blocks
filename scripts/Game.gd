@@ -46,9 +46,11 @@ func _process(_delta: float) -> void:
 func game_over():
 	var score_data = load("res://scripts/ScoreData.gd").new(Global.highscore_file_path)
 	if score_data.is_good_enough(Global.score):
-		get_tree().change_scene("res://scenes/NamePrompt.tscn")
+		if get_tree().change_scene("res://scenes/NamePrompt.tscn") != OK:
+			print("Can't open name prompt scene")
 	else:
-		get_tree().change_scene("res://scenes/Summary.tscn")
+		if get_tree().change_scene("res://scenes/Summary.tscn") != OK:
+			print("Can't open summary scene")
 
 func display_at(text, position, remove_others = false):
 	var score = FloatingText.instance()
@@ -69,7 +71,8 @@ func on_timeout():
 func squares_removed(squares):
 	Sounds.get_node("removeRow").play()
 	var score = add_points(squares.size());
-	display_at("+%s" % score, Vector2(Global.width / 2, Global.height / 2))
+
+	display_at("+%s" % score, Global.screen_center)
 	
 func add_points(squares: int, multiplier : int = 1):
 	print("%s [squares_removed] with multiplier:%s on lvl:%s" % [squares, multiplier, level])
@@ -82,7 +85,7 @@ func level_up():
 	Sounds.get_node("lvlUp").play()
 	var score = add_points(Global.columns, tillNextLevel * noStallMultiplier)
 	display_at("lvl UP! +%s" % score,
-				Vector2(Global.width / 2, Global.height/2),
+				Global.screen_center,
 				true)
 	level += 1
 	tillNextLevel = rowsToNextLevel

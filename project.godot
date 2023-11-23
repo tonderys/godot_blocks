@@ -152,6 +152,10 @@ Global="*res://scripts/Global.gd"
 Settings="*res://scenes/Settings.tscn"
 Sounds="*res://scenes/Sounds.tscn"
 
+[debug]
+
+gdscript/warnings/integer_division=false
+
 [display]
 
 window/size/width=580
@@ -177,6 +181,8 @@ restore=false
 widtg=false
 width=false
 quit=false
+integer=false
+"integer div"=false
 
 [input]
 

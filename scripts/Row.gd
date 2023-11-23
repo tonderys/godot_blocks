@@ -54,7 +54,8 @@ func remove_squares(behavior) -> Array:
 		to_be_removed.append(column)
 	
 	for column in to_be_removed:
-		squares.erase(column)
+		if squares.erase(column) != true:
+			print ("Can't erase column that doesn't exist")
 	return result
 
 func merge_with(other: Row) -> void:

@@ -5,7 +5,8 @@ var action = Action.NONE
 
 func start_pressed():
 	get_tree().paused = false
-	get_tree().change_scene("res://scenes/Game.tscn")
+	if get_tree().change_scene("res://scenes/Game.tscn") != OK:
+		print("Can't open game scene")
 	
 func quit_pressed():
 	get_tree().paused = false
@@ -13,7 +14,8 @@ func quit_pressed():
 
 func back_pressed():
 	get_tree().paused = false
-	get_tree().change_scene("res://scenes/Menu.tscn")
+	if get_tree().change_scene("res://scenes/Menu.tscn") != OK:
+		print("Can't open menu scene")
 
 func ensure(text, act):
 	$menu.visible = false
@@ -38,7 +40,9 @@ func toggle_pause():
 	get_owner().toggle_pause()
 
 func settings_pressed():
-	get_tree().change_scene_to(Settings)
+	if get_tree().change_scene_to(Settings) != OK:
+		print("Can't open settings scene")
 
 func highscores_pressed():
-	get_tree().change_scene("res://scenes/Scoreboard.tscn")
+	if get_tree().change_scene("res://scenes/Scoreboard.tscn") != OK:
+		print("Can't open scoreboard scene")

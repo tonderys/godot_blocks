@@ -18,4 +18,5 @@ func name_focus_entered():
 
 func submit_pressed():
 	scoreboard.save(get_node("UI/insert name/name").text, Global.score)
-	get_tree().change_scene("res://scenes/Summary.tscn")
+	if get_tree().change_scene("res://scenes/Summary.tscn") != OK:
+		print("Can't open summary scene")

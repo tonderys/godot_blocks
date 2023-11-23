@@ -5,7 +5,7 @@ onready var emitter = get_node("fall")
 
 var color: Color
 
-func init(c: Color, p: Vector2, d: bool = true) -> void:
+func init(c: Color, p: Vector2) -> void:
 	position = p
 	color = c
 	

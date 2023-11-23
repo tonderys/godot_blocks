@@ -7,7 +7,7 @@ var mute_on = preload("res://icons/mute_on.png")
 var mute_off = preload("res://icons/mute_off.png")
 
 var data = {"nickname": "",
-			"volume": 100,
+			"volume": 0,
 			"muted": false,
 			"color": true,
 			"fall": true}
@@ -31,12 +31,14 @@ func update_settings():
 	get_node("Background").reload()
 	get_node("MenuButtons/SetNickname/Background").reload()
 	get_node("MenuButtons/Sound/Intensity").value = data.volume
+	get_node("MenuButtons/Sound/value").text = \
+		"%s"%[0 if data.muted else int(100 + (data.volume * 1.25))]
 	
-	if data.volume > -80 and !data.muted:
-		AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), false)
-		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), data.volume / 10)
-	else:
+	if data.volume == -80 or data.muted:
 		AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), true)
+	else:
+		AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), false)
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), data.volume / 4)
 	get_node("MenuButtons/Sound/mute").icon = mute_on if data.muted else mute_off
 	_save_file()
 

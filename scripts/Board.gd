@@ -25,7 +25,7 @@ func reset() -> void:
 	looseRows = Array()
 	_remove_unnecessary_pieces()
 	
-	for height in range(0, Global.rows/2):
+	for height in range(0, floor(Global.rows / 2)):
 		_add_row(height)
 
 func _remove_unnecessary_pieces() -> void:

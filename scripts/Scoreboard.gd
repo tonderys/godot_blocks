@@ -27,4 +27,5 @@ func save(name, score):
 
 
 func _ensure_deletion():
-	get_tree().change_scene("res://scenes/EnsureDeletion.tscn")
+	if get_tree().change_scene("res://scenes/EnsureDeletion.tscn") != OK:
+		print("Can't open ensure deletion scene")

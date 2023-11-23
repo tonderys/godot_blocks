@@ -8,6 +8,8 @@ const square_side: int = width / columns
 const height = 870
 const rows: int = (height - square_side) / square_side
 
+const screen_center = Vector2(width / 2.0, height / 2.0)
+
 func background_color():
 	return Color("cdffc7") if Settings.data.color else Color("cdcdcd")
 
