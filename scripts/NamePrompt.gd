@@ -17,6 +17,8 @@ func name_focus_entered():
 	get_node("UI/insert name/name").text = ""
 
 func submit_pressed():
-	scoreboard.save(get_node("UI/insert name/name").text, Global.score)
+	var name = get_node("UI/insert name/name").text
+	scoreboard.save(name, Global.score)
+	SilentWolf.Scores.persist_score(name, Global.score)
 	if get_tree().change_scene("res://scenes/Summary.tscn") != OK:
 		print("Can't open summary scene")
