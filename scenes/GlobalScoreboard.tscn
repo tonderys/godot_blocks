@@ -82,6 +82,24 @@ position = Vector2( 0, 607 )
 [node name="9" parent="records" instance=ExtResource( 5 )]
 position = Vector2( 0, 672 )
 
+[node name="local" type="Label" parent="."]
+visible = false
+margin_left = 4.0
+margin_top = 672.0
+margin_right = 580.0
+margin_bottom = 824.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 7 )
+text = "..."
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="score" parent="local" instance=ExtResource( 5 )]
+position = Vector2( -4, 105 )
+
 [node name="State" type="Node" parent="."]
 
 [node name="refresh" type="Button" parent="State"]

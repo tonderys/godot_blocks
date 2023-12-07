@@ -18,8 +18,7 @@ func _ready():
 			var player_score = record[1]
 
 			i += 1
-			place.get_node("place").text = "%s."%i
-			place.get_node("name").text = "%s"%player_name
+			place.get_node("place").text = "%s.%s"%[i, player_name]
 			place.get_node("score").text = "%s"%player_score
 
 func save(name, score):

@@ -22,6 +22,7 @@ func score_received():
 	get_data_from_database()
 
 func get_data_from_database():
+	var local_best_found = false
 	var score_data = load("res://scripts/ScoreData.gd").new(Global.highscore_file_path)
 	var local_best = score_data.get_record_at(0)
 	if(local_best):
@@ -38,15 +39,23 @@ func get_data_from_database():
 		else:
 			i += 1
 			if(record.player_name == highlight_name && record.score == highlight_score):
+				local_best_found = true
 				set_record_color(place, Color(0,0,1,1))
 			
-			place.get_node("place").text = "%s."%i
-			place.get_node("name").text = "%s"%record.player_name
+			place.get_node("place").text = "%s.%s"%[i,record.player_name]
 			place.get_node("score").text = "%s"%record.score
+	if not local_best_found:
+		get_node("local").visible = true
+		set_record_color(get_node("local/score"), Color(0,0,1,1))
+		
+		yield(SilentWolf.Scores.get_score_position(highlight_score), "sw_position_received")
+		var position = SilentWolf.Scores.position
+		get_node("local/score/place").text = "%s.%s"%[(position - 1), highlight_name]
+		get_node("local/score/score").text = "%s"%highlight_score
+		
 
 func set_record_color(record, color):
 	record.get_node("place").add_color_override("font_color", color)
-	record.get_node("name").add_color_override("font_color", color)
 	record.get_node("score").add_color_override("font_color", color)
 	
 func remove_color_override():
