@@ -1,7 +1,6 @@
 extends Node2D
 
 const settings_file_path = "user://settings.res"
-var settings_file = File.new()
 
 var mute_on = preload("res://icons/mute_on.png")
 var mute_off = preload("res://icons/mute_off.png")
@@ -13,17 +12,17 @@ var data = {"nickname": "",
 			"fall": true}
 
 func _save_file():
-	settings_file.open(settings_file_path, File.WRITE)
+	var settings_file = FileAccess.open(settings_file_path, FileAccess.WRITE)
 	settings_file.store_var(data)
 	settings_file.close()
 	
 func _read_file():
-	settings_file.open(settings_file_path, File.READ)
+	var settings_file = FileAccess.open(settings_file_path, FileAccess.READ)
 	data = settings_file.get_var()
 	settings_file.close()
 	
 func update_settings():
-	if data.nickname != "":
+	if self.data.nickname != "":
 		get_node("MenuButtons/SetNickname/DefaultNickname").text = data.nickname
 		get_node("MenuButtons/SetNickname/Background/insert name/name").text = data.nickname
 	get_node("MenuButtons/BelowDestroyed/RemainingsBehavior").text = "Fall" if data.fall else "Destroy"
@@ -43,7 +42,7 @@ func update_settings():
 	_save_file()
 
 func _init():
-	if not settings_file.file_exists(settings_file_path):
+	if not FileAccess.file_exists(settings_file_path):
 		_save_file()
 	else:
 		_read_file()

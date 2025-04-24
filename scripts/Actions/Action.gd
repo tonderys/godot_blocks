@@ -23,4 +23,4 @@ func is_valid(event):
 	return event is InputEventMouseButton or event is InputEventScreenTouch
 	
 func is_on_board(event):
-	return board_node.get_node("Area").get_global_rect().has_point(event.position)
+	return board_node.get_node("Area3D").get_global_rect().has_point(event.position)

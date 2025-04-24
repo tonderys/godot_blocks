@@ -1,7 +1,7 @@
 extends Node2D
 class_name FallSquare
 
-onready var emitter = get_node("fall")
+@onready var emitter = get_node("fall")
 
 var color: Color
 

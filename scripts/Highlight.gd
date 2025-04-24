@@ -44,7 +44,7 @@ func update():
 	set_position(Vector2(highlighted_column * Global.square_side + delta_x, tmp_y))
 	set_size(Vector2(width, max_height - tmp_y))
 	if is_instance_valid(operating_range):
-		operating_range.set_position(tmp_y)
+		operating_range.move(tmp_y)
 
 func lower_by(delta):
 	delta_y = delta
@@ -67,8 +67,5 @@ func indicate_no_action():
 	$column.color = no_action_color
 	update()
 
-func set_position(position: Vector2):
-	$column.rect_position = position
-
 func set_size(size: Vector2):
-	$column.rect_size = size
+	$column.size = size

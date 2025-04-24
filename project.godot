@@ -6,151 +6,16 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
-
-_global_script_classes=[ {
-"base": "Node",
-"class": "Action",
-"language": "GDScript",
-"path": "res://scripts/Actions/Action.gd"
-}, {
-"base": "Reference",
-"class": "ActionFactory",
-"language": "GDScript",
-"path": "res://scripts/Actions/ActionFactory.gd"
-}, {
-"base": "Node2D",
-"class": "Background",
-"language": "GDScript",
-"path": "res://scripts/Background.gd"
-}, {
-"base": "Node",
-"class": "Board",
-"language": "GDScript",
-"path": "res://scripts/Board.gd"
-}, {
-"base": "Node2D",
-"class": "DestroySquare",
-"language": "GDScript",
-"path": "res://scripts/DestroySquare.gd"
-}, {
-"base": "Generator",
-"class": "EasyRow",
-"language": "GDScript",
-"path": "res://scripts/Generators/EasyRow.gd"
-}, {
-"base": "Node2D",
-"class": "EnsureDeletion",
-"language": "GDScript",
-"path": "res://scripts/EnsureDeletion.gd"
-}, {
-"base": "Generator",
-"class": "FakeRow",
-"language": "GDScript",
-"path": "res://scripts/Generators/FakeRow.gd"
-}, {
-"base": "Node2D",
-"class": "FallSquare",
-"language": "GDScript",
-"path": "res://scripts/FallSquare.gd"
-}, {
-"base": "Node",
-"class": "Game",
-"language": "GDScript",
-"path": "res://scripts/Game.gd"
-}, {
-"base": "Node",
-"class": "Generator",
-"language": "GDScript",
-"path": "res://scripts/Generators/Generator.gd"
-}, {
-"base": "Node2D",
-"class": "GlobalScoreboard",
-"language": "GDScript",
-"path": "res://scripts/GlobalScoreboard.gd"
-}, {
-"base": "Reference",
-"class": "GutHookScript",
-"language": "GDScript",
-"path": "res://addons/gut/hook_script.gd"
-}, {
-"base": "Node",
-"class": "GutTest",
-"language": "GDScript",
-"path": "res://addons/gut/test.gd"
-}, {
-"base": "Node2D",
-"class": "Highlight",
-"language": "GDScript",
-"path": "res://scripts/Highlight.gd"
-}, {
-"base": "Generator",
-"class": "RandomRow",
-"language": "GDScript",
-"path": "res://scripts/Generators/RandomRow.gd"
-}, {
-"base": "Node2D",
-"class": "Row",
-"language": "GDScript",
-"path": "res://scripts/Row.gd"
-}, {
-"base": "Node",
-"class": "ScoreData",
-"language": "GDScript",
-"path": "res://scripts/ScoreData.gd"
-}, {
-"base": "Node",
-"class": "Scoreboard",
-"language": "GDScript",
-"path": "res://scripts/Scoreboard.gd"
-}, {
-"base": "Node2D",
-"class": "Square",
-"language": "GDScript",
-"path": "res://scripts/Square.gd"
-}, {
-"base": "Action",
-"class": "Tap",
-"language": "GDScript",
-"path": "res://scripts/Actions/Tap.gd"
-}, {
-"base": "Action",
-"class": "Untap",
-"language": "GDScript",
-"path": "res://scripts/Actions/Untap.gd"
-} ]
-_global_script_class_icons={
-"Action": "",
-"ActionFactory": "",
-"Background": "",
-"Board": "",
-"DestroySquare": "",
-"EasyRow": "",
-"EnsureDeletion": "",
-"FakeRow": "",
-"FallSquare": "",
-"Game": "",
-"Generator": "",
-"GlobalScoreboard": "",
-"GutHookScript": "",
-"GutTest": "",
-"Highlight": "",
-"RandomRow": "",
-"Row": "",
-"ScoreData": "",
-"Scoreboard": "",
-"Square": "",
-"Tap": "",
-"Untap": ""
-}
+config_version=5
 
 [application]
 
 config/name="blocks"
 run/main_scene="res://scenes/Menu.tscn"
-config/icon="res://icon.png"
 config/auto_accept_quit=false
 config/quit_on_go_back=false
+config/features=PackedStringArray("4.4")
+config/icon="res://icon.png"
 
 [autoload]
 
@@ -165,18 +30,17 @@ gdscript/warnings/integer_division=false
 
 [display]
 
-window/size/width=580
-window/size/height=1024
-window/size/fullscreen=true
-window/size/test_width=288
-window/size/test_height=512
-window/handheld/orientation="portrait"
+window/size/viewport_width=580
+window/size/viewport_height=1024
+window/size/window_width_override=288
+window/size/window_height_override=512
 window/stretch/mode="viewport"
-window/stretch/aspect="keep"
+window/handheld/orientation="portrait"
+window/size/fullscreen=true
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/gut/plugin.cfg" )
+enabled=PackedStringArray("res://addons/gut/plugin.cfg")
 
 [global]
 
@@ -190,13 +54,14 @@ width=false
 quit=false
 integer=false
 "integer div"=false
+compileSdkVersion=true
 
 [input]
 
 mouse_clicked={
 "deadzone": 0.5,
-"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
- ]
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"canceled":false,"pressed":false,"double_click":false,"script":null)
+]
 }
 
 [physics]
@@ -205,8 +70,7 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+environment/defaults/default_environment="res://default_env.tres"
 quality/driver/driver_name="GLES2"
 2d/snapping/use_gpu_pixel_snap=true
 vram_compression/import_etc=true
-vram_compression/import_etc2=false
-environment/default_environment="res://default_env.tres"

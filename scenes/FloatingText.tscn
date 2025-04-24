@@ -1,22 +1,19 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://cu80ctifqpil4"]
 
-[ext_resource path="res://fonts/GUI_60_outline.tres" type="DynamicFont" id=1]
-[ext_resource path="res://scripts/FloatingText.gd" type="Script" id=2]
+[ext_resource type="FontFile" path="res://fonts/GUI_60_outline.tres" id="1"]
+[ext_resource type="Script" uid="uid://bqo87dmf68aua" path="res://scripts/FloatingText.gd" id="2"]
 
 [node name="FloatingText" type="Node2D"]
-script = ExtResource( 2 )
+script = ExtResource("2")
 
 [node name="score" type="Label" parent="."]
-margin_right = 19.0
-margin_bottom = 20.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 1 )
+offset_right = 19.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1")
 text = "+2137"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="timer" type="Timer" parent="."]
 wait_time = 0.4

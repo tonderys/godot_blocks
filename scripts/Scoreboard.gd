@@ -25,9 +25,9 @@ func save(name, score):
 	score_data.save(name, score)
 
 func _ensure_deletion():
-	if get_tree().change_scene("res://scenes/EnsureDeletion.tscn") != OK:
+	if get_tree().change_scene_to_file("res://scenes/EnsureDeletion.tscn") != OK:
 		print("Can't open ensure deletion scene")
 
 
 func show_global_scores():
-	get_tree().change_scene("res://scenes/GlobalScoreboard.tscn")
+	get_tree().change_scene_to_file("res://scenes/GlobalScoreboard.tscn")

@@ -1,13 +1,14 @@
 extends Node2D
 class_name DestroySquare
 
-onready var emitter = get_node("destroy")
+@onready var emitter = get_node("destroy")
 
 var color: Color
 
 func split_square():
 	var slices = Global.rng.randi_range(2, 5)
-	emitter.scale_amount = Global.square_side / slices
+	emitter.scale_amount_min = Global.square_side / slices
+	emitter.scale_amount_max = Global.square_side / slices
 	emitter.amount = slices * slices
 	
 func init(c: Color, p: Vector2) -> void:

@@ -2,7 +2,7 @@ extends GutTest
 
 const test_file = "res://test/highscore.res"
 
-var dir = Directory.new()
+var dir = DirAccess.new()
 var score_data
 
 func before_each():

@@ -18,9 +18,9 @@ func _init(h: int, indices: Array, amount_of_columns = Global.columns):
 	columns = amount_of_columns
 
 	for i in indices:
-		squares[i] = Square.instance()
-		squares[i].get_node("body").rect_size = square_dimensions
-		squares[i].get_node("body").rect_position = Vector2(i * Global.square_side, 0)
+		squares[i] = Square.instantiate()
+		squares[i].get_node("body").size = square_dimensions
+		squares[i].get_node("body").position = Vector2(i * Global.square_side, 0)
 		add_child(squares[i])
 
 func _process(_delta: float):
@@ -41,13 +41,13 @@ func remove_squares(behavior) -> Array:
 	var to_be_removed = []
 	for column in squares:
 		var square_body = squares[column].get_node("body")
-		var square_position = Vector2(square_body.rect_position.x + square_body.rect_size.x / 2,
-									  self.position.y + square_body.rect_size.y / 2)
+		var square_position = Vector2(square_body.position.x + square_body.size.x / 2,
+									  self.position.y + square_body.size.y / 2)
 		var piece
 		if (behavior == RemoveBy.DESTROY):
-			piece = DestroySquare.instance()
+			piece = DestroySquare.instantiate()
 		else:
-			piece = FallSquare.instance()
+			piece = FallSquare.instantiate()
 		piece.init(square_body.color, square_position)
 		result.append(piece)
 		remove_child(squares[column])

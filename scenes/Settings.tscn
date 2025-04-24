@@ -1,249 +1,217 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=9 format=3 uid="uid://81x1mmmcht5j"]
 
-[ext_resource path="res://scripts/MenuButtons.gd" type="Script" id=1]
-[ext_resource path="res://scripts/Settings.gd" type="Script" id=2]
-[ext_resource path="res://fonts/Press_Start_2P/PressStart2P-Regular.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://fonts/GUI_60.tres" type="DynamicFont" id=4]
-[ext_resource path="res://scenes/Background.tscn" type="PackedScene" id=5]
-[ext_resource path="res://icons/mute_off.png" type="Texture" id=6]
+[ext_resource type="Script" uid="uid://c1u6hb0b3nscy" path="res://scripts/MenuButtons.gd" id="1"]
+[ext_resource type="Script" uid="uid://vs4hl3vyghm5" path="res://scripts/Settings.gd" id="2"]
+[ext_resource type="FontFile" uid="uid://cvysbiubrkpfa" path="res://fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="3"]
+[ext_resource type="FontFile" path="res://fonts/GUI_60.tres" id="4"]
+[ext_resource type="PackedScene" path="res://scenes/Background.tscn" id="5"]
+[ext_resource type="Texture2D" uid="uid://bcxkvhds4i2xn" path="res://icons/mute_off.png" id="6"]
 
-[sub_resource type="DynamicFont" id=1]
-size = 80
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 3 )
+[sub_resource type="FontFile" id="1"]
+fallbacks = Array[Font]([ExtResource("3")])
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
 
-[sub_resource type="DynamicFont" id=2]
-size = 40
-font_data = ExtResource( 3 )
+[sub_resource type="FontFile" id="2"]
+fallbacks = Array[Font]([ExtResource("3")])
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
 
 [node name="Settings" type="Node2D"]
-script = ExtResource( 2 )
+script = ExtResource("2")
 
-[node name="Background" parent="." instance=ExtResource( 5 )]
+[node name="Background" parent="." instance=ExtResource("5")]
 
 [node name="Title" type="Label" parent="."]
-margin_right = 644.0
-margin_bottom = 254.0
-rect_scale = Vector2( 0.9, 1 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 1 )
+offset_right = 644.0
+offset_bottom = 254.0
+scale = Vector2(0.9, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("1")
 text = "Settings"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="MenuButtons" type="Node2D" parent="."]
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="Sound" type="Label" parent="MenuButtons"]
-margin_top = 254.0
-margin_right = 520.0
-margin_bottom = 310.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 4 )
+offset_top = 254.0
+offset_right = 520.0
+offset_bottom = 310.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4")
 text = "Sound volume:"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Intensity" type="HSlider" parent="MenuButtons/Sound"]
-margin_left = 8.0
-margin_top = 63.0
-margin_right = 451.0
-margin_bottom = 90.0
+layout_mode = 0
+offset_left = 8.0
+offset_top = 63.0
+offset_right = 451.0
+offset_bottom = 90.0
 min_value = -80.0
 max_value = 0.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="mute" type="Button" parent="MenuButtons/Sound"]
-margin_left = 520.0
-margin_top = 6.0
-margin_right = 564.0
-margin_bottom = 49.0
-icon = ExtResource( 6 )
+layout_mode = 0
+offset_left = 520.0
+offset_top = 6.0
+offset_right = 564.0
+offset_bottom = 49.0
+icon = ExtResource("6")
 flat = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="value" type="Label" parent="MenuButtons/Sound"]
-margin_left = 458.0
-margin_top = 56.0
-margin_right = 578.0
-margin_bottom = 112.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 4 )
+layout_mode = 0
+offset_left = 458.0
+offset_top = 56.0
+offset_right = 578.0
+offset_bottom = 112.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4")
 text = "100"
 
 [node name="Blocks" type="Button" parent="MenuButtons"]
-margin_top = 369.0
-margin_right = 576.0
-margin_bottom = 491.0
+offset_top = 369.0
+offset_right = 576.0
+offset_bottom = 491.0
 flat = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="MenuButtons/Blocks"]
-margin_right = 580.0
-margin_bottom = 56.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 4 )
+layout_mode = 0
+offset_right = 580.0
+offset_bottom = 56.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4")
 text = "Blocks:"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Color" type="Label" parent="MenuButtons/Blocks"]
-margin_top = 54.0
-margin_right = 580.0
-margin_bottom = 122.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 4 )
+layout_mode = 0
+offset_top = 54.0
+offset_right = 580.0
+offset_bottom = 122.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4")
 text = "color/grey"
-align = 1
-valign = 1
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="BelowDestroyed" type="Button" parent="MenuButtons"]
-margin_top = 559.0
-margin_right = 576.0
-margin_bottom = 671.0
+offset_top = 559.0
+offset_right = 576.0
+offset_bottom = 671.0
 flat = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="MenuButtons/BelowDestroyed"]
-margin_right = 580.0
-margin_bottom = 56.0
-rect_pivot_offset = Vector2( 514, 59 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 4 )
+layout_mode = 0
+offset_right = 580.0
+offset_bottom = 56.0
+pivot_offset = Vector2(514, 59)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4")
 text = "Below removed:"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="RemainingsBehavior" type="Label" parent="MenuButtons/BelowDestroyed"]
-margin_top = 56.0
-margin_right = 580.0
-margin_bottom = 112.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 4 )
+layout_mode = 0
+offset_top = 56.0
+offset_right = 580.0
+offset_bottom = 112.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4")
 text = "Destroy/Fall"
-align = 1
-valign = 1
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Back" type="Button" parent="MenuButtons"]
-margin_top = 930.0
-margin_right = 580.0
-margin_bottom = 996.0
+offset_top = 930.0
+offset_right = 580.0
+offset_bottom = 996.0
 focus_mode = 0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
-custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 4 )
-enabled_focus_mode = 0
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4")
 text = "Back"
 flat = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="SetNickname" type="Button" parent="MenuButtons"]
-margin_top = 720.0
-margin_right = 576.0
-margin_bottom = 851.0
+offset_top = 720.0
+offset_right = 576.0
+offset_bottom = 851.0
 focus_mode = 0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
-custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 4 )
-enabled_focus_mode = 0
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4")
 flat = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="MenuButtons/SetNickname"]
-margin_right = 580.0
-margin_bottom = 56.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 4 )
+layout_mode = 0
+offset_right = 580.0
+offset_bottom = 56.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4")
 text = "Set Nickname"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="DefaultNickname" type="Label" parent="MenuButtons/SetNickname"]
-margin_top = 75.0
-margin_right = 580.0
-margin_bottom = 131.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 4 )
+layout_mode = 0
+offset_top = 75.0
+offset_right = 580.0
+offset_bottom = 131.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4")
 text = "____________"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Background" parent="MenuButtons/SetNickname" instance=ExtResource( 5 )]
+[node name="Background" parent="MenuButtons/SetNickname" instance=ExtResource("5")]
 visible = false
-position = Vector2( 0, -720 )
+position = Vector2(0, -720)
 
 [node name="insert name" type="Label" parent="MenuButtons/SetNickname/Background"]
-margin_top = 254.0
-margin_right = 576.0
-margin_bottom = 337.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 4 )
+offset_top = 254.0
+offset_right = 576.0
+offset_bottom = 337.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4")
 text = "Please insert
 your name:"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="name" type="LineEdit" parent="MenuButtons/SetNickname/Background/insert name"]
-margin_top = 140.0
-margin_right = 580.0
-margin_bottom = 217.0
-custom_fonts/font = SubResource( 2 )
-align = 1
+layout_mode = 0
+offset_top = 140.0
+offset_right = 580.0
+offset_bottom = 217.0
+theme_override_fonts/font = SubResource("2")
 max_length = 9
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Submit" type="Button" parent="MenuButtons/SetNickname/Background"]
-margin_top = 930.0
-margin_right = 580.0
-margin_bottom = 996.0
+offset_top = 930.0
+offset_right = 580.0
+offset_bottom = 996.0
 focus_mode = 0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
-custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 4 )
-enabled_focus_mode = 0
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4")
 text = "Ok!"
 flat = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [connection signal="value_changed" from="MenuButtons/Sound/Intensity" to="." method="_set_volume"]
 [connection signal="pressed" from="MenuButtons/Sound/mute" to="." method="_toggle_mute"]

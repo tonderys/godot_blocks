@@ -8,8 +8,7 @@ var font_color: Color
 var outline_color: Color
 
 func get_size_of_label() -> Vector2:
-	var font = get_node("score").get_font("font")
-	return font.get_string_size(get_node("score").text)
+	return get_node("score").get_size()
 
 func get_starting_pos(position) -> Vector2:
 	var label_size = get_size_of_label()
@@ -29,13 +28,13 @@ func _process(_delta):
 	var alpha = _get_remaining() * 3
 	font_color.a = alpha
 	outline_color.a = alpha
-	get_node("score").add_color_override("font_color", font_color)
-	get_node("score").add_color_override("font_outline_modulate", outline_color)
+	get_node("score").add_theme_color_override("font_color", font_color)
+	get_node("score").add_theme_color_override("font_outline_modulate", outline_color)
 
 func init(text: String, position: Vector2):
 	font_color = Global.get_random_color();
 	outline_color = Color(1,1,1,0);
-	get_node("score").add_color_override("font_color", font_color)
+	get_node("score").add_theme_color_override("font_color", font_color)
 	
 	get_node("score").text = text
 	

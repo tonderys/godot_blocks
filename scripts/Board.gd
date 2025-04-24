@@ -15,8 +15,8 @@ signal add_square
 
 func _ready():
 	reset()
-	get_node("HSeparator").margin_top = Global.square_side * Global.rows
-	get_node("HSeparator").margin_bottom = Global.square_side * Global.rows + 4
+	get_node("HSeparator").offset_top = Global.square_side * Global.rows
+	get_node("HSeparator").offset_bottom = Global.square_side * Global.rows + 4
 
 func reset() -> void:
 	rows = Array()
@@ -38,7 +38,7 @@ func _remove_unnecessary_pieces() -> void:
 		pieces.erase(piece)
 
 func highlight_column(pos_x):
-	highlight = Highlight.instance()
+	highlight = Highlight.instantiate()
 	highlight.init(_get_column_id(pos_x), self)
 	highlight.z_index += 1
 	add_child(highlight)
@@ -66,7 +66,7 @@ func get_lowest_square_in(column: int) -> int:
 	return -1
 
 func is_empty() -> bool:
-	return rows.empty()
+	return rows.is_empty()
 
 func is_full() -> bool:
 	return rows.size() > Global.rows

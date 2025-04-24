@@ -4,7 +4,6 @@ class_name ScoreData
 const entries_amount = 9
 
 var file_path
-var score_file = File.new()
 
 var score_data = {"recent_name": "",
 				  "scoreboard": [],
@@ -18,12 +17,12 @@ func _init(path):
 		_read_file()
 
 func _save_file():
-	score_file.open(file_path, File.WRITE)
+	var score_file = FileAccess.open(file_path, File.WRITE)
 	score_file.store_var(score_data)
 	score_file.close()
 
 func _read_file():
-	score_file.open(file_path, File.READ)
+	var score_file = FileAccess.open(file_path, File.READ)
 	score_data = score_file.get_var()
 	score_file.close()
 

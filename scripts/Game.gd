@@ -1,7 +1,7 @@
 extends Node
 class_name Game 
 
-onready var board_node = get_node("BoardNode")
+@onready var board_node = get_node("BoardNode")
 const FloatingText = preload("res://scenes/FloatingText.tscn")
 
 const tick : float = 0.2/Global.rows
@@ -20,8 +20,8 @@ func _init():
 	action_factory = ActionFactory.new()
 	
 func _ready():
-	board_node.connect("squares_removed", self, "squares_removed")
-	board_node.connect("add_square", Sounds, "play_add_square")
+	board_node.connect("squares_removed", Callable(self, "squares_removed"))
+	board_node.connect("add_square", Callable(Sounds, "play_add_square"))
 	change_action_to("tap", board_node, self, Vector2(0,0))
 	get_node("Timer").color = Global.timer_color()
 	get_node("TillNextLevel").color = Global.till_next_level_color()
@@ -46,14 +46,14 @@ func _process(_delta: float) -> void:
 func game_over():
 	var score_data = load("res://scripts/ScoreData.gd").new(Global.highscore_file_path)
 	if score_data.is_good_enough(Global.score):
-		if get_tree().change_scene("res://scenes/NamePrompt.tscn") != OK:
+		if get_tree().change_scene_to_file("res://scenes/NamePrompt.tscn") != OK:
 			print("Can't open name prompt scene")
 	else:
-		if get_tree().change_scene("res://scenes/Summary.tscn") != OK:
+		if get_tree().change_scene_to_file("res://scenes/Summary.tscn") != OK:
 			print("Can't open summary scene")
 
 func display_at(text, position, remove_others = false):
-	var score = FloatingText.instance()
+	var score = FloatingText.instantiate()
 	score.init(text, position)
 	if remove_others:
 		for child in get_node("GUI/popups").get_children():
@@ -98,7 +98,7 @@ func toggle_pause():
 	get_node("GUI/Pause/overlay").visible = paused
 
 func _notification(what):
-	if what == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST:
+	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
 		get_node("GUI/Pause/overlay/PauseMenu").back_pressed()
-	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		get_node("GUI/Pause/overlay/PauseMenu").back_pressed()

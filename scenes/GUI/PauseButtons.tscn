@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://fonts/GUI_60.tres" type="DynamicFont" id=1]
+[ext_resource path="res://fonts/GUI_60.tres" type="FontFile" id=1]
 [ext_resource path="res://scripts/MenuButtons.gd" type="Script" id=2]
 
 [node name="Node" type="Node2D"]
@@ -9,15 +9,15 @@ script = ExtResource( 2 )
 [node name="menu" type="Node2D" parent="."]
 
 [node name="Restart" type="Button" parent="menu"]
-margin_top = 223.0
-margin_right = 576.0
-margin_bottom = 289.0
+offset_top = 223.0
+offset_right = 576.0
+offset_bottom = 289.0
 focus_mode = 0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
-custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 1 )
-enabled_focus_mode = 0
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_colors/font_hover_color = Color( 0, 0, 0, 1 )
+theme_override_colors/font_pressed_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 1 )
+focus_mode = 0
 text = "Restart"
 flat = true
 __meta__ = {
@@ -25,15 +25,15 @@ __meta__ = {
 }
 
 [node name="Continue" type="Button" parent="menu"]
-margin_top = 456.0
-margin_right = 576.0
-margin_bottom = 522.0
+offset_top = 456.0
+offset_right = 576.0
+offset_bottom = 522.0
 focus_mode = 0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
-custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 1 )
-enabled_focus_mode = 0
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_colors/font_hover_color = Color( 0, 0, 0, 1 )
+theme_override_colors/font_pressed_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 1 )
+focus_mode = 0
 text = "Continue"
 flat = true
 __meta__ = {
@@ -41,15 +41,15 @@ __meta__ = {
 }
 
 [node name="Back" type="Button" parent="menu"]
-margin_top = 735.0
-margin_right = 576.0
-margin_bottom = 801.0
+offset_top = 735.0
+offset_right = 576.0
+offset_bottom = 801.0
 focus_mode = 0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
-custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 1 )
-enabled_focus_mode = 0
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_colors/font_hover_color = Color( 0, 0, 0, 1 )
+theme_override_colors/font_pressed_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 1 )
+focus_mode = 0
 text = "Back"
 flat = true
 __meta__ = {
@@ -60,11 +60,11 @@ __meta__ = {
 visible = false
 
 [node name="prompt" type="Label" parent="ensure prompt"]
-margin_top = 179.0
-margin_right = 576.0
-margin_bottom = 269.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 1 )
+offset_top = 179.0
+offset_right = 576.0
+offset_bottom = 269.0
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "Are you sure you want to"
 align = 1
 autowrap = true
@@ -73,11 +73,11 @@ __meta__ = {
 }
 
 [node name="option" type="Label" parent="ensure prompt"]
-margin_top = 269.0
-margin_right = 576.0
-margin_bottom = 320.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 1 )
+offset_top = 269.0
+offset_right = 576.0
+offset_bottom = 320.0
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "quit / restart"
 align = 1
 autowrap = true
@@ -86,15 +86,15 @@ __meta__ = {
 }
 
 [node name="Yes" type="Button" parent="ensure prompt"]
-margin_top = 454.0
-margin_right = 288.0
-margin_bottom = 520.0
+offset_top = 454.0
+offset_right = 288.0
+offset_bottom = 520.0
 focus_mode = 0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
-custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 1 )
-enabled_focus_mode = 0
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_colors/font_hover_color = Color( 0, 0, 0, 1 )
+theme_override_colors/font_pressed_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 1 )
+focus_mode = 0
 text = "Yes"
 flat = true
 __meta__ = {
@@ -102,16 +102,16 @@ __meta__ = {
 }
 
 [node name="No" type="Button" parent="ensure prompt"]
-margin_left = 288.0
-margin_top = 454.0
-margin_right = 576.0
-margin_bottom = 520.0
+offset_left = 288.0
+offset_top = 454.0
+offset_right = 576.0
+offset_bottom = 520.0
 focus_mode = 0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
-custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 1 )
-enabled_focus_mode = 0
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_colors/font_hover_color = Color( 0, 0, 0, 1 )
+theme_override_colors/font_pressed_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 1 )
+focus_mode = 0
 text = "No"
 flat = true
 __meta__ = {

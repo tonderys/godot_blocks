@@ -48,23 +48,23 @@ func get_data_from_database():
 		get_node("local").visible = true
 		set_record_color(get_node("local/score"), Color(0,0,1,1))
 		
-		yield(SilentWolf.Scores.get_score_position(highlight_score), "sw_position_received")
+		await SilentWolf.Scores.get_score_position(highlight_score).sw_position_received
 		var position = SilentWolf.Scores.position
 		get_node("local/score/place").text = "%s.%s"%[(position - 1), highlight_name]
 		get_node("local/score/score").text = "%s"%highlight_score
 		
 
 func set_record_color(record, color):
-	record.get_node("place").add_color_override("font_color", color)
-	record.get_node("score").add_color_override("font_color", color)
+	record.get_node("place").add_theme_color_override("font_color", color)
+	record.get_node("score").add_theme_color_override("font_color", color)
 	
-func remove_color_override():
+func remove_theme_color_override():
 	for place in get_node("records").get_children():
 		set_record_color(place, Color(0,0,0,1))
 		
 func refresh_data():
 	set_waiting()
-	remove_color_override()
+	remove_theme_color_override()
 	yield(SilentWolf.Scores.get_high_scores(
 		get_node("records").get_child_count()), "sw_scores_received")
 	score_received()
