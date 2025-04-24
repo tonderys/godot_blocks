@@ -9,3 +9,10 @@ export_presets.cfg
 *.wav
 *.import
 *.sfs
+
+.godot/*
+.idea/*
+android/*
+*.tmp
+screenshots/*
+*.uid
