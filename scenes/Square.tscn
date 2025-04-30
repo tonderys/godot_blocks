@@ -1,13 +1,10 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://5mm7uygviu03"]
 
-[ext_resource path="res://scripts/Square.gd" type="Script" id=1]
+[ext_resource type="Script" uid="uid://io5ot6cxphoh" path="res://scripts/Square.gd" id="1"]
 
 [node name="Square" type="Node2D"]
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="body" type="ColorRect" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}

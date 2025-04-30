@@ -11,6 +11,7 @@ offset_right = 19.0
 offset_bottom = 20.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1")
+theme_override_font_sizes/font_size = 32
 text = "+2137"
 horizontal_alignment = 1
 vertical_alignment = 1

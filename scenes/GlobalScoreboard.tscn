@@ -5,7 +5,7 @@
 [ext_resource type="FontFile" uid="uid://cvysbiubrkpfa" path="res://fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="3"]
 [ext_resource type="FontFile" path="res://fonts/GUI_60.tres" id="4"]
 [ext_resource type="PackedScene" uid="uid://c5ao6pjwj4g5f" path="res://scenes/GUI/Record.tscn" id="5"]
-[ext_resource type="PackedScene" path="res://scenes/Background.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://b26nan6i3i8po" path="res://scenes/Background.tscn" id="6"]
 [ext_resource type="FontFile" path="res://fonts/GUI_40_red.tres" id="7"]
 
 [sub_resource type="FontFile" id="1"]

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://8xgoqt4ja34r" path="res://scripts/NamePrompt.gd" id="1"]
 [ext_resource type="FontFile" uid="uid://cvysbiubrkpfa" path="res://fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="2"]
-[ext_resource type="PackedScene" path="res://scenes/Background.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://b26nan6i3i8po" path="res://scenes/Background.tscn" id="3"]
 [ext_resource type="FontFile" path="res://fonts/GUI_60.tres" id="4"]
 
 [sub_resource type="FontFile" id="2"]
@@ -12,6 +12,11 @@ cache/0/16/0/descent = 0.0
 cache/0/16/0/underline_position = 0.0
 cache/0/16/0/underline_thickness = 0.0
 cache/0/16/0/scale = 1.0
+cache/0/38/0/ascent = 0.0
+cache/0/38/0/descent = 0.0
+cache/0/38/0/underline_position = 0.0
+cache/0/38/0/underline_thickness = 0.0
+cache/0/38/0/scale = 1.0
 
 [node name="NamePrompt" type="Node2D"]
 script = ExtResource("1")
@@ -38,6 +43,7 @@ offset_top = 140.0
 offset_right = 580.0
 offset_bottom = 217.0
 theme_override_fonts/font = SubResource("2")
+theme_override_font_sizes/font_size = 38
 max_length = 9
 
 [node name="Submit" type="Button" parent="UI"]

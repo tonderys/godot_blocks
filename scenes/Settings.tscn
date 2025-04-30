@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://vs4hl3vyghm5" path="res://scripts/Settings.gd" id="2"]
 [ext_resource type="FontFile" uid="uid://cvysbiubrkpfa" path="res://fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="3"]
 [ext_resource type="FontFile" path="res://fonts/GUI_60.tres" id="4"]
-[ext_resource type="PackedScene" path="res://scenes/Background.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://b26nan6i3i8po" path="res://scenes/Background.tscn" id="5"]
 [ext_resource type="Texture2D" uid="uid://bcxkvhds4i2xn" path="res://icons/mute_off.png" id="6"]
 
 [sub_resource type="FontFile" id="1"]

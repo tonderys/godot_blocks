@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cteyyhlhcw4v0" path="res://scenes/GUI/GameOverButtons.tscn" id="1"]
 [ext_resource type="Script" uid="uid://okkkfvxsljam" path="res://scripts/Summary.gd" id="2"]
-[ext_resource type="PackedScene" path="res://scenes/Background.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://b26nan6i3i8po" path="res://scenes/Background.tscn" id="3"]
 [ext_resource type="FontFile" path="res://fonts/GUI_60.tres" id="4"]
 
 [node name="Summary" type="Node2D"]

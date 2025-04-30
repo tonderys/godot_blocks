@@ -1,10 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://cae07rdqdbu5w"]
 
-[ext_resource path="res://fonts/GUI_60.tres" type="FontFile" id=1]
-[ext_resource path="res://scripts/MenuButtons.gd" type="Script" id=2]
+[ext_resource type="FontFile" path="res://fonts/GUI_60.tres" id="1"]
+[ext_resource type="Script" uid="uid://c1u6hb0b3nscy" path="res://scripts/MenuButtons.gd" id="2"]
 
 [node name="Node" type="Node2D"]
-script = ExtResource( 2 )
+script = ExtResource("2")
 
 [node name="menu" type="Node2D" parent="."]
 
@@ -13,48 +13,39 @@ offset_top = 223.0
 offset_right = 576.0
 offset_bottom = 289.0
 focus_mode = 0
-theme_override_colors/font_color = Color( 0, 0, 0, 1 )
-theme_override_colors/font_hover_color = Color( 0, 0, 0, 1 )
-theme_override_colors/font_pressed_color = Color( 0, 0, 0, 1 )
-theme_override_fonts/font = ExtResource( 1 )
-focus_mode = 0
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1")
+theme_override_font_sizes/font_size = 38
 text = "Restart"
 flat = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Continue" type="Button" parent="menu"]
 offset_top = 456.0
 offset_right = 576.0
 offset_bottom = 522.0
 focus_mode = 0
-theme_override_colors/font_color = Color( 0, 0, 0, 1 )
-theme_override_colors/font_hover_color = Color( 0, 0, 0, 1 )
-theme_override_colors/font_pressed_color = Color( 0, 0, 0, 1 )
-theme_override_fonts/font = ExtResource( 1 )
-focus_mode = 0
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1")
+theme_override_font_sizes/font_size = 38
 text = "Continue"
 flat = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Back" type="Button" parent="menu"]
 offset_top = 735.0
 offset_right = 576.0
 offset_bottom = 801.0
 focus_mode = 0
-theme_override_colors/font_color = Color( 0, 0, 0, 1 )
-theme_override_colors/font_hover_color = Color( 0, 0, 0, 1 )
-theme_override_colors/font_pressed_color = Color( 0, 0, 0, 1 )
-theme_override_fonts/font = ExtResource( 1 )
-focus_mode = 0
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1")
+theme_override_font_sizes/font_size = 38
 text = "Back"
 flat = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ensure prompt" type="Node2D" parent="."]
 visible = false
@@ -63,43 +54,34 @@ visible = false
 offset_top = 179.0
 offset_right = 576.0
 offset_bottom = 269.0
-theme_override_colors/font_color = Color( 0, 0, 0, 1 )
-theme_override_fonts/font = ExtResource( 1 )
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1")
+theme_override_font_sizes/font_size = 24
 text = "Are you sure you want to"
-align = 1
-autowrap = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+horizontal_alignment = 1
 
 [node name="option" type="Label" parent="ensure prompt"]
 offset_top = 269.0
 offset_right = 576.0
 offset_bottom = 320.0
-theme_override_colors/font_color = Color( 0, 0, 0, 1 )
-theme_override_fonts/font = ExtResource( 1 )
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1")
+theme_override_font_sizes/font_size = 24
 text = "quit / restart"
-align = 1
-autowrap = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+horizontal_alignment = 1
 
 [node name="Yes" type="Button" parent="ensure prompt"]
 offset_top = 454.0
 offset_right = 288.0
 offset_bottom = 520.0
 focus_mode = 0
-theme_override_colors/font_color = Color( 0, 0, 0, 1 )
-theme_override_colors/font_hover_color = Color( 0, 0, 0, 1 )
-theme_override_colors/font_pressed_color = Color( 0, 0, 0, 1 )
-theme_override_fonts/font = ExtResource( 1 )
-focus_mode = 0
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1")
+theme_override_font_sizes/font_size = 38
 text = "Yes"
 flat = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="No" type="Button" parent="ensure prompt"]
 offset_left = 288.0
@@ -107,19 +89,16 @@ offset_top = 454.0
 offset_right = 576.0
 offset_bottom = 520.0
 focus_mode = 0
-theme_override_colors/font_color = Color( 0, 0, 0, 1 )
-theme_override_colors/font_hover_color = Color( 0, 0, 0, 1 )
-theme_override_colors/font_pressed_color = Color( 0, 0, 0, 1 )
-theme_override_fonts/font = ExtResource( 1 )
-focus_mode = 0
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1")
+theme_override_font_sizes/font_size = 38
 text = "No"
 flat = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[connection signal="pressed" from="menu/Restart" to="." method="ensure" binds= [ "restart", 2 ]]
+[connection signal="pressed" from="menu/Restart" to="." method="ensure" binds= ["restart", 2]]
 [connection signal="pressed" from="menu/Continue" to="." method="toggle_pause"]
-[connection signal="pressed" from="menu/Back" to="." method="ensure" binds= [ "quit", 1 ]]
+[connection signal="pressed" from="menu/Back" to="." method="ensure" binds= ["quit", 1]]
 [connection signal="pressed" from="ensure prompt/Yes" to="." method="yes_pressed"]
 [connection signal="pressed" from="ensure prompt/No" to="." method="restore_pause_menu"]

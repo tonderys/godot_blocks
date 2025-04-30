@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://6d3fm5u4ip02" path="res://scripts/Menu.gd" id="2"]
 [ext_resource type="FontFile" uid="uid://cvysbiubrkpfa" path="res://fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="3"]
 [ext_resource type="FontFile" path="res://fonts/GUI_60.tres" id="4"]
-[ext_resource type="PackedScene" path="res://scenes/Background.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://b26nan6i3i8po" path="res://scenes/Background.tscn" id="5"]
 
 [sub_resource type="FontFile" id="1"]
 fallbacks = Array[Font]([ExtResource("3")])

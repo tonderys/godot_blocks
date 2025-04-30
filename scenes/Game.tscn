@@ -4,9 +4,9 @@
 [ext_resource type="Script" uid="uid://ic2p5a4qxdex" path="res://scripts/Game.gd" id="2"]
 [ext_resource type="Script" uid="uid://bwupmdjalpg1" path="res://scripts/TillNextLevel.gd" id="3"]
 [ext_resource type="Script" uid="uid://4dlx7lclxsvt" path="res://scripts/Timer.gd" id="4"]
-[ext_resource type="PackedScene" path="res://scenes/Board.tscn" id="5"]
-[ext_resource type="PackedScene" path="res://scenes/Background.tscn" id="7"]
-[ext_resource type="PackedScene" path="res://scenes/GUI/PauseButtons.tscn" id="11"]
+[ext_resource type="PackedScene" uid="uid://bfoi7js4pifb3" path="res://scenes/Board.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://b26nan6i3i8po" path="res://scenes/Background.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://cae07rdqdbu5w" path="res://scenes/GUI/PauseButtons.tscn" id="11"]
 
 [node name="Game" type="Node"]
 script = ExtResource("2")
@@ -45,6 +45,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="overlay" type="ColorRect" parent="GUI/Pause"]
 visible = false
