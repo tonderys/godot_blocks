@@ -12,7 +12,6 @@ config_version=5
 
 config/name="blocks"
 run/main_scene="res://scenes/Menu.tscn"
-config/auto_accept_quit=false
 config/quit_on_go_back=false
 config/features=PackedStringArray("4.4")
 config/icon="res://icon.png"

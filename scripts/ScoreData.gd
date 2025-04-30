@@ -11,18 +11,18 @@ var score_data = {"recent_name": "",
 
 func _init(path):
 	file_path = path
-	if not score_file.file_exists(file_path):
+	if not FileAccess.file_exists(file_path):
 		_save_file()
 	else:
 		_read_file()
 
 func _save_file():
-	var score_file = FileAccess.open(file_path, File.WRITE)
+	var score_file = FileAccess.open(file_path, FileAccess.WRITE)
 	score_file.store_var(score_data)
 	score_file.close()
 
 func _read_file():
-	var score_file = FileAccess.open(file_path, File.READ)
+	var score_file = FileAccess.open(file_path, FileAccess.READ)
 	score_data = score_file.get_var()
 	score_file.close()
 

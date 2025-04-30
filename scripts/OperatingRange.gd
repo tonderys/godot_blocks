@@ -12,28 +12,21 @@ func is_in_range(point):
 
 func get_line(start, steps):
 	var result = [start, ]
-	for i in range((radius * 2) + 1):
+	for i in range(3):
 		result.append(result[-1] + steps[i%2])
 	return result
 
-func _init(pos, r, c):
-	bottom_left = pos
-	radius = r
+func _init(c):
+	bottom_left = Vector2(0,0)
 	color = c
 
-func move(y):
-	bottom_left = Vector2(bottom_left.x, y)
-	
-func set_radius(r):
-	radius = r
-
 func _draw():
-	var bl = get_line(bottom_left, [Vector2(0, -step), Vector2(-step,0)])
-	var ul = get_line(bl[-1], [Vector2(step, 0), Vector2(0, -step)])
-	var ur = get_line(ul[-1], [Vector2(0, step), Vector2(step, 0)])
-	var dr = get_line(ur[-1], [Vector2(-step, 0), Vector2(0, step)])
+	var bl = Vector2(0, step)
+	var ul = Vector2(0, 0)
+	var ur = Vector2(step, 0)
+	var dr = Vector2(step, step)
 	
-	var points = bl + ul + ur + dr
+	var points = [bl, ul, ur, dr, bl]
 	var prev = points[0]
 	for i in range (1, len(points)):
 		var next = points[i]

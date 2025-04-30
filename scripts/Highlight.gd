@@ -26,13 +26,10 @@ func init(column, board):
 
 	update()
 
-func add_operating_range(color, radius := 0):
+func add_operating_range(color):
 	if is_instance_valid(operating_range):
 		operating_range.queue_free()
-	operating_range = OperatingRange.new(
-		Vector2(highlighted_column * Global.square_side + delta_x, pos_y()),
-		radius,
-		color)
+	operating_range = OperatingRange.new(color)
 	add_child(operating_range)	
 
 func remove_operating_range():
@@ -43,11 +40,9 @@ func update():
 	var tmp_y = pos_y()
 	set_position(Vector2(highlighted_column * Global.square_side + delta_x, tmp_y))
 	set_size(Vector2(width, max_height - tmp_y))
-	if is_instance_valid(operating_range):
-		operating_range.move(tmp_y)
 
 func lower_by(delta):
-	delta_y = delta
+	$column.set_position(Vector2(0, delta * Global.square_side))
 
 func pos_y():
 	return (board_node.get_lowest_square_in(highlighted_column) + 1 + delta_y) * Global.square_side

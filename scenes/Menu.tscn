@@ -13,6 +13,11 @@ cache/0/16/0/descent = 0.0
 cache/0/16/0/underline_position = 0.0
 cache/0/16/0/underline_thickness = 0.0
 cache/0/16/0/scale = 1.0
+cache/0/80/0/ascent = 0.0
+cache/0/80/0/descent = 0.0
+cache/0/80/0/underline_position = 0.0
+cache/0/80/0/underline_thickness = 0.0
+cache/0/80/0/scale = 1.0
 
 [node name="Menu" type="Node2D"]
 script = ExtResource("2")
@@ -26,6 +31,7 @@ offset_right = 576.0
 offset_bottom = 256.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("1")
+theme_override_font_sizes/font_size = 80
 text = "Blocks"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -42,6 +48,7 @@ theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4")
+theme_override_font_sizes/font_size = 38
 text = "Start"
 flat = true
 
@@ -54,6 +61,7 @@ theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4")
+theme_override_font_sizes/font_size = 38
 text = "Settings"
 flat = true
 
@@ -66,6 +74,7 @@ theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4")
+theme_override_font_sizes/font_size = 38
 text = "High Scores"
 flat = true
 
@@ -78,6 +87,7 @@ theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4")
+theme_override_font_sizes/font_size = 38
 text = "Quit"
 flat = true
 

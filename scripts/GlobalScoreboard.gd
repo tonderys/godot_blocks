@@ -65,6 +65,5 @@ func remove_theme_color_override():
 func refresh_data():
 	set_waiting()
 	remove_theme_color_override()
-	yield(SilentWolf.Scores.get_high_scores(
-		get_node("records").get_child_count()), "sw_scores_received")
+	await SilentWolf.Scores.get_scores(get_node("records").get_child_count())
 	score_received()
