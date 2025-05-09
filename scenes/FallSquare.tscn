@@ -9,7 +9,7 @@ script = ExtResource("1")
 
 [node name="fall" type="CPUParticles2D" parent="."]
 emitting = false
-amount = 6
+amount = 1
 texture = SubResource("1")
 lifetime = 6.0
 one_shot = true

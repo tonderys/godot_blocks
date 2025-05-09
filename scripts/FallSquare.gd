@@ -11,4 +11,6 @@ func init(c: Color, p: Vector2) -> void:
 	
 func _ready():
 	emitter.color = color
+	emitter.scale_amount_min = Global.square_side
+	emitter.scale_amount_max = Global.square_side
 	emitter.emitting = true
