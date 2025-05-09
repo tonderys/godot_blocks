@@ -44,6 +44,7 @@ offset_right = 580.0
 offset_bottom = 217.0
 theme_override_fonts/font = SubResource("2")
 theme_override_font_sizes/font_size = 38
+alignment = 1
 max_length = 9
 
 [node name="Submit" type="Button" parent="UI"]
