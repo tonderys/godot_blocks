@@ -14,9 +14,9 @@ func log_data():
 	if(data):
 		print("\tnickname: \"", data.nickname, "\"")
 		print("\tvolume: ", data.volume)
-		print("\tmuted" if data.muted else "not muted")
-		print("\tcolor" if data.color else "grey")
-		print("\tfall" if data.fall else "destroy")
+		print("\t", "muted" if data.muted else "not muted")
+		print("\t", "color" if data.color else "grey")
+		print("\t", "fall" if data.fall else "destroy")
 	else:
 		print("\tempty")
 	print("^^^^^^^^^^^^^^^^^^^^^^^^^^")
@@ -37,7 +37,6 @@ func _init():
 		_save_file()
 	else:
 		_read_file()
-	log_data()
 
 func _change_color():
 	data.color = !data.color

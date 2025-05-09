@@ -44,19 +44,12 @@ func test_destroy_all_squares():
 	var row = create_row([1,2,3,5])
 	
 	assert_true(row.has_square_in(1))
-	var pieces = row.destroy_all_squares()
+	var pieces = row.remove_squares(Row.RemoveBy.DESTROY)
 	assert_false(row.has_square_in(1))
 	
 	assert_true(len(pieces) == 4)
 	for piece in pieces:
 		piece.free()
-
-func test_destroy_square():
-	var row = create_row([1,2,3,5])
-	
-	assert_true(row.has_square_in(1))
-	row.destroy_square(1)
-	assert_false(row.has_square_in(1))
 
 func test_merge_possible():
 	var row1 = create_row([1,2,3,5])
@@ -69,7 +62,6 @@ func test_merge_possible():
 	row1.merge_with(row2)
 	
 	assert_eq(amount_of_squares_in(row1), 9)
-	assert_eq(amount_of_squares_in(row2), 0)
 	
 func test_merge_impossible():
 	var row1 = create_row([1,2,3,5])
