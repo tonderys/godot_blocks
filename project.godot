@@ -19,9 +19,9 @@ config/icon="res://icon.png"
 [autoload]
 
 Global="*res://scripts/Global.gd"
-Settings="*res://scenes/Settings.tscn"
 Sounds="*res://scenes/Sounds.tscn"
 SilentWolf="*res://addons/silent_wolf/SilentWolf.gd"
+Settings="*res://scripts/Settings.gd"
 
 [debug]
 

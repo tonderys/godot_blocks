@@ -1,5 +1,7 @@
 extends Node
 
+@export var settings_scene: PackedScene
+
 enum Action{NONE = 0, BACK = 1, RESTART = 2}
 var action = Action.NONE
 
@@ -40,7 +42,7 @@ func toggle_pause():
 	get_owner().toggle_pause()
 
 func settings_pressed():
-	if get_tree().change_scene_to_file("res://scenes/Settings.tscn") != OK:
+	if get_tree().change_scene_to_packed(settings_scene) != OK:
 		print("Can't open settings scene")
 
 func highscores_pressed():

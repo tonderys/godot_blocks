@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://81x1mmmcht5j"]
 
 [ext_resource type="Script" uid="uid://c1u6hb0b3nscy" path="res://scripts/MenuButtons.gd" id="1"]
-[ext_resource type="Script" uid="uid://vs4hl3vyghm5" path="res://scripts/Settings.gd" id="2"]
+[ext_resource type="Script" uid="uid://vs4hl3vyghm5" path="res://scripts/SettingsMenu.gd" id="2"]
 [ext_resource type="FontFile" uid="uid://cvysbiubrkpfa" path="res://fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="3"]
 [ext_resource type="FontFile" path="res://fonts/GUI_60.tres" id="4"]
 [ext_resource type="PackedScene" uid="uid://b26nan6i3i8po" path="res://scenes/Background.tscn" id="5"]
@@ -9,6 +9,9 @@
 
 [sub_resource type="FontFile" id="1"]
 fallbacks = Array[Font]([ExtResource("3")])
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
 cache/0/16/0/ascent = 0.0
 cache/0/16/0/descent = 0.0
 cache/0/16/0/underline_position = 0.0
@@ -127,11 +130,19 @@ cache/0/80/0/scale = 1.0
 
 [sub_resource type="FontFile" id="2"]
 fallbacks = Array[Font]([ExtResource("3")])
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
 cache/0/16/0/ascent = 0.0
 cache/0/16/0/descent = 0.0
 cache/0/16/0/underline_position = 0.0
 cache/0/16/0/underline_thickness = 0.0
 cache/0/16/0/scale = 1.0
+cache/0/38/0/ascent = 0.0
+cache/0/38/0/descent = 0.0
+cache/0/38/0/underline_position = 0.0
+cache/0/38/0/underline_thickness = 0.0
+cache/0/38/0/scale = 1.0
 
 [node name="Settings" type="Node2D"]
 script = ExtResource("2")
@@ -310,6 +321,7 @@ offset_right = 576.0
 offset_bottom = 337.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4")
+theme_override_font_sizes/font_size = 38
 text = "Please insert
 your name:"
 horizontal_alignment = 1
@@ -321,6 +333,7 @@ offset_top = 140.0
 offset_right = 580.0
 offset_bottom = 217.0
 theme_override_fonts/font = SubResource("2")
+theme_override_font_sizes/font_size = 38
 max_length = 9
 
 [node name="Submit" type="Button" parent="MenuButtons/SetNickname/Background"]
@@ -332,6 +345,7 @@ theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4")
+theme_override_font_sizes/font_size = 38
 text = "Ok!"
 flat = true
 

@@ -11,7 +11,7 @@ const rows: int = (height - square_side) / square_side
 const screen_center = Vector2(width / 2.0, height / 2.0)
 
 func background_color():
-	return Color("cdffc7") if Settings.data.color else Color("cdcdcd")
+	return Color("cdffc7") if Settings.data && Settings.data.color else Color("cdcdcd")
 
 func till_next_level_color():
 	return Color("ff0000") if Settings.data.color else Color("363636")
