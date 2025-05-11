@@ -33,6 +33,10 @@ var rng = RandomNumberGenerator.new()
 	
 func _init():
 	rng.randomize()
+	
+func _ready():
+	var silent_wolf_config = FileAccess.open("res://configs/silent_wolf.json", FileAccess.READ)
+	SilentWolf.configure(silent_wolf_config.get_as_text())
 
 func random_indices() -> Array:
 	var indices = []

@@ -26,11 +26,11 @@ func _read_file():
 	score_data = score_file.get_var()
 	score_file.close()
 
-func save(name, score):
-	score_data.recent_name = name
+func save(player_name, score):
+	score_data.recent_name = player_name
 	score_data.high_score = max(score, score_data.high_score)
 	
-	var entry = [name, score]
+	var entry = [player_name, score]
 	for i in range(entries_amount):
 		if len(score_data.scoreboard) == i:
 			score_data.scoreboard.append(entry)

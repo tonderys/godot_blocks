@@ -15,4 +15,5 @@ export_presets.cfg
 android/*
 *.tmp
 screenshots/*
+configs/*
 *.uid

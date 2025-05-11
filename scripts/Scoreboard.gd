@@ -21,8 +21,8 @@ func _ready():
 			place.get_node("place").text = "%s.%s"%[i, player_name]
 			place.get_node("score").text = "%s"%player_score
 
-func save(name, score):
-	score_data.save(name, score)
+func save(player_name, score):
+	score_data.save(player_name, score)
 
 func _ensure_deletion():
 	if get_tree().change_scene_to_file("res://scenes/EnsureDeletion.tscn") != OK:

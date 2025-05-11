@@ -2,8 +2,7 @@ extends Node2D
 class_name EnsureDeletion
 
 func _delete_score_file():
-	var dir = DirAccess.new()
-	dir.remove(Global.highscore_file_path)
+	DirAccess.remove_absolute(Global.highscore_file_path)
 	_change_back_to_scoreboard()
 
 func _change_back_to_scoreboard():
