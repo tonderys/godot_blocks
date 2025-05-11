@@ -6,7 +6,7 @@ const columns: int = 7
 const width = 580 - (580 % columns)
 const square_side: int = width / columns
 const height = 870
-const rows: int = (height - square_side) / square_side
+const rows: int = height / square_side
 
 const screen_center = Vector2(width / 2.0, height / 2.0)
 

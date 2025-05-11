@@ -39,7 +39,7 @@ func remove_operating_range():
 func update():
 	var tmp_y = pos_y()
 	set_position(Vector2(highlighted_column * Global.square_side + delta_x, tmp_y))
-	set_size(Vector2(width, max_height - tmp_y))
+	set_size(Vector2(width, Global.height - (tmp_y + Global.square_side)))
 
 func lower_by(delta):
 	$column.set_position(Vector2(0, delta * Global.square_side))

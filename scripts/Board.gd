@@ -15,8 +15,10 @@ signal add_square
 
 func _ready():
 	reset()
-	get_node("HSeparator").offset_top = Global.square_side * Global.rows
-	get_node("HSeparator").offset_bottom = Global.square_side * Global.rows + 4
+	$BottomLine.set_point_position(0, Vector2(-1.0, (Global.rows) * Global.square_side))
+	$BottomLine.set_point_position(1, Vector2(Global.width + 10.0, (Global.rows) * Global.square_side))
+	$BottomLine.set_width(3)
+	$BottomLine.set_default_color(Color.BLACK)
 
 func reset() -> void:
 	rows = Array()
