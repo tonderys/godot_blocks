@@ -44,6 +44,7 @@ vertical_alignment = 1
 script = ExtResource("1")
 
 [node name="Global" type="Button" parent="UI/MenuButtons"]
+visible = false
 offset_top = 826.0
 offset_right = 580.0
 offset_bottom = 926.0
