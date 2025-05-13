@@ -22,6 +22,7 @@ func update_settings():
 		AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), false)
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), data.volume / 4)
 	get_node("MenuButtons/Sound/mute").icon = mute_on if data.muted else mute_off
+	Settings.save_file()
 		
 func _ready():
 	if(Settings.data):

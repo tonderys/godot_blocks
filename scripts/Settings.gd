@@ -21,7 +21,7 @@ func log_data():
 		print("\tempty")
 	print("^^^^^^^^^^^^^^^^^^^^^^^^^^")
 
-func _save_file():
+func save_file():
 	var settings_file = FileAccess.open(settings_file_path, FileAccess.WRITE)
 	settings_file.store_var(data)
 	settings_file.close()
@@ -34,7 +34,7 @@ func _read_file():
 func _init():
 	print("Initializing settings")
 	if not FileAccess.file_exists(settings_file_path):
-		_save_file()
+		save_file()
 	else:
 		_read_file()
 
