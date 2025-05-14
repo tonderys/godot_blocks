@@ -36,7 +36,9 @@ func _init():
 	
 func _ready():
 	var silent_wolf_config = FileAccess.open("res://configs/silent_wolf.json", FileAccess.READ)
-	SilentWolf.configure(silent_wolf_config.get_as_text())
+	var config_data = JSON.parse_string(silent_wolf_config.get_as_text())
+	if config_data != null:
+		SilentWolf.configure(config_data)
 
 func random_indices() -> Array:
 	var indices = []
