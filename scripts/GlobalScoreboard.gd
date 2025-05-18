@@ -65,6 +65,11 @@ func remove_theme_color_override():
 func refresh_data():
 	set_waiting()
 	remove_theme_color_override()
-	var result = await SilentWolf.Scores.get_scores(get_node("records").get_child_count()).sw_get_scores_complete
-	print(result)
+	var records_amount = get_node("records").get_child_count()
+	# There's a bug in SilentWolf instead of in a loop it checks if the  
+	# http_node is there only once. 
+	# instead of [if !http_node.is_inside_tree():]
+	# should be  [while !http_node.is_inside_tree():]
+	# in [send_get_request] at SilentWolf.gd
+	var result = await SilentWolf.Scores.get_scores(records_amount).sw_get_scores_complete
 	score_received()
