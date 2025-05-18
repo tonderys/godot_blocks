@@ -70,9 +70,13 @@ func on_timeout():
 
 func squares_removed(squares):
 	Sounds.get_node("removeRow").play()
+	var position = squares[0].get_position()
+	for square in squares:
+		position = (position + square.get_position()) / 2
+		
 	var score = add_points(squares.size());
 
-	display_at("+%s" % score, Global.screen_center)
+	display_at("+%s" % score, position)
 	
 func add_points(squares: int, multiplier : int = 1):
 	print("%s [squares_removed] with multiplier:%s on lvl:%s" % [squares, multiplier, level])
