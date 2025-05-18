@@ -43,7 +43,7 @@ func get_data_from_database():
 				set_record_color(place, Color(0,0,1,1))
 			
 			place.get_node("place").text = "%s.%s"%[i,record.player_name]
-			place.get_node("score").text = "%s"%record.score
+			place.get_node("score").text = "%d"%record.score
 	if not local_best_found:
 		get_node("local").visible = true
 		set_record_color(get_node("local/score"), Color(0,0,1,1))

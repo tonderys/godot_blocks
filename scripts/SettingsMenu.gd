@@ -15,12 +15,6 @@ func update_settings():
 	get_node("MenuButtons/Sound/Intensity").value = data.volume
 	get_node("MenuButtons/Sound/value").text = \
 		"%s"%[0 if data.muted else int(100 + (data.volume * 1.25))]
-	
-	if data.volume == -80 or data.muted:
-		AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), true)
-	else:
-		AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), false)
-		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), data.volume / 4)
 	get_node("MenuButtons/Sound/mute").icon = mute_on if data.muted else mute_off
 	Settings.save_file()
 		
@@ -29,22 +23,22 @@ func _ready():
 		update_settings()
 		
 func _change_color():
-	Settings.data.color = !Settings.data.color
+	Settings.change_color()
 	update_settings()
 
 func _set_nickname():
 	get_node("MenuButtons/SetNickname/Background").visible = true
 
 func _change_remainings():
-	Settings.data.fall = !Settings.data.fall
+	Settings.change_remainings()
 	update_settings()
 
 func _toggle_mute():
-	Settings.data.muted = !Settings.data.muted
+	Settings.toggle_mute()
 	update_settings()
 
 func _set_volume(value):
-	Settings.data.volume = value
+	Settings.set_volume(value)
 	update_settings();
 	Sounds.get_node("addSquare").play()
 

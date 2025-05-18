@@ -37,16 +37,26 @@ func _init():
 		save_file()
 	else:
 		_read_file()
-
-func _change_color():
+	set_volume_bus()
+	
+func change_color():
 	data.color = !data.color
 
-func _change_remainings():
+func change_remainings():
 	data.fall = !data.fall
 
-func _toggle_mute():
+func toggle_mute():
 	data.muted = !data.muted
+	set_volume_bus()
 
-func _set_volume(value):
+func set_volume(value):
 	data.volume = value
+	set_volume_bus()
 	Sounds.get_node("addSquare").play()
+
+func set_volume_bus():
+	if data.volume == -80 or data.muted:
+		AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), true)
+	else:
+		AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), false)
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), data.volume / 4)
